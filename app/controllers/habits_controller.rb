@@ -1,19 +1,21 @@
 class HabitsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  before_filter :authenticate_user_from_token!
+  before_filter :authenticate_user!
+
   def index
-    render json: Habit.all, each_serializer: HabitSerializer
+    render json: current_user.habits, each_serializer: HabitSerializer
   end
 
   def show
-    render json: Habit.find(params[:id]), serializer: HabitSerializer
+    render json: current_user.habits.find(params[:id]), serializer: HabitSerializer
   end
 
   def create
-    render json: Habit.create(title: habit_params)
+    render json: current_user.habits.create(title: habit_params)
   end
 
   def update
-    render json: Habit.find(params[:id]).update_attributes(habit_params)
+    render json: current_user.habits.find(params[:id]).update_attributes(habit_params)
   end
 
   def destroy

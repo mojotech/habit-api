@@ -1,7 +1,11 @@
 class CheckinsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  before_filter :authenticate_user_from_token!
+  before_filter :authenticate_user!
+
   def create
-    render json: Checkin.create(post_params)
+    habit = current_user.habits.find(params[:checkin][:habit_id])
+
+    render json: habit.checkins.create(post_params)
   end
 
   private
