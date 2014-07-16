@@ -11,7 +11,7 @@ class HabitsController < ApplicationController
   end
 
   def create
-    render json: current_user.habits.create(title: habit_params)
+    render json: current_user.habits.create(habit_params)
   end
 
   def update
@@ -26,6 +26,9 @@ class HabitsController < ApplicationController
   private
 
   def habit_params
-    params.require(:habit).require(:title)
+    {
+      title: params.require(:habit).require(:title),
+      unit: params.require(:habit).require(:unit)
+    }
   end
 end
