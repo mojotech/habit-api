@@ -1,3 +1,7 @@
 class CheckinSerializer < ActiveModel::Serializer
-  attributes :id, :value
+  def email
+    object.user.email
+  end
+
+  attributes :id, :value, :email, :created_at, :user_id
 end

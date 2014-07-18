@@ -11,7 +11,13 @@ class HabitsController < ApplicationController
   end
 
   def create
-    render json: current_user.habits.create(habit_params)
+    matching_habit = Habit.find_by_title(habit_params[:title])
+    if matching_habit
+      current_user.habits << matching_habit
+      render json: matching_habit
+    else
+      render json: current_user.habits.create(habit_params)
+    end
   end
 
   def update

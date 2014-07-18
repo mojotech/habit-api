@@ -11,21 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140703181944) do
+ActiveRecord::Schema.define(version: 20140717204309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "checkins", force: true do |t|
-    t.integer "value"
-    t.integer "habit_id"
+    t.integer  "value"
+    t.integer  "habit_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "habits", force: true do |t|
-    t.string  "title"
-    t.integer "user_id"
-    t.string  "unit"
+    t.string   "title"
+    t.string   "unit"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  create_table "habits_users", id: false, force: true do |t|
+    t.integer "habit_id"
+    t.integer "user_id"
+  end
+
+  add_index "habits_users", ["habit_id"], name: "index_habits_users_on_habit_id", using: :btree
+  add_index "habits_users", ["user_id"], name: "index_habits_users_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

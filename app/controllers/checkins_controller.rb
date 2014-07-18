@@ -5,7 +5,7 @@ class CheckinsController < ApplicationController
   def create
     habit = current_user.habits.find(params[:checkin][:habit_id])
 
-    render json: habit.checkins.create(post_params)
+    render json: habit.checkins.create(post_params.merge({ user_id: current_user.id }))
   end
 
   private
