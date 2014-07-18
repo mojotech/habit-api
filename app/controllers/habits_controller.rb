@@ -11,12 +11,16 @@ class HabitsController < ApplicationController
   end
 
   def create
-    matching_habit = Habit.find_by_title(habit_params[:title])
-    if matching_habit
-      current_user.habits << matching_habit
-      render json: matching_habit
-    else
+    if habit_params[:private]
       render json: current_user.habits.create(habit_params)
+    else
+      matching_habit = Habit.where(private: false, title: habit_params[:title]).first
+      if matching_habit
+        current_user.habits << matching_habit
+        render json: matching_habit
+      else
+        render json: current_user.habits.create(habit_params)
+      end
     end
   end
 
@@ -32,9 +36,6 @@ class HabitsController < ApplicationController
   private
 
   def habit_params
-    {
-      title: params.require(:habit).require(:title),
-      unit: params.require(:habit).require(:unit)
-    }
+    params.require(:habit).permit(:title, :unit, :private)
   end
 end
