@@ -11,21 +11,11 @@ class HabitsController < ApplicationController
   end
 
   def create
-    if habit_params[:private]
-      render json: current_user.habits.create(habit_params)
-    else
-      matching_habit = Habit.where(private: false, title: habit_params[:title]).first
-      if matching_habit
-        current_user.habits << matching_habit
-        render json: matching_habit
-      else
-        render json: current_user.habits.create(habit_params)
-      end
-    end
+    render json: Habit.associate_matching_or_create(habit_params, current_user)
   end
 
   def update
-    render json: current_user.habits.find(params[:id]).update_attributes(habit_params)
+    render json: current_user.habits.find(params[:id]).convert_or_update(habit_params, current_user)
   end
 
   def destroy
