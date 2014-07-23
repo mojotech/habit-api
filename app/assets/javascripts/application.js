@@ -13,4 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require lodash
+//= require handlebars-1.1.2
+//= require ember-1.5.1
+//= require ember-data
+//= require ember-simple-auth-0.5.2
+//= require ember-simple-auth-devise-0.5.2
+//= require typeahead
 //= require_tree .
