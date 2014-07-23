@@ -1,6 +1,11 @@
 class Habit < ActiveRecord::Base
+
   has_and_belongs_to_many :users
   has_many :checkins, order: "created_at DESC"
+
+  validates :title, :unit,  presence: true
+  validates_inclusion_of :private, in: [true, false]
+  validates_uniqueness_of :title, conditions: -> { where({ private: false})  }
 
   def self.associate_matching_or_create(habit_params, current_user)
     associate_matching(habit_params, current_user) do |match|
