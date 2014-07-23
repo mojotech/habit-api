@@ -19,11 +19,16 @@ gem 'jbuilder', '~> 1.2'
 group :doc do
   gem 'sdoc', require: false
 end
-gem 'pry'
 gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'devise'
 
+group :development, :test do
+  gem 'pry'
+  gem 'rspec-rails', '~> 2.99'
+  gem 'factory_girl_rails'
+  gem 'faker'
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
