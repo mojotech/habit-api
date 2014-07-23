@@ -1,9 +1,16 @@
 class HabitsController < ApplicationController
+  include TokenAuthentication
+  
   before_filter :authenticate_user_from_token!
   before_filter :authenticate_user!
 
   def index
-    render json: current_user.habits, each_serializer: HabitSerializer
+    if params[:title]
+      habits = Habit.where('title LIKE ?', "%#{params[:title]}%")
+    else
+      habits = current_user.habits
+    end
+    render json: habits, each_serializer: HabitSerializer
   end
 
   def show

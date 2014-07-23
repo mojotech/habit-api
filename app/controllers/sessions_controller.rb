@@ -13,7 +13,7 @@ class SessionsController < DeviseController
 
     if resource.valid_password?(params[:user][:password])
       sign_in("user", resource)
-      render :json=> { :user_token=>resource.authentication_token, :user_email=>resource.email }, status: 201
+      render :json=> { :user_token=>resource.authentication_token, :user_email=>resource.email, :user_id => resource.id }, status: 201
       return
     end
     invalid_email_attempt
