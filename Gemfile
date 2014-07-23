@@ -31,10 +31,12 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara-webkit'
   gem 'cucumber-rails', '~> 1.4.1', require: false
   gem 'database_cleaner'
   gem 'dill', github: 'mojotech/dill', branch: 'master'
   gem 'shoulda-matchers', require: false
+  gem 'selenium-webdriver', '~> 2.41.0'
 end
 
 # Use ActiveModel has_secure_password
