@@ -16,7 +16,7 @@
     <h4> Habits </h4>
     <a {{action 'invalidateSession'}} class="logout"> Logout </a>
   </div>
-  <ul>
+  <ul id='habits-list'>
     {{#each}}
       {{#if title}}
         <li>
@@ -33,24 +33,26 @@
 </script>
 
 <script type='text/x-handlebars', id="habits/_form">
-  {{#if isEditable}}
-    {{twitter-typeahead id="title"
-                        placeholder="Habit Title"
-                        remote="http://localhost:3000/habits?title=%QUERY"
-                        customTemplate="<i>{{value}} ({{user_count}})</i>"
-                        action="habitSelected"
-                        valueBinding="title"}}
-    {{view Ember.TextField placeholder="Unit" valueBinding="unit" cols="30"}}
-  {{else}}
-    {{title}}
-    {{unit}}
-  {{/if}}
-  <label> Private </label>
-  {{input type="checkbox" checked=private}}
-  <button {{action 'save'}} class='save'> Save </button>
-  {{#unless isEditable}}
-    <button {{action 'cancel'}} class='cancel'> Cancel </button>
-  {{/unless}}
+  <form>
+    {{#if isEditable}}
+      {{twitter-typeahead id="title"
+                          placeholder="Habit Title"
+                          remote="http://localhost:3000/habits?title=%QUERY"
+                          customTemplate="<i>{{value}} ({{user_count}})</i>"
+                          action="habitSelected"
+                          valueBinding="title"}}
+      {{view Ember.TextField id="unit" placeholder="Unit" valueBinding="unit" cols="30"}}
+    {{else}}
+      {{title}}
+      {{unit}}
+    {{/if}}
+    <label> Private </label>
+    {{input id="private" type="checkbox" checked=private}}
+    <button {{action 'save'}} class='save'> Save </button>
+    {{#unless isEditable}}
+      <button {{action 'cancel'}} class='cancel'> Cancel </button>
+    {{/unless}}
+  </form>
 </script>
 
 <script type='text/x-handlebars', id="habits/new">
