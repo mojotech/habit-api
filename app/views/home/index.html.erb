@@ -19,8 +19,8 @@
   <ul id='habits-list'>
     {{#each}}
       {{#if title}}
-        <li>
-          <div class='title'> {{#link-to 'habit' this}}<span class='value'>{{myCheckinValue}}</span>{{title}}{{/link-to}} </div>
+        <li class='habit-listing'>
+          <div class='title'> {{#link-to 'habit' this}}<span class='value'>{{myCheckinValue}}</span><span class='habit-title'>{{title}}</span>{{/link-to}} </div>
           <div class='button-container'>
             <button {{action 'plusOne' this session.user_id}} class='plus'> + </button>
             <button {{action 'minusOne' this session.user_id}} class='minus'> - </button>
@@ -29,7 +29,7 @@
       {{/if}}
     {{/each}}
   </ul>
-  {{#link-to 'habits.new'}} New Habit {{/link-to}}
+  {{#link-to 'habits.new' class='new-habit'}} New Habit {{/link-to}}
 </script>
 
 <script type='text/x-handlebars', id="habits/_form">
