@@ -2,6 +2,11 @@
 Feature: Authentication
   As a user, I want to login so that I can view my personal habits. I should also be able to sign up for a new account and log out of a logged in account.
 
+  Scenario: Log out
+    Given I am logged in
+    When I click the logout link
+    Then I should be brought to the login form
+
   Scenario: Login with unexisting account
     When I login with the following information:
       | email    | asdfljasdlfkj@asdflklkj.com |
@@ -33,3 +38,29 @@ Feature: Authentication
       | password | password         |
     Then I should see a form to add a new habit
 
+  Scenario: Successful signup
+    Given the account dev@mojotech.com doesn't exist
+    When I signup with the following information:
+      | email    | dev@mojotech.com |
+      | password | password         |
+    Then I should see a form to add a new habit
+
+  Scenario: Signup with existing account
+    Given the account dev@mojotech.com exists
+    When I signup with the following information:
+      | email    | dev@mojotech.com |
+      | password | password         |
+    Then I should be brought to the signup form
+
+  Scenario: Signup with invalid email
+    When I signup with the following information:
+      | email    | devmojotechcom |
+      | password | password       |
+    Then I should be brought to the signup form
+
+  Scenario: Signup with invalid password
+    Given the account dev@mojotech.com doesn't exist
+    When I signup with the following information:
+      | email    | dev@mojotech.com |
+      | password | 123              |
+    Then I should be brought to the signup form
