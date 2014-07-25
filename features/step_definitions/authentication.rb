@@ -4,7 +4,7 @@ end
 
 Given(/^the account (.+) has no habits$/) do |email|
   user = User.where(email: email).first
-  Habit.all.each do |habit|    
+  Habit.all.each do |habit|
     if habit.users.include? user
       if habit.users.count == 1
         habit.destroy
@@ -38,9 +38,9 @@ Then(/^I should see a form to add a new habit$/) do
 end
 
 Given(/^I am logged in$/) do
-  step "the account dev@mojotech.com exists"
-  step "I login with the following information:", table(%{
-    | email    | dev@mojotech.com | 
+  step 'the account dev@mojotech.com exists'
+  step 'I login with the following information:', table(%{
+    | email    | dev@mojotech.com |
     | password | password         |
   })
 end

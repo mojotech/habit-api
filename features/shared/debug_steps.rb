@@ -1,4 +1,4 @@
 Then(/^pause$/) do
-  puts "Press [Enter] to continue..."
+  puts 'Press [Enter] to continue...'
   $stdin.getc
 end
