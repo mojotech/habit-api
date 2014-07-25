@@ -58,3 +58,10 @@ end
 Then(/^I should not see the habit "(.*?)" in my list$/) do |title|
   widget(:habits_list).has_habit?(title).should be false
 end
+
+Given(/^I am logged in$/) do
+  step "I signup with the following information:", table(%{
+      | email    | dev@mojotech.com | 
+      | password | password         |
+    })
+end

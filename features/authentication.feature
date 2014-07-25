@@ -2,9 +2,21 @@
 Feature: Authentication
   As a user, I want to login so that I can view my personal habits. I should also be able to sign up for a new account and log out of a logged in account.
 
+  Scenario: Signup with existing account
+    When I signup with the following information:
+      | email    | dev@mojotech.com |
+      | password | password         |
+    And I click the logout link
+    When I signup with the following information:
+      | email    | dev@mojotech.com |
+      | password | password         |
+    Then I should be brought to the signup form
+
   Scenario: Log out
-    Given I am logged in
-    When I click the logout link
+    When I signup with the following information:
+      | email    | dev@mojotech.com |
+      | password | password         |
+    And I click the logout link
     Then I should be brought to the login form
 
   Scenario: Login with unexisting account
@@ -19,38 +31,38 @@ Feature: Authentication
       | password | abcd1234         |
     Then I should be brought to the login form
 
+  Scenario: Successful login with no habits
+    When I signup with the following information:
+      | email    | dev@mojotech.com |
+      | password | password         |
+    And I click the logout link
+    And I login with the following information:
+      | email    | dev@mojotech.com |
+      | password | password         |
+    Then I should see a form to add a new habit
+
   Scenario: Successful login with habits
-    Given the account dev@mojotech.com exists
-    And the account dev@mojotech.com has the following habits:
+    When I signup with the following information:
+      | email    | dev@mojotech.com |
+      | password | password         |
+    And I create the following habits:
       | title       | unit    | private |
       | walk dog    | times   | true    |
       | drink water | glasses | true    |
-    When I login with the following information:
+    And I click the logout link
+    And I login with the following information:
       | email    | dev@mojotech.com |
       | password | password         |
-    Then I should see a list of my habits
-
-  Scenario: Successful login with no habits
-    Given the account dev@mojotech.com exists
-    And the account dev@mojotech.com has no habits
-    When I login with the following information:
-      | email    | dev@mojotech.com |
-      | password | password         |
-    Then I should see a form to add a new habit
+    Then I should see the following habits:
+      | title       |
+      | walk dog    |
+      | drink water |
 
   Scenario: Successful signup
-    Given the account dev@mojotech.com doesn't exist
     When I signup with the following information:
       | email    | dev@mojotech.com |
       | password | password         |
     Then I should see a form to add a new habit
-
-  Scenario: Signup with existing account
-    Given the account dev@mojotech.com exists
-    When I signup with the following information:
-      | email    | dev@mojotech.com |
-      | password | password         |
-    Then I should be brought to the signup form
 
   Scenario: Signup with invalid email
     When I signup with the following information:
@@ -59,7 +71,6 @@ Feature: Authentication
     Then I should be brought to the signup form
 
   Scenario: Signup with invalid password
-    Given the account dev@mojotech.com doesn't exist
     When I signup with the following information:
       | email    | dev@mojotech.com |
       | password | 123              |
