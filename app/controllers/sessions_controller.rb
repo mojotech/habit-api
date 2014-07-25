@@ -12,7 +12,7 @@ class SessionsController < DeviseController
     return invalid_email_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
-      sign_in("user", resource)
+      sign_in('user', resource)
       render :json=> { :user_token=>resource.authentication_token, :user_email=>resource.email, :user_id => resource.id }, status: 201
       return
     end
@@ -27,11 +27,11 @@ class SessionsController < DeviseController
   protected
   def ensure_params_exist
     return unless params[:user].blank?
-    render :json=>{:success=>false, :message=>"missing user parameter"}, :status=>422
+    render :json=>{:success=>false, :message=>'missing user parameter'}, :status=>422
   end
 
   def invalid_email_attempt
     # warden.custom_failure!
-    render :json=> {:success=>false, :message=>"Error with your email or password"}, :status=>401
+    render :json=> {:success=>false, :message=>'Error with your email or password'}, :status=>401
   end
 end
