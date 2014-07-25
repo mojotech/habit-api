@@ -13,6 +13,6 @@ class HabitSerializer < ActiveModel::Serializer
     object.checkins.where(user_id: current_user.id)
   end
   def value
-    my_checkins.inject(0) { |sum, n| sum + n.value }
+    my_checkins.reduce(0) { |sum, n| sum + n.value }
   end
 end
