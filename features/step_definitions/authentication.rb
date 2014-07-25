@@ -6,7 +6,7 @@ When(/^I create the following habits:$/) do |table|
   table.hashes.each do |row|
     step "I visit the new habits page"
     step "I create a habit with the following information:", table(%{
-      | title   | #{row['title']}   | 
+      | title   | #{row['title']}   |
       | unit    | #{row['unit']}    |
       | private | #{row['private']} |
     })
