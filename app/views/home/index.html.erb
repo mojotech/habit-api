@@ -19,8 +19,8 @@
   <ul id='habits-list'>
     {{#each}}
       {{#if title}}
-        <li>
-          <div class='title'> {{#link-to 'habit' this}}<span class='value'>{{myCheckinValue}}</span>{{title}}{{/link-to}} </div>
+        <li class='habit-listing'>
+          <div class='title'> {{#link-to 'habit' this}}<span class='value'>{{myCheckinValue}}</span><span class='habit-title'>{{title}}</span>{{/link-to}} </div>
           <div class='button-container'>
             <button {{action 'plusOne' this session.user_id}} class='plus'> + </button>
             <button {{action 'minusOne' this session.user_id}} class='minus'> - </button>
@@ -29,7 +29,7 @@
       {{/if}}
     {{/each}}
   </ul>
-  {{#link-to 'habits.new'}} New Habit {{/link-to}}
+  {{#link-to 'habits.new' class='new-habit'}} New Habit {{/link-to}}
 </script>
 
 <script type='text/x-handlebars', id="habits/_form">
@@ -72,38 +72,40 @@
 </script>
 
 <script type='text/x-handlebars' id='habit'>
-  <div class="nav-bar">
-    <h4> {{title}} </h4>
-    <a {{action 'invalidateSession'}} class="logout"> Logout </a>
-  </div>
-  <h2> {{value}} {{unit}} </h2>
-  {{view Ember.TextField valueBinding="newCheckinValue" cols="30"}}
-  <div class='inline-button-container'>
-    <button {{action 'checkin' this 'plus'}} class='plus'> + </button>
-    <button {{action 'checkin' this 'minus'}} class='minus'> - </button>
-  </div>
-  Max Checkin: {{maxCheckin}}
-  Min Checkin: {{minCheckin}}
-  Last Checkin: {{lastCheckin}}
-  Users: {{users.length}}
-  <br />
-  <button {{action 'editHabit'}} class='edit'> Edit {{title}} </button>
-  <button {{action 'removeHabit'}} class='delete'> Delete {{title}} </button>
-  <br />
-  {{#if checkins.length}}
-    {{#if private}}
-      <h3>Private Checkins</h3>
-    {{else}}
-      <h3>Public Checkins</h3>
-    {{/if}}
-    {{#each checkin in App.checkinsController}}
+  <div class='habit-details'>
+    <div class="nav-bar">
+      <h4> {{title}} </h4>
+      <a {{action 'invalidateSession'}} class="logout"> Logout </a>
+    </div>
+    <h2> {{value}} {{unit}} </h2>
+    {{view Ember.TextField valueBinding="newCheckinValue" cols="30"}}
+    <div class='inline-button-container'>
+      <button {{action 'checkin' this 'plus'}} class='plus'> + </button>
+      <button {{action 'checkin' this 'minus'}} class='minus'> - </button>
+    </div>
+    Max Checkin: {{maxCheckin}}
+    Min Checkin: {{minCheckin}}
+    Last Checkin: {{lastCheckin}}
+    Users: {{users.length}}
+    <br />
+    <button {{action 'editHabit'}} class='edit'> Edit {{title}} </button>
+    <button {{action 'removeHabit'}} class='delete'> Delete {{title}} </button>
+    <br />
+    {{#if checkins.length}}
       {{#if private}}
-        <p>({{checkin.value}})</p>
+        <h3>Private Checkins</h3>
       {{else}}
-        <p>{{checkin.email}} ({{checkin.value}})</p>
+        <h3>Public Checkins</h3>
       {{/if}}
-    {{/each}}
-  {{/if}}
+      {{#each checkin in App.checkinsController}}
+        {{#if private}}
+          <p>({{checkin.value}})</p>
+        {{else}}
+          <p>{{checkin.email}} ({{checkin.value}})</p>
+        {{/if}}
+      {{/each}}
+    {{/if}}
+  </div>
 </script>
 
 <script type='text/x-handlebars' id='login'>

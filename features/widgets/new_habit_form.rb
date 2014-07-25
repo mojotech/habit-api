@@ -1,11 +1,11 @@
-class NewHabitForm < Dill::FieldGroup
+class NewHabitForm < Dill::Form
   root 'form'
 
   text_field :title, 'title'
-  text_field :unit, 'password'
-  widget :private, 'private'
+  text_field :unit, 'unit'
+  check_box :private, 'private'
 
-  widget :save, 'save'
+  widget :save, '.save'
 
   def submit_form
     widget(:save).click
