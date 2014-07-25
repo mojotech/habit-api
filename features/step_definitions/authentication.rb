@@ -38,8 +38,8 @@ Then(/^I should see a form to add a new habit$/) do
 end
 
 Given(/^I am logged in$/) do
-  step "the account dev@mojotech.com exists"
-  step "I login with the following information:", table(%{
+  step 'the account dev@mojotech.com exists'
+  step 'I login with the following information:', table(%{
     | email    | dev@mojotech.com |
     | password | password         |
   })
