@@ -1,6 +1,10 @@
-class HabitDetails < Dill::Widget
+class HabitDetails < Dill::FieldGroup
   root '.habit-details'
 
-  widget :title, 'h4'
+  widget :title, '.title'
   widget :delete, '.delete'
+  widget :value, '.value'
+  text_field :new_checkin_value, 'new-checkin-value'
+  widget :positive_checkin, '.plus'
+  widget :negative_checkin, '.minus'
 end
