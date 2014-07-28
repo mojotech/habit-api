@@ -26,17 +26,6 @@ App.Habit = DS.Model.extend
   users: DS.hasMany 'user'
   newCheckinValue: 1
   value: DS.attr 'number'
-  maxCheckin: Ember.computed 'checkins', ->
-    require @get('checkins'), (checkins) ->
-      _.max(checkins, (checkin) ->
-        checkin.get('value')).get('value')
-  minCheckin: Ember.computed 'checkins', ->
-    require @get('checkins'), (checkins) ->
-      _.min(checkins, (checkin) ->
-        checkin.get('value')).get('value')
-  lastCheckin: Ember.computed 'checkins', ->
-    require @get('checkins'), (checkins) ->
-      _.last(checkins).get('value')
   isEditable:(->
     @get('private') == true or !@get('user_count') > 0
   ).property('private', 'user_count')
