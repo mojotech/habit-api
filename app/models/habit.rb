@@ -29,6 +29,9 @@ class Habit < ActiveRecord::Base
     self
   end
 
+  def public?
+    !private?
+  end
   private
 
   def convert_to_public(habit_params, current_user)
@@ -42,10 +45,6 @@ class Habit < ActiveRecord::Base
       checkin.save!
     end
     users.destroy current_user
-  end
-
-  def public?
-    !private?
   end
 
   def will_be_private(habit_params)
