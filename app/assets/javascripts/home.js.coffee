@@ -114,7 +114,7 @@ App.HabitsRoute = Ember.Route.extend Ember.SimpleAuth.AuthenticatedRouteMixin,
   afterModel: (habits) ->
     if habits.content.length is 0
       @transitionTo 'habits.new'
-  model: -> 
+  model: ->
     @store.find 'habit'
   actions:
     plusOne: _checkin(1)

@@ -5,7 +5,7 @@ class Habit < ActiveRecord::Base
 
   validates :title, :unit,  presence: true
   validates_inclusion_of :private, in: [true, false]
-  validates_uniqueness_of :title, conditions: -> { where({ private: false})  }
+  validates_uniqueness_of :title, conditions: -> { where({ private: false})  }, if: :public?
 
   def self.associate_matching_or_create(habit_params, current_user)
     associate_matching(habit_params, current_user) do |match|
@@ -18,15 +18,29 @@ class Habit < ActiveRecord::Base
   end
 
   def convert_or_update(habit_params, current_user)
-    if will_be_private(habit_params)
-      convert_to_private habit_params, current_user
-    elsif will_be_public(habit_params)
-      convert_to_public habit_params, current_user
+    attrs = {
+      title: attributes['title'],
+      unit: attributes['unit'],
+      private: attributes['private']
+    }.merge(habit_params)
+
+    if will_be_private(attrs)
+      convert_to_private attrs, current_user
+    elsif will_be_public(attrs)
+      convert_to_public attrs, current_user
     else
-      update_attributes habit_params
+      update_attributes attrs
     end
 
     self
+  end
+
+  def public?
+    !private?
+  end
+
+  def shared?
+    public? && users.count >= 1
   end
 
   private
@@ -42,10 +56,6 @@ class Habit < ActiveRecord::Base
       checkin.save!
     end
     users.destroy current_user
-  end
-
-  def public?
-    !private?
   end
 
   def will_be_private(habit_params)
