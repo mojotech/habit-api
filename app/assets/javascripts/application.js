@@ -11,8 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
 //= require lodash
 //= require handlebars-1.1.2
 //= require ember-1.5.1
