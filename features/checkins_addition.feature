@@ -26,3 +26,21 @@ Feature: Checkins
     And I view the habit details for "walk dog"
     When I checkin negatively with a value of 3
     Then I should see a checkin value of "-3 times"
+
+  Scenario: Positive checkin from list
+    Given I visit the new habits page
+    And I create a habit with the following information:
+      | title   | walk dog |
+      | unit    | times    |
+      | private | true     |
+    When I add a positive checkin to the habit with title "walk dog"
+    Then The habit with title "walk dog" should have a checkin value of 1
+
+  Scenario: Negative checkin from list
+    Given I visit the new habits page
+    And I create a habit with the following information:
+      | title   | walk dog |
+      | unit    | times    |
+      | private | true     |
+    When I add a negative checkin to the habit with title "walk dog"
+    Then The habit with title "walk dog" should have a checkin value of -1
