@@ -18,12 +18,18 @@ class Habit < ActiveRecord::Base
   end
 
   def convert_or_update(habit_params, current_user)
-    if will_be_private(habit_params)
-      convert_to_private habit_params, current_user
-    elsif will_be_public(habit_params)
-      convert_to_public habit_params, current_user
+    attrs = {
+      title: attributes['title'],
+      unit: attributes['unit'],
+      private: attributes['private']
+    }.merge(habit_params)
+
+    if will_be_private(attrs)
+      convert_to_private attrs, current_user
+    elsif will_be_public(attrs)
+      convert_to_public attrs, current_user
     else
-      update_attributes habit_params
+      update_attributes attrs
     end
 
     self
