@@ -5,7 +5,7 @@ class Habit < ActiveRecord::Base
 
   validates :title, :unit,  presence: true
   validates_inclusion_of :private, in: [true, false]
-  validates_uniqueness_of :title, conditions: -> { where({ private: false})  }
+  validates_uniqueness_of :title, conditions: -> { where({ private: false})  }, if: :public?
 
   def self.associate_matching_or_create(habit_params, current_user)
     associate_matching(habit_params, current_user) do |match|
