@@ -3,12 +3,10 @@ Feature: Checkins
   As a user, I want to checkin to my habits to record my progress. I should be able to increment/decrement the checkin value of a habit by a given number of units.
 
   Background:
-    Given I signup with the following information:
-      | email    | dev@mojotech.com |
-      | password | password         |
+    Given I am logged in
+    And I visit the new habits page
 
   Scenario: Positive checkin from habit details
-    Given I visit the new habits page
     And I create a habit with the following information:
       | title   | walk dog |
       | unit    | times    |
@@ -18,7 +16,6 @@ Feature: Checkins
     Then I should see a checkin value of "2 times"
 
   Scenario: Negative checkin from habit details
-    Given I visit the new habits page
     And I create a habit with the following information:
       | title   | walk dog |
       | unit    | times    |
@@ -28,7 +25,6 @@ Feature: Checkins
     Then I should see a checkin value of "-3 times"
 
   Scenario: Positive checkin from list
-    Given I visit the new habits page
     And I create a habit with the following information:
       | title   | walk dog |
       | unit    | times    |
@@ -37,7 +33,6 @@ Feature: Checkins
     Then The habit with title "walk dog" should have a checkin value of 1
 
   Scenario: Negative checkin from list
-    Given I visit the new habits page
     And I create a habit with the following information:
       | title   | walk dog |
       | unit    | times    |

@@ -50,3 +50,29 @@ end
 Then(/^I should be brought to the signup form$/) do
   widget(:signup_form).should be_present
 end
+
+Given(/^I am logged in$/) do
+  user = FactoryGirl.create(:user)
+  step "I login with the following information:", table(%{
+    | email    | #{user.email}    |
+    | password | #{user.password} |
+  })
+end
+
+Given(/^a logged in account with the following information:$/) do |table|
+  User.create(
+    email: table.rows_hash['email'],
+    password: table.rows_hash['password']
+  )
+  step "I login with the following information:", table
+end
+
+Given(/^the account "(.*?)" has the following habits:$/) do |email, table|
+  user = User.where(email: email).first
+  table.hashes.each do |row|
+    matching_habits = user.habits.where(title: row['title'], unit: row['unit'], private: row['private'])
+    if matching_habits.count == 0
+      user.habits.create(title: row['title'], unit: row['unit'], private: row['private'])
+    end
+  end
+end
