@@ -6,7 +6,7 @@ When(/^I create the following habits:$/) do |table|
   table.hashes.each do |row|
     step "I visit the new habits page"
     step "I create a habit with the following information:", table(%{
-      | title   | #{row['title']}   | 
+      | title   | #{row['title']}   |
       | unit    | #{row['unit']}    |
       | private | #{row['private']} |
     })
@@ -31,7 +31,7 @@ Then(/^I should see a form to add a new habit$/) do
   widget(:new_habit_form).should be_present
 end
 
-When(/^I click the logout link$/) do
+Then(/^I click the logout link$/) do
   widget(:logout_link).click
 end
 
