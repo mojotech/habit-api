@@ -38,6 +38,11 @@ class Habit < ActiveRecord::Base
   def public?
     !private?
   end
+
+  def shared?
+    public? && users.count >= 1
+  end
+
   private
 
   def convert_to_public(habit_params, current_user)
