@@ -10,31 +10,6 @@ Ember.Application.initializer
     Ember.SimpleAuth.setup container, application,
       authorizerFactory: 'ember-simple-auth-authorizer:devise'
 
-# Models
-App.Habit = DS.Model.extend
-  title: DS.attr 'string'
-  unit: DS.attr 'string'
-  private: DS.attr 'boolean'
-  checkins: DS.hasMany 'checkin'
-  users: DS.hasMany 'user'
-  newCheckinValue: 1
-  value: DS.attr 'number'
-  isEditable:(->
-    @get('private') == true or !@get('user_count') > 0
-  ).property('private', 'user_count')
-
-App.Checkin = DS.Model.extend
-  habit: DS.belongsTo 'habit'
-  value: DS.attr 'number'
-  email: DS.attr 'string'
-  created_at: DS.attr 'date'
-  user_id: DS.attr 'number'
-
-App.User = DS.Model.extend
-  habits: DS.hasMany 'habits'
-  email: DS.attr 'string'
-  password: DS.attr 'string'
-
 # Routes
 
 App.ApplicationRoute = Ember.Route.extend Ember.SimpleAuth.ApplicationRouteMixin

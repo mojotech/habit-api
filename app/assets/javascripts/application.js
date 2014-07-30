@@ -19,4 +19,5 @@
 //= require ember-simple-auth-devise-0.5.2
 //= require typeahead
 //= require ./app
+//= require_tree ./models/
 //= require_tree ./components/
