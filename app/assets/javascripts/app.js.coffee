@@ -10,13 +10,6 @@ Ember.Application.initializer
     Ember.SimpleAuth.setup container, application,
       authorizerFactory: 'ember-simple-auth-authorizer:devise'
 
-require = (resource, fn) ->
-  asArray = resource.toArray()
-  if asArray.length
-    fn(asArray)
-  else
-    0
-
 # Models
 App.Habit = DS.Model.extend
   title: DS.attr 'string'
