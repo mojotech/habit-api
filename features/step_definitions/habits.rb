@@ -18,7 +18,7 @@ Given(/^I visit the new habits page$/) do
 end
 
 When(/^I create a habit with the following information:$/) do |table|
-  form = widget(:new_habit_form)
+  form = widget(:habit_form)
   form.widget(:title).set(table.rows_hash['title'])
   form.widget(:unit).set(table.rows_hash['unit'])
   form.widget(:private).set(table.rows_hash['private'] == 'true')
@@ -26,7 +26,7 @@ When(/^I create a habit with the following information:$/) do |table|
 end
 
 Then(/^I should see a form to enter a new habit$/) do
-  widget(:new_habit_form).should be_present
+  widget(:habit_form).should be_present
 end
 
 Then(/^I should should see the following habits? in my list:$/) do |table|

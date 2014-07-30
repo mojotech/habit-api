@@ -1,4 +1,4 @@
-class NewHabitForm < Dill::Form
+class HabitForm < Dill::Form
   root 'form'
 
   text_field :title, 'title'

@@ -28,7 +28,7 @@ Then(/^I should see the following habits:$/) do |table|
 end
 
 Then(/^I should see a form to add a new habit$/) do
-  widget(:new_habit_form).should be_present
+  widget(:habit_form).should be_present
 end
 
 Then(/^I click the logout link$/) do
