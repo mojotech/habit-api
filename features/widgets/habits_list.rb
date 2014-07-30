@@ -15,4 +15,8 @@ class HabitsList < Dill::List
   def has_habit?(title)
     widget?(:habit_item, title)
   end
+
+  def has_habit_with_visibility?(title, visibility)
+    widget?(:habit_item, title) and widget(:habit_item, title).classes.include? visibility
+  end
 end
