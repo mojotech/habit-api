@@ -10,4 +10,9 @@ Habit building or breaking through analytics.
 * rake db:create db:setup
 * rails s
 
+## Tests
+
+* brew install chromedriver
+* bundle exec cucumber -r features
+
 Enjoy.
