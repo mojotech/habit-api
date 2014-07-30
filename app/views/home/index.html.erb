@@ -37,7 +37,7 @@
     {{#if isEditable}}
       {{twitter-typeahead id="title"
                           placeholder="Habit Title"
-                          remote="http://localhost:3000/habits?title=%QUERY"
+                          remote="/habits?title=%QUERY"
                           customTemplate="<i>{{value}} ({{user_count}})</i>"
                           action="habitSelected"
                           valueBinding="title"}}
