@@ -10,7 +10,10 @@ Ember.Application.initializer
     Ember.SimpleAuth.setup container, application,
       authorizerFactory: 'ember-simple-auth-authorizer:devise'
 
-App.ApplicationRoute = Ember.Route.extend Ember.SimpleAuth.ApplicationRouteMixin
+App.ApplicationRoute = Ember.Route.extend Ember.SimpleAuth.ApplicationRouteMixin,
+  actions:
+    sessionAuthenticationFailed: (error) ->
+      @controllerFor('login').set('error', 'Invalid email/password combination.')
 
 App.Router.map ->
   @route 'login'
