@@ -22,40 +22,6 @@ App.Router.map ->
   @resource 'habit', path: '/habits/:habit_id'
   @resource 'habits.edit', path: '/habits/:habit_id/edit'
 
-App.LoginController = Ember.Controller.extend Ember.SimpleAuth.LoginControllerMixin,
-  authenticatorFactory: 'ember-simple-auth-authenticator:devise'
-
-App.HabitController = Ember.ObjectController.extend
-  myCheckinValue:(->
-    @get('model.checkins').reduce ((prev, checkin) =>
-      if +@get('session.user_id') is +checkin.get('user_id')
-        prev += checkin.get('value')
-      else
-        prev
-    ), 0
-  ).property('model.checkins')
-
-App.HabitsController = Ember.ArrayController.extend
-  itemController: 'habit'
-
-App.HabitsNewController = Ember.ObjectController.extend
-  actions:
-    habitSelected: (habit) ->
-      @content.set('title', habit.value)
-      @content.set('unit', habit.unit)
-      @content.set('user_count', habit.user_count)
-
-App.HabitsEditController = Ember.ObjectController.extend
-  actions:
-    habitSelected: (habit) ->
-      @content.set('title', habit.value)
-      @content.set('unit', habit.unit)
-      @content.set('user_count', habit.user_count)
-
-App.checkinsController = Ember.ArrayController.create
-  sortProperties: ['created_at']
-  sortAscending: false
-
 App.SignupRoute = Ember.Route.extend
   model: -> {}
   actions:
