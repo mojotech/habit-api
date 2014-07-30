@@ -10,8 +10,6 @@ Ember.Application.initializer
     Ember.SimpleAuth.setup container, application,
       authorizerFactory: 'ember-simple-auth-authorizer:devise'
 
-# Routes
-
 App.ApplicationRoute = Ember.Route.extend Ember.SimpleAuth.ApplicationRouteMixin
 
 App.Router.map ->
@@ -21,78 +19,3 @@ App.Router.map ->
   @resource 'habits.new', path: '/habits/new'
   @resource 'habit', path: '/habits/:habit_id'
   @resource 'habits.edit', path: '/habits/:habit_id/edit'
-
-App.SignupRoute = Ember.Route.extend
-  model: -> {}
-  actions:
-    signUp: ->
-      user = @store.createRecord 'user',
-        email: @currentModel.identification
-        password: @currentModel.password
-      user.save().then (success) =>
-        @get('session')
-          .authenticate "ember-simple-auth-authenticator:devise",
-            identification: @currentModel.identification
-            password: @currentModel.password
-
-_checkin = (value) ->
-  (habit, userId) ->
-    checkin = @store.createRecord 'checkin',
-      value: value
-      habit: habit
-      user_id: userId
-    checkin.save().then =>
-      @store.reloadRecord habit
-
-App.HabitsRoute = Ember.Route.extend Ember.SimpleAuth.AuthenticatedRouteMixin,
-  afterModel: (habits) ->
-    if habits.content.length is 0
-      @transitionTo 'habits.new'
-  model: ->
-    @store.find 'habit'
-  actions:
-    plusOne: _checkin(1)
-    minusOne: _checkin(-1)
-
-App.HabitsNewRoute = Ember.Route.extend Ember.SimpleAuth.AuthenticatedRouteMixin,
-  model: ->
-    @store.createRecord 'habit'
-  actions:
-    save: ->
-      @currentModel.save().then =>
-        @store.unloadAll 'habit'
-        @transitionTo 'habits'
-    cancel: ->
-      @currentModel.set('user_count', 0)
-      @currentModel.set('title', '')
-      @currentModel.set('unit', '')
-      @currentModel.set('private', false)
-
-App.HabitsEditRoute = Ember.Route.extend Ember.SimpleAuth.AuthenticatedRouteMixin,
-  model: (params) -> @store.find('habit', params.habit_id)
-  actions:
-    save: ->
-      @currentModel.save().then =>
-        @store.unloadAll 'habit'
-        @transitionTo 'habits'
-    cancel: ->
-      @currentModel.rollback()
-
-App.HabitRoute = Ember.Route.extend Ember.SimpleAuth.AuthenticatedRouteMixin,
-  model: (params) ->
-    @store.find 'habit', params.habit_id
-  afterModel: (model) ->
-    App.checkinsController.set('content', model.get('checkins'))
-  actions:
-    removeHabit: ->
-      @modelFor('habit').destroyRecord().then =>
-        @transitionTo 'habits'
-    editHabit: ->
-      @transitionTo('habits.edit', @currentModel)
-    checkin: (habit, direction) ->
-      value = if direction is 'plus' then habit.newCheckinValue else -habit.newCheckinValue
-      _checkin.call(this, value).call(this, habit, @get('session.user_id'))
-
-App.IndexRoute = Ember.Route.extend
-  redirect: ->
-    @transitionTo 'habits'
