@@ -1,22 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.2'
-
 gem 'pg'
-
 gem 'sass-rails', '~> 4.0.0'
-
 gem 'uglifier', '>= 1.3.0'
-
 gem 'coffee-rails', '~> 4.0.0'
-
 gem 'jquery-rails'
 
-gem 'jbuilder', '~> 1.2'
-
-group :doc do
-  gem 'sdoc', require: false
-end
 gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'devise'
@@ -36,15 +26,3 @@ group :test do
   gem 'shoulda-matchers', require: false
   gem 'selenium-webdriver', '~> 2.41.0'
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]

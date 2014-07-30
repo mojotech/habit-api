@@ -18,4 +18,9 @@
 //= require ember-simple-auth-0.5.2
 //= require ember-simple-auth-devise-0.5.2
 //= require typeahead
-//= require_tree .
+//= require ./app
+//= require_tree ./models/
+//= require_tree ./controllers/
+//= require_tree ./shared/
+//= require_tree ./routes/
+//= require_tree ./components/
