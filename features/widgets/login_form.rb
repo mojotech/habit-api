@@ -1,6 +1,7 @@
 class LoginForm < Dill::FieldGroup
   root 'form'
 
+  widget :error, '.error'
   text_field :email, 'identification'
   text_field :password, 'password'
   widget :submit, 'button'

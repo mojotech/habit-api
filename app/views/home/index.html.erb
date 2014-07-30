@@ -109,6 +109,9 @@
   <h1>Login</h1>
   {{! login form; the fields must be named "identification" and "password"; the controller action is "authenticate" }}
   <form {{action 'authenticate' on='submit'}}>
+    {{#if error}}
+      <p class='error'>{{error}}</p>
+    {{/if}}
     <div class="form-group">
       {{input id='identification' placeholder='Enter Login' class='form-control' value=identification}}
     </div>
