@@ -19,7 +19,7 @@
   <ul id='habits-list'>
     {{#each}}
       {{#if title}}
-        <li class='habit-listing'>
+        <li {{bind-attr class=":habit-listing private:private:public"}}>
           <div class='title'> {{#link-to 'habit' this}}<span class='value'>{{myCheckinValue}}</span><span class='habit-title'>{{title}}</span>{{/link-to}} </div>
           <div class='button-container'>
             <button {{action 'plusOne' this session.user_id}} class='plus'> + </button>
@@ -37,7 +37,7 @@
     {{#if isEditable}}
       {{twitter-typeahead id="title"
                           placeholder="Habit Title"
-                          remote="http://localhost:3000/habits?title=%QUERY"
+                          remote="/habits?title=%QUERY"
                           customTemplate="<i>{{value}} ({{user_count}})</i>"
                           action="habitSelected"
                           valueBinding="title"}}

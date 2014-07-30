@@ -38,7 +38,13 @@ Given(/^A shared habit can be converted to private$/) do
   user_one.habits << FactoryGirl.create(:habit, private: false)
 
   user_two = FactoryGirl.create(:user)
-  shared_habit = Habit.associate_matching_or_create(user_one.habits.last.attributes.merge('private' => false), user_two)
+  shared_habit = Habit.associate_matching_or_create({
+    title: user_one.habits.last.attributes["title"],
+    unit: user_one.habits.last.attributes["unit"],
+    private: false
+  }, user_two)
+
+  expect(Habit.count).to be 1
 
   shared_habit.convert_or_update({ private: true }, user_two)
 
