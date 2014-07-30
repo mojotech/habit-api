@@ -10,12 +10,14 @@ Scenario: Login with unexisting account
     | email    | asdfljasdlfkj@asdflklkj.com |
     | password | password                    |
   Then I should be brought to the login form
+  And I should see an error message
 
 Scenario: Login with wrong password
   When I login with the following information:
     | email    | dev@mojotech.com |
     | password | abcd1234         |
   Then I should be brought to the login form
+  And I should see an error message
 
 Scenario: Successful login with no habits
   Given a logged in account with the following information:

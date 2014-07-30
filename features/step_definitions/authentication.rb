@@ -76,3 +76,7 @@ Given(/^the account "(.*?)" has the following habits:$/) do |email, table|
     end
   end
 end
+
+Then(/^I should see an error message$/) do
+  widget(:login_form).widget?(:error).should be true
+end
