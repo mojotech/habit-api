@@ -1,6 +1,13 @@
 <script type='text/x-handlebars' id='signup'>
   <h1>Sign Up</h1>
   <form {{action 'signUp' on='submit'}}>
+    {{#if error_messages.length}}
+      <ul class='errors'>
+      {{#each error in error_messages}}
+        <li class='error'>{{error}}</li>
+      {{/each}}
+      </ul>
+    {{/if}}
     <div class="form-group">
       {{input id='identification' placeholder='Enter Login' class='form-control' value=identification}}
     </div>

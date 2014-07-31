@@ -15,6 +15,7 @@ Scenario: Signup with existing account
     | email    | dev@mojotech.com |
     | password | password         |
   Then I should be brought to the signup form
+  And I should be told the account already exists
 
 Scenario: Successful signup
   When I signup with the following information:
@@ -27,9 +28,17 @@ Scenario: Signup with invalid email
     | email    | devmojotechcom |
     | password | password       |
   Then I should be brought to the signup form
+  And I should be told to provide a valid email
 
-Scenario: Signup with invalid password
+Scenario: Signup with short password
   When I signup with the following information:
     | email    | dev@mojotech.com |
     | password | 123              |
   Then I should be brought to the signup form
+  And I should be told to provide a longer password
+
+Scenario: Signup with blank password
+  When I signup with the following information:
+    | email    | dev@mojotech.com |
+  Then I should be brought to the signup form
+  And I should be told to provide a password

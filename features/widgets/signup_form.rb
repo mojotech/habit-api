@@ -5,6 +5,10 @@ class SignupForm < Dill::FieldGroup
   text_field :password, 'password'
   widget :submit, 'button'
 
+  widget :error, -> (message) {
+    ['.errors .error', text: message]
+  }
+
   def submit_form
     widget(:submit).click
   end
