@@ -9,6 +9,6 @@ App.HabitRoute = Ember.Route.extend Ember.SimpleAuth.AuthenticatedRouteMixin,
         @transitionTo 'habits'
     editHabit: ->
       @transitionTo('habits.edit', @currentModel)
-    checkin: (habit, direction) ->
+    checkin: (habit, direction, note) ->
       value = if direction is 'plus' then habit.newCheckinValue else -habit.newCheckinValue
-      App.checkin.call(this, value).call(this, habit, @get('session.user_id'))
+      App.checkin.call(this, value, note).call(this, habit, @get('session.user_id'))

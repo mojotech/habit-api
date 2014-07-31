@@ -85,13 +85,15 @@
       <a {{action 'invalidateSession'}} class="logout"> Logout </a>
     </div>
     <h2 class='value'> {{value}} {{unit}} </h2>
-    {{view Ember.TextField valueBinding="newCheckinValue" cols="30" id="new-checkin-value"}}
+    Value: {{view Ember.TextField valueBinding="newCheckinValue" cols="30" id="new-checkin-value"}}
     <div class='inline-button-container'>
-      <button {{action 'checkin' this 'plus'}} class='plus'> + </button>
-      <button {{action 'checkin' this 'minus'}} class='minus'> - </button>
+      <button {{action 'checkin' this 'plus' note}} class='plus'> + </button>
+      <button {{action 'checkin' this 'minus' note}} class='minus'> - </button>
     </div>
-    Users: {{users.length}}
+    Note: {{view Ember.TextField valueBinding="note" cols="50" id="note"}}
     <br />
+    Users: {{users.length}}
+    <br /><br />
     <button {{action 'editHabit'}} class='edit'> Edit {{title}} </button>
     {{#if shared}}
       <button {{action 'removeHabit'}} class='abandon'> Abandon {{title}} </button>
@@ -107,9 +109,9 @@
       {{/if}}
       {{#each checkin in App.checkinsController}}
         {{#if private}}
-          <p>({{checkin.value}})</p>
+          <p class="checkin">({{checkin.value}}) {{checkin.note}}</p>
         {{else}}
-          <p>{{checkin.email}} ({{checkin.value}})</p>
+          <p class="checkin">{{checkin.email}} ({{checkin.value}}) {{checkin.note}}</p>
         {{/if}}
       {{/each}}
     {{/if}}

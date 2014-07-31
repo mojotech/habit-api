@@ -15,6 +15,6 @@ class CheckinsController < ApplicationController
   def post_params
     params
       .require(:checkin)
-      .permit(:value, :habit_id)
+      .permit(:value, :habit_id, :note)
   end
 end

@@ -4,3 +4,4 @@ App.Checkin = DS.Model.extend
   email: DS.attr 'string'
   created_at: DS.attr 'date'
   user_id: DS.attr 'number'
+  note: DS.attr 'string'
