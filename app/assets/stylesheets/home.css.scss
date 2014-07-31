@@ -69,10 +69,10 @@ button {
   }
 }
 
-ul {
+#habits-list {
   margin: 0;
   padding: 0;
-  li {
+  .habit-listing {
     position: relative;
     font-size: 15px;
     list-style-type: none;

@@ -80,3 +80,19 @@ end
 Then(/^I should see an error message$/) do
   widget(:login_form).widget?(:error).should be true
 end
+
+Then(/^I should be told the account already exists$/) do
+  widget(:signup_form).widget?(:error, 'email has already been taken').should be true
+end
+
+Then(/^I should be told to provide a valid email$/) do
+  widget(:signup_form).widget?(:error, 'email is invalid').should be true
+end
+
+Then(/^I should be told to provide a longer password$/) do
+  widget(:signup_form).widget?(:error, 'password is too short (minimum is 8 characters)').should be true
+end
+
+Then(/^I should be told to provide a password$/) do
+  widget(:signup_form).widget?(:error, "password can't be blank").should be true
+end
