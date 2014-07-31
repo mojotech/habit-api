@@ -48,3 +48,12 @@ Feature: Habit
 
   Scenario: Joinability
     * A public habit can be joined, creating a shared habit
+
+  Scenario: Private Removal
+    * A user can remove a private habit
+
+  Scenario: Public Removal
+    * A user can remove a public habit
+
+  Scenario: Shared Removal
+    * A user can abandon a shared habit

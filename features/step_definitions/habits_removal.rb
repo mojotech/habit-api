@@ -46,3 +46,15 @@ end
 When(/^I view the habit's details$/) do
   widget(:habit_item, 'walk dog').click
 end
+
+When(/^I abandon the shared habit$/) do
+  step 'I click the habit with the title "walk dog"'
+  widget(:habit_details).widget(:abandon).click
+end
+
+Then(/^the other users still belong to the habit$/) do
+  step "I login to a new account"
+  step "I visit the new habits page"
+  step 'I type "walk do" into the title field'
+  widget(:type_ahead).has_item?('walk dog').should be true
+end

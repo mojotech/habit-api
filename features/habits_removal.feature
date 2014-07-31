@@ -37,3 +37,8 @@ Scenario: Abandon button for shared habits
   Given that I joined a shared habit
   When I view the habit's details
   Then I should see an abandon button
+
+Scenario: Dissassociate from shared habit
+  Given that I joined a shared habit
+  When I abandon the shared habit
+  Then the other users still belong to the habit
