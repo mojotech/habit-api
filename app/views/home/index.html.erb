@@ -50,8 +50,8 @@
                           valueBinding="title"}}
       {{view Ember.TextField id="unit" placeholder="Unit" valueBinding="unit" cols="30"}}
     {{else}}
-      {{title}}
-      {{unit}}
+      <span class='locked-title'>{{title}}</span>
+      <span class='locked-unit'>{{unit}}</span>
     {{/if}}
     <label> Private </label>
     {{input id="private" type="checkbox" checked=private}}

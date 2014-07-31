@@ -58,3 +58,43 @@ end
 Then(/^I should not see the habit "(.*?)" in my list$/) do |title|
   widget(:habits_list).has_habit?(title).should be false
 end
+
+Given(/^there is a public habit "(.*?)"$/) do |title|
+  step "I visit the new habits page"
+  step "I create a habit with the following information:", table(%{
+    | title   | #{title}   |
+    | unit    | times                         |
+    | private | false                         |
+  })
+  step "I login to a new account"
+end
+
+Then(/^I should see a suggestion for "(.*?)"$/) do |title|
+  widget(:type_ahead).has_item?(title).should be true
+end
+
+When(/^I click the suggestion for "(.*?)"$/) do |title|
+  widget(:type_ahead).click_suggestion(title)
+end
+
+Then(/^I shouldn't be able to edit the title or unit$/) do
+  widget(:habit_form).widget?(:title).should be false
+  widget(:habit_form).widget?(:unit).should be false
+  widget(:habit_form).widget?(:locked_title).should be true
+  widget(:habit_form).widget?(:locked_unit).should be true
+end
+
+Then(/^I should be able to unjoin the public habit$/) do
+  widget(:habit_form).widget?(:cancel).should be true
+end
+
+When(/^I cancel out of the public habit$/) do
+  widget(:habit_form).widget(:cancel).click
+end
+
+Then(/^I should be able to set the title and unit$/) do
+  widget(:habit_form).widget?(:title).should be true
+  widget(:habit_form).widget?(:unit).should be true
+  widget(:habit_form).widget?(:locked_title).should be false
+  widget(:habit_form).widget?(:locked_unit).should be false
+end
