@@ -9,3 +9,6 @@ App.Habit = DS.Model.extend
   isEditable:(->
     @get('private') == true or !@get('user_count') > 0
   ).property('private', 'user_count')
+  shared:(->
+    @get('users.length') > 1
+  ).property('users')
