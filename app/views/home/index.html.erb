@@ -93,7 +93,11 @@
     Users: {{users.length}}
     <br />
     <button {{action 'editHabit'}} class='edit'> Edit {{title}} </button>
-    <button {{action 'removeHabit'}} class='delete'> Delete {{title}} </button>
+    {{#if shared}}
+      <button {{action 'removeHabit'}} class='abandon'> Abandon {{title}} </button>
+    {{else}}
+      <button {{action 'removeHabit'}} class='delete'> Delete {{title}} </button>
+    {{/if}}
     <br />
     {{#if checkins.length}}
       {{#if private}}

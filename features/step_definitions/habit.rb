@@ -83,3 +83,32 @@ Given(/^A public habit can be joined, creating a shared habit$/) do
   expect(Habit.first.users.count).to be 2
   expect(Habit.first.shared?).to be true
 end
+
+Given(/^A user can remove a private habit$/) do
+  user = FactoryGirl.create(:user)
+  user.habits << FactoryGirl.create(:habit, private: true)
+  user.habits.first.destroy
+  expect(Habit.count).to be 0
+end
+
+Given(/^A user can remove a public habit$/) do
+  user = FactoryGirl.create(:user)
+  user.habits << FactoryGirl.create(:habit, private: false)
+  user.habits.first.destroy
+  expect(Habit.count).to be 0
+end
+
+Given(/^A user can abandon a shared habit$/) do
+  user_one = FactoryGirl.create(:user)
+  user_one.habits << FactoryGirl.create(:habit, private: false)
+  user_two = FactoryGirl.create(:user)
+
+  Habit.associate_matching_or_create({ title: user_one.habits.last.title, private: false }, user_two)
+  habit = user_two.habits.first
+  habit.users.delete(user_two)
+  habit.save
+
+  expect(Habit.count).to be 1
+  expect(Habit.first.users.count).to be 1
+  expect(Habit.first.public?).to be true
+end

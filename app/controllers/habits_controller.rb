@@ -26,7 +26,14 @@ class HabitsController < ApplicationController
   end
 
   def destroy
-    Habit.destroy(params[:id])
+    habit = Habit.find(params[:id])
+    if habit.users.count > 1
+      habit.users.delete(current_user)
+      habit.checkins.where(user: current_user).destroy_all
+      habit.save
+    else
+      habit.destroy
+    end
     render json: :no_content, status: :no_content
   end
 
