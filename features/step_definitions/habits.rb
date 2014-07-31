@@ -51,10 +51,6 @@ Given(/^I view the habit details for "(.*?)"$/) do |title|
   step "I click the habit with the title \"#{title}\""
 end
 
-Given(/^I delete the habit$/) do
-  widget(:habit_details).widget(:delete).click
-end
-
 Then(/^I should not see the habit "(.*?)" in my list$/) do |title|
   widget(:habits_list).has_habit?(title).should be false
 end
