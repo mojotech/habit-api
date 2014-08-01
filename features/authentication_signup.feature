@@ -10,7 +10,7 @@ Scenario: Signup with existing account
   When I signup with the following information:
     | email    | dev@mojotech.com |
     | password | password         |
-  And I click the logout link
+  And I logout
   When I signup with the following information:
     | email    | dev@mojotech.com |
     | password | password         |

@@ -4,5 +4,5 @@ Feature: Authentication
 
 Scenario: Log out
   Given I am logged in
-  When I click the logout link
+  When I logout
   Then I should be brought to the login form

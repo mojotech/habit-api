@@ -22,3 +22,4 @@ App.Router.map ->
   @resource 'habits.new', path: '/habits/new'
   @resource 'habit', path: '/habits/:habit_id'
   @resource 'habits.edit', path: '/habits/:habit_id/edit'
+  @route 'logout'

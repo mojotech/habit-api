@@ -1,3 +1,8 @@
+When(/^I logout$/) do
+  visit '#/logout'
+  sleep 2
+end
+
 Given(/^the account (.+) exists$/) do |email|
   FactoryGirl.create(:user, email: email, password: 'password') if User.where(email: email).count == 0
 end
