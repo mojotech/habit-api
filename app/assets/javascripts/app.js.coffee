@@ -24,3 +24,4 @@ App.Router.map ->
   @resource 'habits.edit', path: '/habits/:habit_id/edit'
   @route 'logout'
   @route 'forgot_password'
+  @route 'edit_password', path: '/edit_password/:reset_password_token'

@@ -1,5 +1,5 @@
 When(/^I logout$/) do
-  visit '#/logout'
+  visit '/#/logout'
   sleep 2
 end
 
@@ -63,6 +63,7 @@ Given(/^I am logged in$/) do
     | email    | #{user.email}    |
     | password | #{user.password} |
   })
+  sleep 2
 end
 
 Given(/^a logged in account with the following information:$/) do |table|

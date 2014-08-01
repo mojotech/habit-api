@@ -186,3 +186,27 @@
     {{link-to 'Sign Up' 'signup'}}
   </form>
 </script>
+
+<script type='text/x-handlebars' id='edit_password'>
+  <h1>Change Password</h1>
+  {{#unless resetPassword}}
+    {{#if errors.length}}
+      <ul class='errors'>
+      {{#each error in errors}}
+        <li class='error'>{{error}}</li>
+      {{/each}}
+      </ul>
+    {{/if}}
+    <form class='edit-password' {{action 'changePassword' on='submit'}}>
+      {{input type="password" placeholder="New password" name="new-password" valueBinding=newPassword}}
+      <br />
+      {{input type="password" placeholder="Confirm new password" name="confirm-new-password" valueBinding=confirmNewPassword}}
+      <br />
+      <button class="submit">Submit</button>
+    </form>
+  {{else}}
+    <p class='reset'>Thanks, your password has been reset. You may now login to your account.</p>
+    <br />
+    <a href='/#/login'>Login</a>
+  {{/unless}}
+</script>
