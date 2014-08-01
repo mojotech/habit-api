@@ -3,6 +3,7 @@ class HabitSerializer < ActiveModel::Serializer
 
   has_many :checkins
   has_many :users
+  has_many :targets
 
   attributes :id, :title, :unit, :private, :user_count, :value
 

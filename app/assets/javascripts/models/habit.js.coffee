@@ -4,6 +4,7 @@ App.Habit = DS.Model.extend
   private: DS.attr 'boolean'
   checkins: DS.hasMany 'checkin'
   users: DS.hasMany 'user'
+  targets: DS.hasMany 'target'
   newCheckinValue: 1
   value: DS.attr 'number'
   isEditable:(->

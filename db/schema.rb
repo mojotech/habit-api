@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 20140731194336) do
   add_index "habits_users", ["habit_id"], name: "index_habits_users_on_habit_id", using: :btree
   add_index "habits_users", ["user_id"], name: "index_habits_users_on_user_id", using: :btree
 
+  create_table "targets", force: true do |t|
+    t.integer  "value"
+    t.string   "timeframe"
+    t.integer  "user_id"
+    t.integer  "habit_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
