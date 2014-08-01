@@ -102,3 +102,47 @@ end
 Then(/^I should be told to provide a password$/) do
   widget(:signup_form).widget?(:error, "password can't be blank").should be true
 end
+
+When(/^I view the login page$/) do
+  visit '/#/login'
+end
+
+Then(/^I should see a link to reset my password$/) do
+  widget(:login_form).widget?(:forgot_password).should be true
+end
+
+When(/^I click the forgot password link$/) do
+  widget(:login_form).widget(:forgot_password).click
+end
+
+Then(/^I should be brought to a page to reset my password$/) do
+  widget?(:forgot_password_form).should be true
+end
+
+When(/^I enter my account information$/) do
+  widget(:forgot_password_form).widget(:email).set('dev@mojotech.com')
+end
+
+Given(/^I created an account$/) do
+  step "the account dev@mojotech.com exists"
+end
+
+When(/^I view the forgot password page$/) do
+  visit '/#/forgot_password'
+end
+
+When(/^I click the reset password button$/) do
+  widget(:forgot_password_form).widget(:reset).click
+end
+
+Then(/^I should be sent an email to reset my password$/) do
+  widget(:forgot_password_form).widget?(:sent).should be true
+end
+
+When(/^I enter an unexisting account$/) do
+  widget(:forgot_password_form).widget(:email).set('asdf4w2^&adf21@gmail.com')
+end
+
+Then(/^I should be told the account is invalid$/) do
+  widget(:forgot_password_form).widget(:error).text.should eq "The specified account doesn't exist."
+end
