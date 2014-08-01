@@ -59,6 +59,11 @@
     {{#unless isEditable}}
       <button {{action 'cancel'}} class='cancel'> Cancel </button>
     {{/unless}}
+    <h3>Target </h3>
+    <label> Amount </label>
+    {{input name="target-value" valueBinding="targetValue"}}
+    {{view Ember.Select content=timeframeOptions value=timeframe name='target-timeframe'}}
+
   </form>
 </script>
 
@@ -100,6 +105,9 @@
     {{else}}
       <button {{action 'removeHabit'}} class='delete'> Delete {{title}} </button>
     {{/if}}
+    <br />
+    <h2> Target </h2>
+    <div class="target"> {{targetValue}} {{unit}} {{timeframe}} </div>
     <br />
     {{#if checkins.length}}
       {{#if private}}

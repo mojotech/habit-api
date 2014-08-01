@@ -10,6 +10,9 @@ class HabitForm < Dill::Form
   widget :save, '.save'
   widget :cancel, '.cancel'
 
+  text_field :target_value, 'target-value'
+  select :timeframe, 'target-timeframe'
+
   def submit_form
     widget(:save).click
   end

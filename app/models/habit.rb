@@ -2,6 +2,7 @@ class Habit < ActiveRecord::Base
 
   has_and_belongs_to_many :users
   has_many :checkins, order: "created_at DESC"
+  has_many :targets
 
   validates :title, :unit,  presence: true
   validates_inclusion_of :private, in: [true, false]
@@ -53,6 +54,10 @@ class Habit < ActiveRecord::Base
     checkins.where(user_id: current_user.id).each do |checkin|
       checkin.habit = private_habit
       checkin.save!
+    end
+    targets.where(user_id: current_user.id).each do |target|
+      target.habit = private_habit
+      target.save!
     end
     users.destroy current_user
     destroy if users.count == 0

@@ -10,6 +10,7 @@ class HabitDetails < Dill::FieldGroup
   text_field :note, 'note'
   widget :positive_checkin, '.plus'
   widget :negative_checkin, '.minus'
+  widget :target, '.target'
 
   widget :checkins, -> (note) {
     ['.checkin', text: note]
