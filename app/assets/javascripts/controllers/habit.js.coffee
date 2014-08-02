@@ -7,11 +7,3 @@ App.HabitController = Ember.ObjectController.extend
     target = @get('model.targets').find (t) =>
       +t.get('user').id is +@get('session.user_id')
     target?.get?('value')
-  myCheckinValue:(->
-    @get('model.checkins').reduce ((prev, checkin) =>
-      if +@get('session.user_id') is +checkin.get('user_id')
-        prev += checkin.get('value')
-      else
-        prev
-    ), 0
-  ).property('model.checkins')

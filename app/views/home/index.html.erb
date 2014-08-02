@@ -27,7 +27,7 @@
     {{#each}}
       {{#if title}}
         <li {{bind-attr class=":habit-listing private:private:public"}}>
-          <div class='title'> {{#link-to 'habit' this}}<span class='value'>{{myCheckinValue}}</span><span class='habit-title'>{{title}}</span>{{/link-to}} </div>
+          <div class='title'> {{#link-to 'habit' this}}<span class='value'>{{value}}</span><span class='habit-title'>{{title}}</span>{{/link-to}} </div>
           <div class='button-container'>
             <button {{action 'plusOne' this session.user_id}} class='plus'> + </button>
             <button {{action 'minusOne' this session.user_id}} class='minus'> - </button>
