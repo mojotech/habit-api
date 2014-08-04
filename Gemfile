@@ -13,6 +13,8 @@ gem 'devise'
 gem 'font-awesome-rails'
 gem 'ember-rails'
 gem 'ember-source', '1.5.0'
+gem 'oj'
+
 group :development, :test do
   gem 'pry'
   gem 'pry-debugger'
