@@ -10,7 +10,9 @@ gem 'jquery-rails'
 gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'devise'
-
+gem 'font-awesome-rails'
+gem 'ember-rails'
+gem 'ember-source', '1.5.0'
 group :development, :test do
   gem 'pry'
   gem 'pry-debugger'

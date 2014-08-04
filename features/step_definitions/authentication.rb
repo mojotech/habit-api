@@ -1,3 +1,8 @@
+When(/^I logout$/) do
+  visit '#/logout'
+  sleep 2
+end
+
 Given(/^the account (.+) exists$/) do |email|
   FactoryGirl.create(:user, email: email, password: 'password') if User.where(email: email).count == 0
 end
@@ -32,6 +37,7 @@ Then(/^I should see a form to add a new habit$/) do
 end
 
 Then(/^I click the logout link$/) do
+  visit '/#habits/'
   widget(:logout_link).click
 end
 

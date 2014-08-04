@@ -1,6 +1,9 @@
 App.HabitsEditRoute = Ember.Route.extend Ember.SimpleAuth.AuthenticatedRouteMixin,
   model: (params) -> @store.find('habit', params.habit_id)
   actions:
+    removeHabit: ->
+      @modelFor('habit').destroyRecord().then =>
+        @transitionTo 'habits'
     save: ->
       target = @controller.get('model').get('targets').find (t) =>
         +t.get('user').id is +@get('session.user_id')

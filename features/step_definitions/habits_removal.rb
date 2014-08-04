@@ -1,5 +1,5 @@
 Given(/^I delete the habit$/) do
-  widget(:habit_details).widget(:delete).click
+  widget(:habit_form).widget(:delete).click
 end
 
 Given(/^that I created a private habit$/) do
@@ -12,7 +12,7 @@ Given(/^that I created a private habit$/) do
 end
 
 Then(/^I should see a delete button$/) do
-  widget(:habit_details).widget?(:delete).should be true
+  widget(:habit_form).widget?(:delete).should be true
 end
 
 Given(/^that I created a public habit$/) do
@@ -40,7 +40,7 @@ Given(/^that I joined a shared habit$/) do
 end
 
 Then(/^I should see an abandon button$/) do
-  widget(:habit_details).widget?(:abandon).should be true
+  widget(:habit_form).widget?(:abandon).should be true
 end
 
 When(/^I view the habit's details$/) do
@@ -49,7 +49,8 @@ end
 
 When(/^I abandon the shared habit$/) do
   step 'I click the habit with the title "walk dog"'
-  widget(:habit_details).widget(:abandon).click
+  step 'I click the edit button'
+  widget(:habit_form).widget(:abandon).click
 end
 
 Then(/^the other users still belong to the habit$/) do
@@ -57,4 +58,8 @@ Then(/^the other users still belong to the habit$/) do
   step "I visit the new habits page"
   step 'I type "walk do" into the title field'
   widget(:type_ahead).has_item?('walk dog').should be true
+end
+
+Given(/^I click the edit button$/) do
+  widget(:habit_details).widget(:edit).click
 end

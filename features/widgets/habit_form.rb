@@ -13,6 +13,9 @@ class HabitForm < Dill::Form
   text_field :target_value, 'target-value'
   select :timeframe, 'target-timeframe'
 
+  widget :delete, '.delete'
+  widget :abandon, '.abandon'
+
   def submit_form
     widget(:save).click
   end

@@ -13,7 +13,7 @@
 //= require jquery
 //= require lodash
 //= require handlebars-1.1.2
-//= require ember-1.5.1
+//= require ember
 //= require ember-data
 //= require ember-simple-auth-0.5.2
 //= require ember-simple-auth-devise-0.5.2

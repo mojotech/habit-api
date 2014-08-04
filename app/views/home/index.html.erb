@@ -20,14 +20,16 @@
 
 <script type='text/x-handlebars' id='habits'>
   <div class="nav-bar">
+    <a {{action 'invalidateSession'}} class="fa fa-sign-out logout"></a>
     <h4> Habits </h4>
-    <a {{action 'invalidateSession'}} class="logout"> Logout </a>
+    {{#link-to 'habits.new' class='new-habit fa fa-plus'}} {{/link-to}}
+    <div class="clear"> </div>
   </div>
   <ul id='habits-list'>
     {{#each}}
       {{#if title}}
         <li {{bind-attr class=":habit-listing private:private:public"}}>
-          <div class='title'> {{#link-to 'habit' this}}<span class='value'>{{myCheckinValue}}</span><span class='habit-title'>{{title}}</span>{{/link-to}} </div>
+          <div class='title'> {{#link-to 'habit' this}}<span class='value'>{{value}}</span><span class='habit-title'>{{title}}</span>{{/link-to}} </div>
           <div class='button-container'>
             <button {{action 'plusOne' this session.user_id}} class='plus'> + </button>
             <button {{action 'minusOne' this session.user_id}} class='minus'> - </button>
@@ -36,93 +38,110 @@
       {{/if}}
     {{/each}}
   </ul>
-  {{#link-to 'habits.new' class='new-habit'}} New Habit {{/link-to}}
 </script>
 
 <script type='text/x-handlebars', id="habits/_form">
   <form>
-    {{#if isEditable}}
-      {{twitter-typeahead id="title"
-                          placeholder="Habit Title"
-                          remote="/habits?title=%QUERY"
-                          customTemplate="<i>{{value}} ({{user_count}})</i>"
-                          action="habitSelected"
-                          valueBinding="title"}}
-      {{view Ember.TextField id="unit" placeholder="Unit" valueBinding="unit" cols="30"}}
-    {{else}}
-      <span class='locked-title'>{{title}}</span>
-      <span class='locked-unit'>{{unit}}</span>
-    {{/if}}
-    <label> Private </label>
-    {{input id="private" type="checkbox" checked=private}}
-    <button {{action 'save'}} class='save'> Save </button>
-    {{#unless isEditable}}
-      <button {{action 'cancel'}} class='cancel'> Cancel </button>
-    {{/unless}}
-    <h3>Target </h3>
-    <label> Amount </label>
-    {{input name="target-value" valueBinding="targetValue"}}
-    {{view Ember.Select content=timeframeOptions value=timeframe name='target-timeframe'}}
-
-  </form>
+    <div class='section'>
+      {{#if isEditable}}
+        {{twitter-typeahead id="title"
+                            placeholder="Habit Title"
+                            remote="/habits?title=%QUERY"
+                            customTemplate="<i>{{value}} ({{user_count}})</i>"
+                            action="habitSelected"
+                            valueBinding="title"}}
+      {{else}}
+        <span class='locked-title'>{{title}}</span>
+      {{/if}}
+    </div>
+    <div class='section'>
+      <label>Target </label>
+      {{input name="target-value" valueBinding="targetValue"}}
+      {{#if isEditable}}
+        {{view Ember.TextField id="unit" placeholder="Unit" valueBinding="unit" cols="10"}}
+      {{else}}
+        <span class='locked-unit'>{{unit}}</span>
+      {{/if}}
+      {{view Ember.Select content=timeframeOptions value=timeframe name='target-timeframe'}}
+    </div>
+    <div class='section'>
+      <label> Private </label>
+      {{input id="private" type="checkbox" checked=private}}
+    </div>
+    <div class='section'>
+      <button {{action 'save'}} class='save'> Save </button>
+      {{#unless isEditable}}
+        <button {{action 'cancel'}} class='cancel'> Cancel </button>
+      {{/unless}}
 </script>
 
 <script type='text/x-handlebars', id="habits/new">
   <div class="nav-bar">
+    {{#link-to 'habits' class='habits-link fa fa-bars'}} {{/link-to}}
     <h4> New Habit </h4>
-    <a {{action 'invalidateSession'}} class="logout"> Logout </a>
   </div>
   {{partial "habits/form"}}
+  </div>
+  </form>
 </script>
 
 <script type='text/x-handlebars', id="habits/edit">
   <div class="nav-bar">
+    {{#link-to 'habits' class='habits-link fa fa-bars'}} {{/link-to}}
     <h4> Edit Habit </h4>
-    <a {{action 'invalidateSession'}} class="logout"> Logout </a>
   </div>
   {{partial "habits/form"}}
+  {{#if shared}}
+    <button {{action 'removeHabit'}} class='abandon'> Abandon {{title}} </button>
+  {{else}}
+    <button {{action 'removeHabit'}} class='delete'> Delete {{title}} </button>
+  {{/if}}
+  </div>
+  </form>
 </script>
 
 <script type='text/x-handlebars' id='habit'>
   <div class='habit-details'>
     <div class="nav-bar">
-      <h4 class='title'> {{title}} </h4>
-      <a {{action 'invalidateSession'}} class="logout"> Logout </a>
+      {{#link-to 'habits' class='habits-link fa fa-bars'}} {{/link-to}}
+      <div class='title-lockup'>
+        <h4 class='title'> {{title}} </h4>
+        <br />
+        <h4 class='sub-title'> {{users.length}} other users</h4>
+      </div>
+      <div {{action 'editHabit'}} class='edit fa fa-pencil'></div>
     </div>
-    <h2 class='value'> {{value}} {{unit}} </h2>
-    Value: {{view Ember.TextField valueBinding="newCheckinValue" cols="30" id="new-checkin-value"}}
-    <div class='inline-button-container'>
-      <button {{action 'checkin' this 'plus' note}} class='plus'> + </button>
-      <button {{action 'checkin' this 'minus' note}} class='minus'> - </button>
+    <div class='section'>
+      <h2>{{percentage}}</h2>
+      <p>You have completed <span class='value'>{{value}} {{unit}}</span> {{formattedTimeFrame}} </p>
+      <p>Your target is <span class="target"> {{targetValue}} {{unit}} per {{timeframe}} </span></p>
     </div>
-    Note: {{view Ember.TextField valueBinding="note" cols="50" id="note"}}
-    <br />
-    Users: {{users.length}}
-    <br /><br />
-    <button {{action 'editHabit'}} class='edit'> Edit {{title}} </button>
-    {{#if shared}}
-      <button {{action 'removeHabit'}} class='abandon'> Abandon {{title}} </button>
-    {{else}}
-      <button {{action 'removeHabit'}} class='delete'> Delete {{title}} </button>
-    {{/if}}
-    <br />
-    <h2> Target </h2>
-    <div class="target"> {{targetValue}} {{unit}} {{timeframe}} </div>
-    <br />
-    {{#if checkins.length}}
-      {{#if private}}
-        <h3>Private Checkins</h3>
-      {{else}}
-        <h3>Public Checkins</h3>
+
+    <div class='section'>
+      <h2> New Checkin </h2>
+      Value: {{view Ember.TextField valueBinding="newCheckinValue" cols="30" id="new-checkin-value"}}
+      Note: {{view Ember.TextField valueBinding="note" cols="50" id="note"}}
+      <div class='inline-button-container'>
+        <button {{action 'checkin' this 'plus' note}} class='plus'> + </button>
+        <button {{action 'checkin' this 'minus' note}} class='minus'> - </button>
+      </div>
+    </div>
+      {{#if checkins.length}}
+        <div class='section'>
+          {{#if private}}
+            <h3>Private Checkins</h3>
+          {{else}}
+            <h3>Public Checkins</h3>
+          {{/if}}
+          {{#each checkin in App.checkinsController}}
+            {{#if private}}
+              <p class="checkin">({{checkin.value}}) {{checkin.note}}</p>
+            {{else}}
+              <p class="checkin">{{checkin.email}} ({{checkin.value}}) {{checkin.note}}</p>
+            {{/if}}
+          {{/each}}
+        </div>
       {{/if}}
-      {{#each checkin in App.checkinsController}}
-        {{#if private}}
-          <p class="checkin">({{checkin.value}}) {{checkin.note}}</p>
-        {{else}}
-          <p class="checkin">{{checkin.email}} ({{checkin.value}}) {{checkin.note}}</p>
-        {{/if}}
-      {{/each}}
-    {{/if}}
   </div>
 </script>
 

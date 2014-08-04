@@ -1,6 +1,6 @@
 App.HabitsNewController = Ember.ObjectController.extend
-  timeframeOptions: ['Daily', 'Weekly', 'Monthly']
-  timeframe: 'Weekly'
+  timeframeOptions: ['Day', 'Week', 'Month']
+  timeframe: 'Week'
   targetValue: 10
   actions:
     habitSelected: (habit) ->

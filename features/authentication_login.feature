@@ -23,7 +23,7 @@ Scenario: Successful login with no habits
   Given a logged in account with the following information:
     | email    | dev@mojotech.com |
     | password | password         |
-  When I click the logout link
+  When I logout
   And I login with the following information:
     | email    | dev@mojotech.com |
     | password | password         |
