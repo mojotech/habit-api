@@ -1,6 +1,6 @@
 App.HabitsEditController = Ember.ObjectController.extend
-  timeframeOptions: ['Daily', 'Weekly', 'Monthly']
-  timeframe: 'Weekly'
+  timeframeOptions: ['Day', 'Week', 'Month']
+  timeframe: 'Week'
   targetValue: Ember.computed 'content.targets@each.value', ->
     target = @get('model.targets').find (t) =>
       t.get('user').id is @get('session.user_id')

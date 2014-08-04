@@ -3,8 +3,14 @@ $greyblue: #34444f;
 $red: #CE6861;
 $green: #60AB89;
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   color: $greyblue;
+  font-family: "Lucida Grande"
 }
 
 a {
@@ -48,25 +54,51 @@ button {
   color: $red;
 }
 
-.edit, .save {
+.save {
   border: 1px solid blue;
   color: blue;
 }
-
+.tt-dropdown-menu {
+  background-color: white;
+}
 .delete, .cancel, .abandon {
   border: 1px solid $red;
   color: $red;
 }
-
-.nav-bar {
-  background: $greyblue;
+.section {
+  margin: 12px 0;
   padding: 0 5%;
-  color: white;
-  .logout {
-    color: white;
+}
+.nav-bar {
+  height: 50px;
+  line-height: 100%;
+  text-align: center;
+  padding: 0 5%;
+  border-bottom: 1px solid lightgrey;
+  * {
+    line-height: 50px;
+  }
+  .logout, .habits-link {
+    float: left;
+  }
+  .new-habit, .edit {
+    float: right;
   }
   h4 {
     display: inline-block;
+  }
+  .title-lockup {
+    display: inline-block;
+    line-height: 13px;;
+  }
+  .title {
+    margin-top: 14px;
+  }
+  .title, .sub-title {
+    line-height: 13px;
+  }
+  .sub-title {
+    font-size: 8px
   }
 }
 
@@ -77,21 +109,26 @@ button {
     position: relative;
     font-size: 15px;
     list-style-type: none;
-    margin: 10px 0px;
+    margin: 0px;
     height: 50px;
     border-bottom: 1px solid lightgrey;
     line-height: 50px;
     padding: 0 5%;
+    a {
+      line-height: 100%;
+    }
     .value {
       margin-right: 10px;
       font-size: 25px;
       width: 40px;
       text-align: center;
       display: inline-block;
+      position: relative;
+      top: 4px;
     }
 
     .title {
-      width: calc(unquote('100% - 111px'));
+      width: calc(100% - 111px);
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;

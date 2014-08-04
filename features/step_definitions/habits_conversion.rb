@@ -10,6 +10,7 @@ Then(/^I should see the habit is (private|public)$/) do |visibility|
 end
 
 When(/^I login to a new account$/) do
+  visit "/#/habits/"
   widget(:logout_link).click
   user = FactoryGirl.create(:user)
   step "I login with the following information:", table(%{

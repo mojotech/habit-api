@@ -4,9 +4,6 @@ App.HabitRoute = Ember.Route.extend Ember.SimpleAuth.AuthenticatedRouteMixin,
   afterModel: (model) ->
     App.checkinsController.set('content', model.get('checkins'))
   actions:
-    removeHabit: ->
-      @modelFor('habit').destroyRecord().then =>
-        @transitionTo 'habits'
     editHabit: ->
       @transitionTo('habits.edit', @currentModel)
     checkin: (habit, direction, note) ->

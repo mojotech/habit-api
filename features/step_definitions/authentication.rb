@@ -37,6 +37,7 @@ Then(/^I should see a form to add a new habit$/) do
 end
 
 Then(/^I click the logout link$/) do
+  visit '/#habits/'
   widget(:logout_link).click
 end
 
