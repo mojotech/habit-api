@@ -148,17 +148,65 @@
 <script type='text/x-handlebars' id='login'>
   <h1>Login</h1>
   {{! login form; the fields must be named "identification" and "password"; the controller action is "authenticate" }}
-  <form {{action 'authenticate' on='submit'}}>
-    {{#if error}}
-      <p class='error'>{{error}}</p>
-    {{/if}}
-    <div class="form-group">
-      {{input id='identification' placeholder='Enter Login' class='form-control' value=identification}}
-    </div>
-    <div class="form-group">
-      {{input id='password' placeholder='Enter Password' class='form-control' type='password' value=password}}
-    </div>
-    <button type="submit" class="btn btn-default">Login</button>
+  <div class='login-form'>
+    <form {{action 'authenticate' on='submit'}}>
+      {{#if error}}
+        <p class='error'>{{error}}</p>
+      {{/if}}
+      <div class="form-group">
+        {{input id='identification' placeholder='Enter Login' class='form-control' value=identification}}
+      </div>
+      <div class="form-group">
+        {{input id='password' placeholder='Enter Password' class='form-control' type='password' value=password}}
+      </div>
+      <button type="submit" class="btn btn-default">Login</button>
+    </form>
+    {{#link-to 'signup'}} Sign Up {{/link-to}}
+    <br />
+    {{link-to 'Forgot Password' 'forgot_password' class='forgot-password'}}
+  </div>
+</script>
+
+<script type='text/x-handlebars' id='forgot_password'>
+  <h1>Forgot Password</h1>
+  <form class='forgot-password' {{action 'resetPassword' email on='submit'}}>
+    {{#unless sentPasswordReset}}
+      {{#if error}}
+        <p class="error">{{error}}</p>
+      {{/if}}
+      {{input type="text" placeholder="Enter email" name="email" value=email}}
+      <br />
+      <button class="reset">Reset Password</button>
+      <br />
+    {{else}}
+      <p class='sent'>An email was sent to <b>{{email}}</b> with instructions to reset your password.</p>
+    {{/unless}}
+    {{link-to 'Login' 'login'}}
+    <br />
+    {{link-to 'Sign Up' 'signup'}}
   </form>
-  {{#link-to 'signup'}} Sign Up {{/link-to}}
+</script>
+
+<script type='text/x-handlebars' id='edit_password'>
+  <h1>Change Password</h1>
+  {{#unless resetPassword}}
+    {{#if errors.length}}
+      <ul class='errors'>
+      {{#each error in errors}}
+        <li class='error'>{{error}}</li>
+      {{/each}}
+      </ul>
+    {{/if}}
+    <form class='edit-password' {{action 'changePassword' on='submit'}}>
+      {{input type="password" placeholder="New password" name="new-password" valueBinding=newPassword}}
+      <br />
+      {{input type="password" placeholder="Confirm new password" name="confirm-new-password" valueBinding=confirmNewPassword}}
+      <br />
+      <button class="submit">Submit</button>
+    </form>
+  {{else}}
+    <p class='reset'>Thanks, your password has been reset. You may now login to your account.</p>
+    <br />
+    <a href='/#/login'>Login</a>
+  {{/unless}}
 </script>
