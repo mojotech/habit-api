@@ -1,10 +1,4 @@
 class HabitSerializer < ActiveModel::Serializer
-  embed :ids, include: true
-
-  has_many :checkins
-  has_many :users
-  has_many :targets
-
   attributes :id, :title, :unit, :private, :user_count, :value
 
   def user_count
