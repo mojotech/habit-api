@@ -38,10 +38,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
-    barber (0.4.2)
-      ember-source
-      execjs
-      handlebars-source
     bcrypt (3.1.7)
     builder (3.1.4)
     capybara (2.4.1)
@@ -92,19 +88,6 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    ember-data-source (1.0.0.beta.8)
-      ember-source
-    ember-rails (0.15.0)
-      active_model_serializers
-      barber (>= 0.4.1)
-      ember-data-source (>= 1.0.0.beta.5)
-      ember-source (>= 1.1.0)
-      execjs (>= 1.2)
-      handlebars-source (> 1.0.0)
-      jquery-rails (>= 1.0.17)
-      railties (>= 3.1)
-    ember-source (1.5.0)
-      handlebars-source (~> 1.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.1.0)
@@ -120,7 +103,6 @@ GEM
       railties (>= 3.2, < 5.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
-    handlebars-source (1.3.0)
     hike (1.2.3)
     i18n (0.6.9)
     jquery-rails (3.1.0)
@@ -241,8 +223,6 @@ DEPENDENCIES
   database_cleaner
   devise
   dill!
-  ember-rails
-  ember-source (= 1.5.0)
   factory_girl_rails
   faker
   font-awesome-rails
