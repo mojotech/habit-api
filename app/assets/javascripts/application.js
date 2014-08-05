@@ -12,15 +12,5 @@
 //
 //= require jquery
 //= require lodash
-//= require handlebars-1.1.2
-//= require ember
-//= require ember-data
-//= require ember-simple-auth-0.5.2
-//= require ember-simple-auth-devise-0.5.2
 //= require typeahead
-//= require ./app
-//= require_tree ./models/
-//= require_tree ./controllers/
-//= require_tree ./shared/
-//= require_tree ./routes/
-//= require_tree ./components/
+//= require_tree .
