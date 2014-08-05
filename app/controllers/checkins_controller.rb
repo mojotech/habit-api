@@ -5,7 +5,7 @@ class CheckinsController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    habit = current_user.habits.find(params[:checkin][:habit_id])
+    habit = current_user.habits.find(params[:habit_id])
 
     render json: habit.checkins.create(checkin_params.merge({ user_id: current_user.id }))
   end
@@ -14,7 +14,6 @@ class CheckinsController < ApplicationController
 
   def checkin_params
     params
-      .require(:checkin)
       .permit(:value, :habit_id, :note)
   end
 end
