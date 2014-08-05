@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require lodash
+//= require angular
+//= require angular-ui-router
 //= require typeahead
 //= require_tree .
