@@ -13,6 +13,10 @@ class TargetsController < ApplicationController
     habit = current_user.habits.find(params[:habit_id])
     render json: habit.targets
   end
+  def show
+    habit = current_user.habits.find(params[:habit_id])
+    render json: habit.targets.first
+  end
   def update
     target = current_user
       .habits
