@@ -1,9 +1,6 @@
 app.service 'auth', (Auth) ->
   signup: (credentials) ->
-    Auth
-      .register credentials
-      .then ->
-        Auth.login credentials
+    Auth.register credentials
   login: Auth.login
   logout: Auth.logout
   token: ->

@@ -3,9 +3,9 @@
 <script type='text/ng-template' id='signup'>
   <h1>Sign Up</h1>
   <form ng-submit="signup()">
-      <ul class='errors'>
-        <li class='error'></li>
-      </ul>
+    <ul class='errors' ng-show="errors.length > 0">
+      <li class='error' ng-repeat="error in errors">{{error}}</li>
+    </ul>
     <div class="form-group">
       <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
     </div>
