@@ -8,7 +8,7 @@ Background:
 
 Scenario: View habit details
   Given I created the following habits:
-    | title    | unit  | private |
-    | walk dog | times | true    |
+    | title    | unit  | private | target | timeframe |
+    | walk dog | times | true    | 7      | week      |
   And I click the habit with the title "walk dog"
   Then I should see details for the habit "walk dog"

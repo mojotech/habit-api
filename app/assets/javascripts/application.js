@@ -16,4 +16,7 @@
 //= require angular-ui-router
 //= require devise
 //= require typeahead
+//= require app
+//= require typeahead.bundle
+//= require angular-typeahead
 //= require_tree .
