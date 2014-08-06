@@ -15,4 +15,4 @@ app.controller 'HabitEditController', ($scope, $state, habit, target, api) ->
         value: $scope.target.value
         timeframe: $scope.target.timeframe
       .then ->
-        $state.go 'app.habits', _, reload: true
+        $state.go 'app.habits', null, reload: true
