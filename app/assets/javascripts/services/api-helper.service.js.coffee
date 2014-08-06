@@ -3,7 +3,7 @@ BASE = ''
 get  = null
 post = null
 put  = null
-
+del = null
 app.service 'ApiHelper', ($http, auth) ->
   get = (resource, serializedParams, id) ->
     $http
@@ -32,7 +32,16 @@ app.service 'ApiHelper', ($http, auth) ->
     .then (success) ->
       success.data
 
-  {index, show, create, update}
+  del = (resource, serializedParams, id) ->
+    $http
+      url: url resource, serializedParams, id
+      method: 'DELETE'
+      headers:
+        Authorization: auth.token()
+    .then (success) ->
+      success.data
+
+  {index, show, create, update, destroy}
 
 serialize = (params) ->
   $.param params or {}
@@ -58,3 +67,7 @@ index = (resource) ->
 show = (resource) ->
   (id, params) ->
     get resource, serialize(params), id
+
+destroy = (resource) ->
+  (id, params) ->
+    del resource, serialize(params), id
