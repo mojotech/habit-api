@@ -11,9 +11,11 @@ When(/^I create the following habits:$/) do |table|
   table.hashes.each do |row|
     step "I visit the new habits page"
     step "I create a habit with the following information:", table(%{
-      | title   | #{row['title']}   |
-      | unit    | #{row['unit']}    |
-      | private | #{row['private']} |
+      | title     | #{row['title']}   |
+      | unit      | #{row['unit']}    |
+      | private   | #{row['private']} |
+      | target    | 3                 |
+      | timeframe | week              |
     })
   end
 end

@@ -8,8 +8,8 @@ Background:
 
 Scenario: New habit link
   Given I created the following habits:
-    | title    | unit     | private |
-    | walk dog | times    | true    |
+    | title    | unit     | private | target | timeframe |
+    | walk dog | times    | true    | 7      | week      |
   Then I should see a link to add a new habit
 
 Scenario: New habit form
@@ -19,31 +19,37 @@ Scenario: New habit form
 Scenario: Create new public habit
   When I visit the new habits page
   And I create a habit with the following information:
-    | title   | walk dog  |
-    | unit    | times     |
-    | private | false     |
-  Then I should should see the following habit in my list:
+    | title     | walk dog  |
+    | unit      | times     |
+    | private   | false     |
+    | target    | 3         | 
+    | timeframe | day       |
+ Then I should should see the following habit in my list:
     | walk dog |
 
 Scenario: Create new private habit
   When I visit the new habits page
   And I create a habit with the following information:
-    | title   | drink water |
-    | unit    | glasses     |
-    | private | true        |
+    | title     | drink water |
+    | unit      | glasses     |
+    | private   | true        |
+    | target    | 3           |    
+    | timeframe | day         |
   Then I should should see the following habit in my list:
     | drink water |
 
 Scenario: Create habit I already have
   Given I created the following habits:
-    | title       | unit    | private |
-    | walk dog    | times   | true    |
-    | drink water | glasses | false   |
+    | title       | unit    | private | target | timeframe |
+    | walk dog    | times   | true    | 7      | week      |
+    | drink water | glasses | false   | 8      | day       |
   When I visit the new habits page
   And I create a habit with the following information:
-    | title   | drink water |
-    | unit    | glasses     |
-    | private | false       |
+    | title     | drink water |
+    | unit      | glasses     |
+    | private   | false       |
+    | target    | 3           | 
+    | timeframe | day         |
   Then I should see the habit "drink water" once in my list
 
 Scenario: Suggestions for public habits
