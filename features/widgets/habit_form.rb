@@ -1,5 +1,5 @@
 class HabitForm < Dill::Form
-  root 'form'
+  root '.habit-form'
 
   text_field :title, 'title'
   text_field :unit, 'unit'

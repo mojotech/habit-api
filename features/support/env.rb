@@ -64,6 +64,5 @@ end
 
 Before('@javascript') do
   visit "/"
-  page.execute_script("localStorage.clear()")
   Capybara.reset_sessions!
 end

@@ -24,8 +24,9 @@ class Habit < ActiveRecord::Base
       unit: attributes['unit'],
       private: attributes['private']
     }.merge(habit_params.symbolize_keys)
+    attrs[:private] = (attrs[:private] == 'true' or attrs[:private] == true)
     if will_be_private(attrs)
-      convert_to_private attrs, current_user
+      return convert_to_private attrs, current_user
     elsif will_be_public(attrs)
       convert_to_public attrs, current_user
     else
@@ -61,6 +62,7 @@ class Habit < ActiveRecord::Base
     end
     users.destroy current_user
     destroy if users.count == 0
+    private_habit
   end
 
   def will_be_private(habit_params)

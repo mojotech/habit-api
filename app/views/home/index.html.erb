@@ -1,164 +1,147 @@
-<script type='text/x-handlebars' id='signup'>
+<div ui-view> </div>
+
+<script type='text/ng-template' id='signup'>
   <h1>Sign Up</h1>
-  <form {{action 'signUp' on='submit'}}>
-    {{#if error_messages.length}}
-      <ul class='errors'>
-      {{#each error in error_messages}}
-        <li class='error'>{{error}}</li>
-      {{/each}}
-      </ul>
-    {{/if}}
+  <form ng-submit="signup()">
+    <ul class='errors' ng-show="errors.length > 0">
+      <li class='error' ng-repeat="error in errors">{{error}}</li>
+    </ul>
     <div class="form-group">
-      {{input id='identification' placeholder='Enter Login' class='form-control' value=identification}}
+      <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
     </div>
     <div class="form-group">
-      {{input id='password' placeholder='Enter Password' class='form-control' type='password' value=password}}
+      <input class='form-control' id='password' type='password' placeholder='Enter Password' ng-model='user.password'> </input>
     </div>
     <button type="submit" class="btn btn-default">Sign Up</button>
   </form>
 </script>
 
-<script type='text/x-handlebars' id='habits'>
+<script type='text/ng-template' id='habits'>
   <div class="nav-bar">
-    <a {{action 'invalidateSession'}} class="fa fa-sign-out logout"></a>
+    <a ui-sref='logout' class="fa fa-sign-out logout"></a>
     <h4> Habits </h4>
-    {{#link-to 'habits.new' class='new-habit fa fa-plus'}} {{/link-to}}
+    <a ui-sref='app.habits.new' class='new-habit fa fa-plus'></a>
     <div class="clear"> </div>
   </div>
+
   <ul id='habits-list'>
-    {{#each}}
-      {{#if title}}
-        <li {{bind-attr class=":habit-listing private:private:public"}}>
-          <div class='title'> {{#link-to 'habit' this}}<span class='value'>{{value}}</span><span class='habit-title'>{{title}}</span>{{/link-to}} </div>
-          <div class='button-container'>
-            <button {{action 'plusOne' this session.user_id}} class='plus'> + </button>
-            <button {{action 'minusOne' this session.user_id}} class='minus'> - </button>
-          </div>
-        </li>
-      {{/if}}
-    {{/each}}
+    <li class='habit-listing' ng-repeat="habit in habits" ng-class="habit.private ? 'private' : 'public'">
+      <div class='title'>
+        <a ui-sref="app.habits.show({habitId: habit.id})">
+          <span class='value'>{{habit.value}}</span><span class='habit-title'>{{habit.title}}</span>
+        </a>
+      </div>
+      <div class='button-container'>
+        <button ng-click="checkin(habit.id, 1)" class='plus'> + </button>
+        <button ng-click="checkin(habit.id, -1)" class='minus'> - </button>
+      </div>
+    </li>
   </ul>
 </script>
 
-<script type='text/x-handlebars', id="habits/_form">
-  <form>
+<script type="text/ng-template" id="typeahead">
+  <span class='dropdown-item'>{{match.model.title}} ({{match.model.user_count}})</span>
+</script>
+
+<script type='text/ng-template', id="habits/_form">
+  <form class='habit-form'>
     <div class='section'>
-      {{#if isEditable}}
-        {{twitter-typeahead id="title"
-                            placeholder="Habit Title"
-                            remote="/habits?title=%QUERY"
-                            customTemplate="<i>{{value}} ({{user_count}})</i>"
-                            action="habitSelected"
-                            valueBinding="title"}}
-      {{else}}
-        <span class='locked-title'>{{title}}</span>
-      {{/if}}
+      <input ng-if='isEditable'
+             type="text"
+             name="title"
+             ng-model="habit.title"
+             placeholder="habit title"
+             typeahead="suggestion as suggestion.title for suggestion in suggestions($viewValue)"
+             typeahead-on-select="onSelect($item, $model, $label)"
+             typeahead-template-url="typeahead"
+             class="form-control">
+      </input>
+      <span ng-if='!isEditable' class='locked-title'>{{habit.title}}</span>
     </div>
     <div class='section'>
       <label>Target </label>
-      {{input name="target-value" valueBinding="targetValue"}}
-      {{#if isEditable}}
-        {{view Ember.TextField id="unit" placeholder="Unit" valueBinding="unit" cols="10"}}
-      {{else}}
-        <span class='locked-unit'>{{unit}}</span>
-      {{/if}}
-      {{view Ember.Select content=timeframeOptions value=timeframe name='target-timeframe'}}
+      <input name="target-value" ng-model="target.value" placeholder="value">
+      <input ng-if="isEditable" id='unit' name="unit" placeholder='unit' ng-model="habit.unit">
+      <span ng-if="!isEditable" class='locked-unit'>{{habit.unit}}</span>
+      <select name='target-timeframe' ng-model="target.timeframe" ng-options="timeframe for timeframe in timeFrameOptions"></select>
     </div>
     <div class='section'>
       <label> Private </label>
-      {{input id="private" type="checkbox" checked=private}}
+      <input id="private" type="checkbox" ng-model="habit.private"/>
     </div>
     <div class='section'>
-      <button {{action 'save'}} class='save'> Save </button>
-      {{#unless isEditable}}
-        <button {{action 'cancel'}} class='cancel'> Cancel </button>
-      {{/unless}}
+      <button ng-click="save()" class='save'> Save </button>
+      <button ng-if="!isEditable" class='cancel' ng-click='cancel()'> Cancel </button>
+    </div>
+  </form>
 </script>
 
-<script type='text/x-handlebars', id="habits/new">
+<script type='text/ng-template', id="habits/new">
   <div class="nav-bar">
-    {{#link-to 'habits' class='habits-link fa fa-bars'}} {{/link-to}}
+    <a ui-sref='app.habits' ui-sref-opts="{reload: true}" class='habits-link fa fa-bars'></a>
     <h4> New Habit </h4>
   </div>
-  {{partial "habits/form"}}
-  </div>
-  </form>
+  <div static-include='habits/_form'> </div>
 </script>
 
-<script type='text/x-handlebars', id="habits/edit">
+<script type='text/ng-template', id="habits/edit">
   <div class="nav-bar">
-    {{#link-to 'habits' class='habits-link fa fa-bars'}} {{/link-to}}
+    <a ui-sref='app.habits' ui-sref-opts="{reload: true}" class='habits-link fa fa-bars'></a>
     <h4> Edit Habit </h4>
   </div>
-  {{partial "habits/form"}}
-  {{#if shared}}
-    <button {{action 'removeHabit'}} class='abandon'> Abandon {{title}} </button>
-  {{else}}
-    <button {{action 'removeHabit'}} class='delete'> Delete {{title}} </button>
-  {{/if}}
+
+  <div class='habits-edit'>
+
+    <div static-include='habits/_form'> </div>
+    <button ng-if='habit.user_count > 1' ng-click='deleteHabit(habit)' class='abandon'> Abandon {{habit.title}} </button>
+    <button ng-if='habit.user_count == 1' ng-click='deleteHabit(habit)' class='delete'> Delete {{habit.title}} </button>
   </div>
-  </form>
 </script>
 
-<script type='text/x-handlebars' id='habit'>
+<script type='text/ng-template' id='habit'>
   <div class='habit-details'>
     <div class="nav-bar">
-      {{#link-to 'habits' class='habits-link fa fa-bars'}} {{/link-to}}
+      <a ui-sref='app.habits' ui-sref-opts='{reload: true}' class='habits-link fa fa-bars'></a>
       <div class='title-lockup'>
-        <h4 class='title'> {{title}} </h4>
+        <h4 class='title'> {{habit.title}} </h4>
         <br />
-        <h4 class='sub-title'> {{users.length}} other users</h4>
+        <h4 class='sub-title'> {{habit.user_count - 1}} other users</h4>
       </div>
-      <div {{action 'editHabit'}} class='edit fa fa-pencil'></div>
+      <a ui-sref="app.habits.edit({habitId: habit.id})" class='edit fa fa-pencil'></a>
     </div>
     <div class='section'>
-      <h2>{{percentage}}</h2>
-      <p>You have completed <span class='value'>{{value}} {{unit}}</span> {{formattedTimeFrame}} </p>
-      <p>Your target is <span class="target"> {{targetValue}} {{unit}} per {{timeframe}} </span></p>
+      <h2>{{habit.percentage}}%</h2>
+      <p>You have completed <span class='value'>{{habit.value}} {{habit.unit}}</span> {{habit.target.formattedTimeFrame}} </p>
+      <p>Your target is <span class="target"> {{habit.target.value}} {{habit.unit}} per {{habit.target.timeframe}} </span></p>
     </div>
 
     <div class='section'>
       <h2> New Checkin </h2>
-      Value: {{view Ember.TextField valueBinding="newCheckinValue" cols="30" id="new-checkin-value"}}
-      Note: {{view Ember.TextField valueBinding="note" cols="50" id="note"}}
+      Value: <input ng-model="newCheckin.value" id="new-checkin-value"></input>
+      Note: <input ng-model="newCheckin.note" id="note"></input>
       <div class='inline-button-container'>
-        <button {{action 'checkin' this 'plus' note}} class='plus'> + </button>
-        <button {{action 'checkin' this 'minus' note}} class='minus'> - </button>
+        <button ng-click="checkin('plus')" class='plus'> + </button>
+        <button ng-click="checkin('minus')"  class='minus'> - </button>
       </div>
     </div>
-      {{#if checkins.length}}
-        <div class='section'>
-          {{#if private}}
-            <h3>Private Checkins</h3>
-          {{else}}
-            <h3>Public Checkins</h3>
-          {{/if}}
-          {{#each checkin in App.checkinsController}}
-            {{#if private}}
-              <p class="checkin">({{checkin.value}}) {{checkin.note}}</p>
-            {{else}}
-              <p class="checkin">{{checkin.email}} ({{checkin.value}}) {{checkin.note}}</p>
-            {{/if}}
-          {{/each}}
-        </div>
-      {{/if}}
+    <div class='section' ng-if="habit.checkins.length">
+      <h3>Activity</h3>
+      <p class="checkin" ng-repeat="checkin in habit.checkins"><span ng-if="habit.private">{{checkin.email}}</span>({{checkin.value}}) {{checkin.note}}</p>
+    </div>
   </div>
 </script>
 
-<script type='text/x-handlebars' id='login'>
+<script type='text/ng-template' id='login'>
   <h1>Login</h1>
-  {{! login form; the fields must be named "identification" and "password"; the controller action is "authenticate" }}
-  <form {{action 'authenticate' on='submit'}}>
-    {{#if error}}
-      <p class='error'>{{error}}</p>
-    {{/if}}
+  <form ng-submit='login()'>
+    <p class='error' ng-if='error'>{{error}}</p>
     <div class="form-group">
-      {{input id='identification' placeholder='Enter Login' class='form-control' value=identification}}
+      <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
     </div>
     <div class="form-group">
-      {{input id='password' placeholder='Enter Password' class='form-control' type='password' value=password}}
+      <input class='form-control' id='password' type='password' placeholder='Enter Password' ng-model='user.password'> </input>
     </div>
     <button type="submit" class="btn btn-default">Login</button>
   </form>
-  {{#link-to 'signup'}} Sign Up {{/link-to}}
+  <a ui-sref="signup"> Sign Up </a>
 </script>

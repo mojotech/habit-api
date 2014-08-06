@@ -18,6 +18,7 @@ When(/^I add a (positive|negative) checkin to the habit with title "(.*?)"$/) do
   else
     widget(:habit_item, title).widget(:negative_checkin).click
   end
+  sleep 1
 end
 
 Then(/^The habit with title "(.*?)" should have a checkin value of (-?\d+)$/) do |title, value|

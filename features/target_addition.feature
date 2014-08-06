@@ -11,6 +11,6 @@ Scenario: A user should be able to create a target
   And I am a user creating a habit "Walk Dog" in "walks"
   When I set the target with
     | value | timeframe |
-    | 45    | Day       |
+    | 45    | day       |
   And I click the habit with the title "Walk Dog"
   Then I should see the target "45 walks per day"

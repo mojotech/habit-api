@@ -1,11 +1,14 @@
 Given(/^I created the following habits:$/) do |table|
   table.hashes.each do |row|
-    step "I visit the new habits page"
+    visit '/#/habits/new'
     step "I create a habit with the following information:", table(%{
-      | title   | #{row['title']}   |
-      | unit    | #{row['unit']}    |
-      | private | #{row['private']} |
+      | title     | #{row['title']}     |
+      | unit      | #{row['unit']}      |
+      | private   | #{row['private']}   |
+      | target    | #{row['target']}    |
+      | timeframe | #{row['timeframe']} |
     })
+    sleep 2
   end
 end
 
@@ -22,6 +25,8 @@ When(/^I create a habit with the following information:$/) do |table|
   form.widget(:title).set(table.rows_hash['title'])
   form.widget(:unit).set(table.rows_hash['unit'])
   form.widget(:private).set(table.rows_hash['private'] == 'true')
+  form.widget(:target_value).set table.rows_hash['target']
+  form.widget(:timeframe).set table.rows_hash['timeframe']
   form.submit_form()
 end
 
@@ -58,9 +63,11 @@ end
 Given(/^there is a public habit "(.*?)"$/) do |title|
   step "I visit the new habits page"
   step "I create a habit with the following information:", table(%{
-    | title   | #{title}   |
-    | unit    | times                         |
-    | private | false                         |
+    | title     | #{title} |
+    | unit      | times    |
+    | private   | false    |
+    | target    | 3        |
+    | timeframe | day      |
   })
   step "I login to a new account"
 end

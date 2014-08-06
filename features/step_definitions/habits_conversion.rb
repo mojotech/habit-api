@@ -10,13 +10,13 @@ Then(/^I should see the habit is (private|public)$/) do |visibility|
 end
 
 When(/^I login to a new account$/) do
-  visit "/#/habits/"
-  widget(:logout_link).click
+  visit '/#/logout'
   user = FactoryGirl.create(:user)
   step "I login with the following information:", table(%{
     | email    | #{user.email}    |
     | password | #{user.password} |
   })
+  widget(:habit_form).should be_present
 end
 
 When(/^I type "(.*?)" into the title field$/) do |title|
@@ -25,23 +25,29 @@ end
 
 Given(/^that I create a shared habit$/) do
   step "I create a habit with the following information:", table(%{
-    | title    | walk dog |
-    | unit     | times    |
-    | private  | false    |
+    | title     | walk dog |
+    | unit      | times    |
+    | private   | false    |
+    | target    | 3        |
+    | timeframe | week     |
   })
   step "I login to a new account"
   step "I create a habit with the following information:", table(%{
-    | title    | walk dog |
-    | unit     | times    |
-    | private  | false    |
+    | title     | walk dog |
+    | unit      | times    |
+    | private   | false    |
+    | target    | 3        |
+    | timeframe | week     |
   })
 end
 
 Given(/^that I create a (public|private) habit$/) do |visibility|
   step "I create a habit with the following information:", table(%{
-    | title    | walk dog                   |
-    | unit     | times                      |
-    | private  | #{visibility == 'private'} |
+    | title     | walk dog                   |
+    | unit      | times                      |
+    | private   | #{visibility == 'private'} |
+    | target    | 3                          |
+    | timeframe | week                       |
   })
 end
 

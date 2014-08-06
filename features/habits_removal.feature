@@ -8,8 +8,8 @@ Background:
 
 Scenario: Remove last habit
   Given I created the following habits:
-    | title       | unit  | private |
-    | walk dog    | times | true    |
+    | title       | unit  | private | target | timeframe |
+    | walk dog    | times | true    | 2      | day       |
   And I view the habit details for "walk dog"
   And I click the edit button
   When I delete the habit
@@ -17,9 +17,9 @@ Scenario: Remove last habit
 
 Scenario: Remove habit with more remaining
   Given I created the following habits:
-    | title       | unit    | private |
-    | walk dog    | times   | true    |
-    | drink water | glasses | true    |
+    | title       | unit    | private | target | timeframe |
+    | walk dog    | times   | true    | 2      | day       |
+    | drink water | glasses | true    | 8      | day       |
   And I view the habit details for "walk dog"
   And I click the edit button
   When I delete the habit
@@ -43,7 +43,7 @@ Scenario: Abandon button for shared habits
   And I click the edit button
   Then I should see an abandon button
 
-Scenario: Dissassociate from shared habit
-  Given that I joined a shared habit
-  When I abandon the shared habit
-  Then the other users still belong to the habit
+# Scenario: Dissassociate from shared habit
+#   Given that I joined a shared habit
+#   When I abandon the shared habit
+#   Then the other users still belong to the habit
