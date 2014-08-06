@@ -13,7 +13,7 @@ class CheckinsController < ApplicationController
   def index
     habit = current_user.habits.find(params[:habit_id])
 
-   render json: habit.checkins
+    render json: habit.checkins.includes(:user)
   end
 
   private
