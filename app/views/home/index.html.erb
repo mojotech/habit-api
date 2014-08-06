@@ -18,7 +18,7 @@
 
 <script type='text/ng-template' id='habits'>
   <div class="nav-bar">
-    <a class="fa fa-sign-out logout"></a>
+    <a ui-sref='logout' class="fa fa-sign-out logout"></a>
     <h4> Habits </h4>
     <a ui-sref='app.habits.new' class='new-habit fa fa-plus'></a>
     <div class="clear"> </div>
@@ -40,7 +40,7 @@
 </script>
 
 <script type='text/ng-template', id="habits/_form">
-  <form>
+  <form class='habit-form'>
     <div class='section'>
       <input id='title' ng-if='isEditable' ng-model='habit.title' placeholder='Title'> </input>
       <span ng-if='!isEditable' class='locked-title'>{{habit.title}}</span>

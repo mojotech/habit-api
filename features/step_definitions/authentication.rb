@@ -36,11 +36,6 @@ Then(/^I should see a form to add a new habit$/) do
   widget(:habit_form).should be_present
 end
 
-Then(/^I click the logout link$/) do
-  visit '/#habits/'
-  widget(:logout_link).click
-end
-
 Then(/^I should be brought to the login form$/) do
   widget(:login_form).should be_present
 end

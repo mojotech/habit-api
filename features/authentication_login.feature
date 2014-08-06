@@ -37,7 +37,7 @@ Scenario: Successful login with habits
     | title       | unit    | private |
     | walk dog    | times   | true    |
     | drink water | glasses | true    |
-  When I logout
+  And I logout
   And I login with the following information:
     | email    | dev@mojotech.com |
     | password | password         |

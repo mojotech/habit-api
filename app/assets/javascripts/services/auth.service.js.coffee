@@ -5,6 +5,7 @@ app.service 'auth', (Auth) ->
       .then ->
         Auth.login credentials
   login: Auth.login
+  logout: Auth.logout
   token: ->
     if Auth._currentUser
       user = Auth._currentUser
