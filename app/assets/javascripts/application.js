@@ -14,5 +14,6 @@
 //= require lodash
 //= require angular
 //= require angular-ui-router
+//= require devise
 //= require typeahead
 //= require_tree .
