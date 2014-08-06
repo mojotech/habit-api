@@ -4,6 +4,7 @@ get  = null
 post = null
 put  = null
 del = null
+
 app.service 'ApiHelper', ($http, auth) ->
   get = (resource, serializedParams, id) ->
     $http
