@@ -48,9 +48,9 @@
     <div class='section'>
       <label>Target </label>
       <input name="target-value" ng-model="target.value" placeholder="value">
-      <input id='unit' name="target-value" placeholder='unit' ng-model="habit.unit">
+      <input id='unit' name="unit" placeholder='unit' ng-model="habit.unit">
       <span ng-if="!isEditable" class='locked-unit'>{{target.unit}}</span>
-      <select ng-model="target.timeframe" ng-options="timeframe for timeframe in timeFrameOptions"></select>
+      <select name='target-timeframe' ng-model="target.timeframe" ng-options="timeframe for timeframe in timeFrameOptions"></select>
     </div>
     <div class='section'>
       <label> Private </label>
@@ -77,9 +77,11 @@
     <h4> Edit Habit </h4>
   </div>
 
-  <div ng-include="'habits/_form'"> </div>
-  <button ng-if='habit.shared' ng-click='deleteHabit(habit)' class='abandon'> Abandon {{title}} </button>
-  <button ng-if='!habit.shared' ng-click='deleteHabit(habit)' class='delete'> Delete {{title}} </button>
+  <div class='habits-edit'>
+    <div ng-include="'habits/_form'"> </div>
+    <button ng-if='habit.user_count > 1' ng-click='deleteHabit(habit)' class='abandon'> Abandon {{habit.title}} </button>
+    <button ng-if='habit.user_count == 1' ng-click='deleteHabit(habit)' class='delete'> Delete {{habit.title}} </button>
+  </div>
 </script>
 
 <script type='text/ng-template' id='habit'>
