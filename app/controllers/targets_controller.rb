@@ -22,7 +22,6 @@ class TargetsController < ApplicationController
       .habits
       .find(params[:habit_id])
       .targets
-      .where(user_id: params[:user_id])
       .first
 
     render json: target.update_attributes(target_params)
