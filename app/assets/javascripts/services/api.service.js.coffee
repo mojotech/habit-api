@@ -4,6 +4,7 @@ app.service 'api', ($http, ApiHelper) ->
     index: ApiHelper.index 'habits'
     show: ApiHelper.show 'habits'
     create: ApiHelper.create 'habits'
+    destroy: ApiHelper.destroy 'habits'
   targets:
     update: ApiHelper.update 'targets'
     index: ApiHelper.index 'targets'

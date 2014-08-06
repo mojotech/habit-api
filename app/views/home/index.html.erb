@@ -78,8 +78,8 @@
   </div>
 
   <div ng-include="'habits/_form'"> </div>
-  <button ng-if='habit.shared' ng-click='removeHabit' class='abandon'> Abandon {{title}} </button>
-  <button ng-if='!habit.shared' ng-click 'removeHabit' class='delete'> Delete {{title}} </button>
+  <button ng-if='habit.shared' ng-click='deleteHabit(habit)' class='abandon'> Abandon {{title}} </button>
+  <button ng-if='!habit.shared' ng-click='deleteHabit(habit)' class='delete'> Delete {{title}} </button>
   </script>
 
 <script type='text/ng-template' id='habit'>

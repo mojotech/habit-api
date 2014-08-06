@@ -16,3 +16,8 @@ app.controller 'HabitEditController', ($scope, $state, habit, target, api) ->
         timeframe: $scope.target.timeframe
       .then ->
         $state.go 'app.habits', null, reload: true
+
+  $scope.deleteHabit = (habit) ->
+    api.habits.destroy habit.id
+      .then ->
+        $state.go 'app.habits', null, reload: true
