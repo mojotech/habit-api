@@ -24,23 +24,29 @@ end
 
 Given(/^that I create a shared habit$/) do
   step "I create a habit with the following information:", table(%{
-    | title    | walk dog |
-    | unit     | times    |
-    | private  | false    |
+    | title     | walk dog |
+    | unit      | times    |
+    | private   | false    |
+    | target    | 3        |
+    | timeframe | week     |
   })
   step "I login to a new account"
   step "I create a habit with the following information:", table(%{
-    | title    | walk dog |
-    | unit     | times    |
-    | private  | false    |
+    | title     | walk dog |
+    | unit      | times    |
+    | private   | false    |
+    | target    | 3        |
+    | timeframe | week     |
   })
 end
 
 Given(/^that I create a (public|private) habit$/) do |visibility|
   step "I create a habit with the following information:", table(%{
-    | title    | walk dog                   |
-    | unit     | times                      |
-    | private  | #{visibility == 'private'} |
+    | title     | walk dog                   |
+    | unit      | times                      |
+    | private   | #{visibility == 'private'} |
+    | target    | 3                          |
+    | timeframe | week                       |
   })
 end
 

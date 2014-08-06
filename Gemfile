@@ -15,7 +15,6 @@ gem 'oj'
 
 group :development, :test do
   gem 'pry'
-  gem 'pry-debugger'
   gem 'rspec-rails', '~> 2.99'
   gem 'factory_girl_rails'
   gem 'faker'

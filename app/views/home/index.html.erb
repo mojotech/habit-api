@@ -25,7 +25,7 @@
   </div>
 
   <ul id='habits-list'>
-    <li class='habit-listing' ng-repeat="habit in habits" ng-class="isPrivate() ? private : public"}}>
+    <li class='habit-listing' ng-repeat="habit in habits" ng-class="habit.private ? 'private' : 'public'">
       <div class='title'>
         <a ui-sref="app.habits.show({habitId: habit.id})">
           <span class='value'>{{habit.value}}</span><span class='habit-title'>{{habit.title}}</span>
