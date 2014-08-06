@@ -9,6 +9,10 @@ class TargetsController < ApplicationController
     render json: habit.targets.create(target_params.merge({ user_id: current_user.id }))
   end
 
+  def index
+    habit = current_user.habits.find(params[:habit_id])
+    render json: habit.targets
+  end
   def update
     target = current_user
       .habits
