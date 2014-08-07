@@ -42,7 +42,6 @@
 <script type='text/ng-template', id="habits/_form">
   <form class='habit-form'>
     <div class='section'>
-      <habit-title-typeahead habit-model='habit' id='title' > </habit-title-typeahead>
       <span ng-if='!isEditable' class='locked-title'>{{habit.title}}</span>
     </div>
     <div class='section'>

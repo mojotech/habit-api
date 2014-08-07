@@ -2,5 +2,4 @@
   [
     'ui.router'
     'Devise'
-    'siyfion.sfTypeahead'
   ]
