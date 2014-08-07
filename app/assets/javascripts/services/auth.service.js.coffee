@@ -9,3 +9,5 @@ app.service 'auth', (Auth) ->
       "Token token=\"#{user.user_token}\", user_email=\"#{user.user_email}\""
     else
       ""
+  currentUser: ->
+    Auth._currentUser

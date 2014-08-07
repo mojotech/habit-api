@@ -32,8 +32,8 @@
         </a>
       </div>
       <div class='button-container'>
-        <button {{action 'plusOne' this session.user_id}} class='plus'> + </button>
-        <button {{action 'minusOne' this session.user_id}} class='minus'> - </button>
+        <button ng-click="checkin(habit.id, 1)" class='plus'> + </button>
+        <button ng-click="checkin(habit.id, -1)" class='minus'> - </button>
       </div>
     </li>
   </ul>
