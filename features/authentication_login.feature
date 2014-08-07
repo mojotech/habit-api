@@ -46,3 +46,12 @@ Scenario: Successful login with habits
     | title       |
     | walk dog    |
     | drink water |
+
+Scenario: Forgot password link
+  When I view the login page
+  Then I should see a link to reset my password
+
+Scenario: Brought to forgot password page
+  When I view the login page
+  And I click the forgot password link
+  Then I should be brought to a page to reset my password
