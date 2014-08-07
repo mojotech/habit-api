@@ -2,4 +2,5 @@
   [
     'ui.router'
     'Devise'
+    'ui.bootstrap'
   ]

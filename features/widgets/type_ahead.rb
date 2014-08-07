@@ -1,6 +1,6 @@
 class TypeAhead < Dill::List
-  root '.tt-dropdown-menu'
-  item 'i'
+  root '.dropdown-menu'
+  item '.dropdown-item'
 
   def has_item?(title)
     items.each do |item|

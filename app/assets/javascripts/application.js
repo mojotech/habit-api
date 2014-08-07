@@ -16,4 +16,5 @@
 //= require angular-ui-router
 //= require devise
 //= require app
+//= require ui-bootstrap-custom-tpls-0.10.0
 //= require_tree .

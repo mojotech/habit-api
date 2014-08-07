@@ -52,15 +52,12 @@ Scenario: Create habit I already have
     | timeframe | day         |
   Then I should see the habit "drink water" once in my list
 
-
-@wip
 Scenario: Suggestions for public habits
   Given there is a public habit "drink water"
   When I visit the new habits page
   And I type "drink wate" into the title field
   Then I should see a suggestion for "drink water"
 
-@wip
 Scenario: Join public habit
   Given there is a public habit "drink water"
   When I visit the new habits page
@@ -69,7 +66,6 @@ Scenario: Join public habit
   Then I shouldn't be able to edit the title or unit
   And I should be able to unjoin the public habit
 
-@wip
 Scenario: Unjoin public habit
   Given there is a public habit "drink water"
   When I visit the new habits page

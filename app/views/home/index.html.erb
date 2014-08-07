@@ -39,16 +39,30 @@
   </ul>
 </script>
 
+<script type="text/ng-template" id="typeahead">
+  <span class='dropdown-item'>{{match.model.title}} ({{match.model.user_count}})</span>
+</script>
+
 <script type='text/ng-template', id="habits/_form">
   <form class='habit-form'>
     <div class='section'>
+      <input ng-if='isEditable'
+             type="text"
+             name="title"
+             ng-model="habit.title"
+             placeholder="habit title"
+             typeahead="suggestion as suggestion.title for suggestion in suggestions($viewValue)"
+             typeahead-on-select="onSelect($item, $model, $label)"
+             typeahead-template-url="typeahead"
+             class="form-control">
+      </input>
       <span ng-if='!isEditable' class='locked-title'>{{habit.title}}</span>
     </div>
     <div class='section'>
       <label>Target </label>
       <input name="target-value" ng-model="target.value" placeholder="value">
-      <input id='unit' name="unit" placeholder='unit' ng-model="habit.unit">
-      <span ng-if="!isEditable" class='locked-unit'>{{target.unit}}</span>
+      <input ng-if="isEditable" id='unit' name="unit" placeholder='unit' ng-model="habit.unit">
+      <span ng-if="!isEditable" class='locked-unit'>{{habit.unit}}</span>
       <select name='target-timeframe' ng-model="target.timeframe" ng-options="timeframe for timeframe in timeFrameOptions"></select>
     </div>
     <div class='section'>
@@ -68,7 +82,6 @@
     <h4> New Habit </h4>
   </div>
   <div static-include='habits/_form'> </div>
-  {{habit}}
 </script>
 
 <script type='text/ng-template', id="habits/edit">

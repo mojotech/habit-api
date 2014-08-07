@@ -1,4 +1,4 @@
-app.controller 'HabitNewController', ($scope, $state, api) ->
+app.controller 'HabitNewController', ($scope, $state, api, $http) ->
   $scope.isEditable = true
 
   $scope.habit = {}
@@ -7,6 +7,23 @@ app.controller 'HabitNewController', ($scope, $state, api) ->
     timeframe: 'week'
   $scope.timeFrameOptions = ['day','week','month']
 
+  $scope.suggestions = (query) ->
+    $http.get "/habits?title=#{query}"
+    .then (results) ->
+      results.data
+
+  $scope.onSelect = ($item, $model, $label) ->
+    $scope.isEditable = false
+    $scope.habit.title = $model.title
+    $scope.habit.unit = $model.unit
+    $scope.habit.user_count = $model.user_count
+
+  $scope.cancel = ->
+    $scope.habit.user_count = 0
+    $scope.habit.title = ''
+    $scope.habit.unit = ''
+    $scope.habit.private = false
+    $scope.isEditable = true
 
   $scope.save = ->
     api.habits.create

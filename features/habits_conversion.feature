@@ -11,7 +11,7 @@ Feature: Habit Conversion
     Given that I create a private habit
     When I edit the habit to be public
     Then I should see the habit is public
-    # And another user should be able to see the habit  # TODO add back in with typeahead
+    And another user should be able to see the habit
 
   Scenario: Public to private
     Given that I create a public habit
@@ -23,4 +23,4 @@ Feature: Habit Conversion
     Given that I create a shared habit
     When I edit the habit to be private
     Then I should see the habit is private    
-    # And another user should be able to see the habit   # TODO add back in with typeahead
+    And another user should be able to see the habit
