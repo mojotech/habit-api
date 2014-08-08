@@ -17,5 +17,5 @@
 //= require devise
 //= require restangular
 //= require app
-//= require ui-bootstrap-custom-tpls-0.10.0
+//= require ui-bootstrap-tpls-0.11.0
 //= require_tree .
