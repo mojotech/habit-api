@@ -1,5 +1,8 @@
 app.controller 'LoginController', ($scope, $state, auth) ->
-  $scope.login = ->  
+  $scope.closeFlash = ->
+    $scope.error = ''
+
+  $scope.login = ->
     $scope.error = ''
     if $scope.user
       auth.login

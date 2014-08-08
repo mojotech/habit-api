@@ -137,23 +137,43 @@
       <button type="submit" class="btn btn-primary">Sign Up</button>
       <a ui-sref="login"> Login </a>
     </form>
+    <div class='signup-form'>
+      <alert ng-show="errors.length > 0" type="danger" close="closeFlash()">
+        <ul>
+          <li class="error" ng-repeat="error in errors">{{error}}</li>
+        </ul>
+      </alert>
+      <h1>Sign Up</h1>
+      <form ng-submit="signup()">
+        <div class="form-group" ng-class="emailError ? 'has-error' : ''">
+          <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
+        </div>
+        <div class="form-group" ng-class="passwordError ? 'has-error' : ''">
+          <input class='form-control' id='password' type='password' placeholder='Enter Password' ng-model='user.password'> </input>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <a ui-sref="login"> Login </a>
+      </form>
+    </div>
   </div>
 </script>
 
 
 <script type='text/ng-template' id='login'>
   <div class='padded-container'>
-    <h1>Login</h1>
-    <form ng-submit='login()'>
-      <p class='error' ng-if='error'>{{error}}</p>
-      <div class="form-group">
-        <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
-      </div>
-      <div class="form-group">
-        <input class='form-control' id='password' type='password' placeholder='Enter Password' ng-model='user.password'> </input>
-      </div>
-      <button type="submit" class="btn btn-primary">Login</button>
-      <a ui-sref="signup"> Sign Up </a>
-    </form>
+    <div class='login-form'>
+      <alert ng-show="error.length > 0" type="danger" close="closeFlash()">{{error}}</alert>
+      <h1>Login</h1>
+      <form ng-submit='login()'>
+        <div class="form-group" ng-class="error.length > 0 ? 'has-error' : ''">
+          <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
+        </div>
+        <div class="form-group" ng-class="error.length > 0 ? 'has-error' : ''">
+          <input class='form-control' id='password' type='password' placeholder='Enter Password' ng-model='user.password'> </input>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a ui-sref="signup"> Sign Up </a>
+      </form>
+    </div>
   </div>
 </script>
