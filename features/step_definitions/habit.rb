@@ -112,3 +112,19 @@ Given(/^A user can abandon a shared habit$/) do
   expect(Habit.first.users.count).to be 1
   expect(Habit.first.public?).to be true
 end
+
+Given(/^A user can't remove a shared habit$/) do
+  user_one = FactoryGirl.create(:user)
+  user_one.habits << FactoryGirl.create(:habit, private: false)
+
+  user_two = FactoryGirl.create(:user)
+  shared_habit = Habit.associate_matching_or_create({
+    title: user_one.habits.last.attributes["title"],
+    unit: user_one.habits.last.attributes["unit"],
+    private: false
+  }, user_two)
+
+  expect(Habit.count).to be 1
+  shared_habit.destroy
+  expect(Habit.count).to be 1
+end

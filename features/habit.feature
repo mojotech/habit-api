@@ -51,6 +51,7 @@ Feature: Habit
 
   Scenario: Private Removal
     * A user can remove a private habit
+    * A user can't remove a shared habit
 
   Scenario: Public Removal
     * A user can remove a public habit
