@@ -3,7 +3,7 @@ app.controller 'HabitController', ($scope, $state, habit, target, checkins, Chec
     _.extend habit,
       target: _.extend target,
         formattedTimeFrame: (week: 'this week', month: 'this month', day: 'today')[target.timeframe]
-      percentage: (habit.value / target.value).toFixed(2) * 100
+      percentage: (habit.value / target.value * 100 ).toFixed(0)
       {checkins}
 
   $scope.habit = constructHabit habit, checkins
