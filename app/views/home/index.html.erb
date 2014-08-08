@@ -123,20 +123,6 @@
 
 <script type='text/ng-template' id='signup'>
   <div class='padded-container'>
-    <h1>Sign Up</h1>
-    <form ng-submit="signup()">
-      <ul class='errors' ng-show="errors.length > 0">
-        <li class='error' ng-repeat="error in errors">{{error}}</li>
-      </ul>
-      <div class="form-group">
-        <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
-      </div>
-      <div class="form-group">
-        <input class='form-control' id='password' type='password' placeholder='Enter Password' ng-model='user.password'> </input>
-      </div>
-      <button type="submit" class="btn btn-primary">Sign Up</button>
-      <a ui-sref="login"> Login </a>
-    </form>
     <div class='signup-form'>
       <alert ng-show="errors.length > 0" type="danger" close="closeFlash()">
         <ul>
