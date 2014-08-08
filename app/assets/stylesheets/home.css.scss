@@ -3,69 +3,31 @@ $greyblue: #34444f;
 $red: #CE6861;
 $green: #60AB89;
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  color: $greyblue;
-  font-family: "Lucida Grande"
-}
-
-a {
-  color: $greyblue;
+a, a:hover {
+  color: inherit;
   min-height: 50px;
   text-decoration: none;
+
 }
 
-button, .btn {
-  border: none;
-  background-color: transparent;
-  outline: none;
-  color: $greyblue;
+.padded-container {
+  padding: 0 5%;
 }
 
 .button-container {
   position: absolute;
   top: 0;
-  right: 0;
-}
-
-button {
-  &.plus, &.minus {
-    font-size: 40px;
-    font-weight: 200;
-    position: relative;
-    top: -4px;
-    width: 50px;
-    padding: 0;
-    opacity: 0.5;
-    &:active {
-      opacity: 1;
-    }
+  right: 5%;
+  .plus {
+    margin-right: -15px;
   }
 }
 
-.plus {
-  color: $green;
-}
-.minus {
-  color: $red;
-}
-
-.save {
-  border: 1px solid blue;
-  color: blue;
-}
-.delete, .cancel, .abandon {
-  border: 1px solid $red;
-  color: $red;
-}
 .section {
   margin: 12px 0;
   padding: 0 5%;
 }
+
 .nav-bar {
   height: 50px;
   line-height: 100%;
@@ -83,6 +45,7 @@ button {
   }
   h4 {
     display: inline-block;
+    margin: 0 auto;
   }
   .title-lockup {
     display: inline-block;
@@ -99,6 +62,9 @@ button {
   }
 }
 
+.habit-percentage {
+  font-size: 80px;
+}
 #habits-list {
   margin: 0;
   padding: 0;

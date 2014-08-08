@@ -1,4 +1,4 @@
-app.controller 'HabitEditController', ($scope, $state, habit, target, Habit, Target) ->
+app.controller 'HabitEditController', ($scope, $state, habit, $http, target, Habit, Target) ->
 
   $scope.isEditable = true
   $scope.habit = habit
@@ -8,16 +8,14 @@ app.controller 'HabitEditController', ($scope, $state, habit, target, Habit, Tar
   $scope.suggestions = (query) ->
     $http.get "/habits?title=#{query}"
     .then (results) ->
-      _.map results.data, (habit) -> "habit.title (#{habit.user_count})"
+      results.data
 
   $scope.onSelect = ($item, $model, $label) ->
     $scope.isEditable = false
-    $http.get "/habits?title=#{$label}"
-    .then (results) ->
-      habit = results.data[0]
-      $scope.habit.title = habit.title
-      $scope.habit.unit = habit.unit
-      $scope.habit.user_count = habit.user_count
+    $scope.habit.title = $model.title
+    $scope.habit.unit = $model.unit
+    $scope.habit.user_count = $model.user_count
+
 
   $scope.cancel = ->
     $scope.habit.user_count = 0

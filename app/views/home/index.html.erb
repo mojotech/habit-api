@@ -1,21 +1,5 @@
 <div ui-view> </div>
 
-<script type='text/ng-template' id='signup'>
-  <h1>Sign Up</h1>
-  <form ng-submit="signup()">
-    <ul class='errors' ng-show="errors.length > 0">
-      <li class='error' ng-repeat="error in errors">{{error}}</li>
-    </ul>
-    <div class="form-group">
-      <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
-    </div>
-    <div class="form-group">
-      <input class='form-control' id='password' type='password' placeholder='Enter Password' ng-model='user.password'> </input>
-    </div>
-    <button type="submit" class="btn btn-default">Sign Up</button>
-  </form>
-</script>
-
 <script type='text/ng-template' id='habits'>
   <div class="nav-bar">
     <a ui-sref='logout' class="fa fa-sign-out logout"></a>
@@ -32,8 +16,7 @@
         </a>
       </div>
       <div class='button-container'>
-        <button ng-click="checkin(habit.id, 1)" class='plus'> + </button>
-        <button ng-click="checkin(habit.id, -1)" class='minus'> - </button>
+        <button ng-click="checkin(habit.id, 1)" class='btn btn-success btn-link plus fa fa-plus'> </button>
       </div>
     </li>
   </ul>
@@ -60,8 +43,8 @@
     </div>
     <div class='section'>
       <label>Target </label>
-      <input name="target-value" ng-model="target.value" placeholder="value">
-      <input ng-if="isEditable" id='unit' name="unit" placeholder='unit' ng-model="habit.unit">
+      <input name="target-value" ng-model="target.value" placeholder="value" class="form-control">
+      <input ng-if="isEditable" id='unit' name="unit" placeholder='unit' ng-model="habit.unit" class="form-control">
       <span ng-if="!isEditable" class='locked-unit'>{{habit.unit}}</span>
       <select name='target-timeframe' ng-model="target.timeframe" ng-options="timeframe for timeframe in timeFrameOptions"></select>
     </div>
@@ -70,8 +53,8 @@
       <input id="private" type="checkbox" ng-model="habit.private"/>
     </div>
     <div class='section'>
-      <button ng-click="save()" class='save'> Save </button>
-      <button ng-if="!isEditable" class='cancel' ng-click='cancel()'> Cancel </button>
+      <button ng-click="save()" class='save btn btn-primary'> Save </button>
+      <button ng-if="!isEditable" class='cancel btn btn-link' ng-click='cancel()'> Cancel </button>
     </div>
   </form>
 </script>
@@ -93,8 +76,11 @@
   <div class='habits-edit'>
 
     <div static-include='habits/_form'> </div>
-    <button ng-if='habit.user_count > 1' ng-click='deleteHabit(habit)' class='abandon'> Abandon {{habit.title}} </button>
-    <button ng-if='habit.user_count == 1' ng-click='deleteHabit(habit)' class='delete'> Delete {{habit.title}} </button>
+    <div class='padded-container'>
+
+      <button ng-if='habit.user_count > 1' ng-click='deleteHabit(habit)' class='abandon btn btn-danger'> Abandon {{habit.title}} </button>
+      <button ng-if='habit.user_count == 1' ng-click='deleteHabit(habit)' class='delete btn btn-danger'> Delete {{habit.title}} </button>
+    </div>
   </div>
 </script>
 
@@ -109,39 +95,65 @@
       </div>
       <a ui-sref="app.habits.edit({habitId: habit.id})" class='edit fa fa-pencil'></a>
     </div>
-    <div class='section'>
-      <h2>{{habit.percentage}}%</h2>
+    <div class='section text-center'>
+      <h1 class='habit-percentage text-primary'>{{habit.percentage}}<small class='text-primary'>%</small></h1>
       <p>You have completed <span class='value'>{{habit.value}} {{habit.unit}}</span> {{habit.target.formattedTimeFrame}} </p>
       <p>Your target is <span class="target"> {{habit.target.value}} {{habit.unit}} per {{habit.target.timeframe}} </span></p>
     </div>
 
     <div class='section'>
-      <h2> New Checkin </h2>
-      Value: <input ng-model="newCheckin.value" id="new-checkin-value"></input>
-      Note: <input ng-model="newCheckin.note" id="note"></input>
-      <div class='inline-button-container'>
-        <button ng-click="checkin('plus')" class='plus'> + </button>
-        <button ng-click="checkin('minus')"  class='minus'> - </button>
-      </div>
+      <label>Value</label>
+      <input ng-model="newCheckin.value" id="new-checkin-value" class='form-control'></input>
+      <label>Note</label>
+      <input ng-model="newCheckin.note" id="note" class='form-control'></input>
+      <button ng-click="checkin('plus')" class='btn btn-success form-control section plus'> Log </button>
     </div>
     <div class='section' ng-if="habit.checkins.length">
       <h3>Activity</h3>
-      <p class="checkin" ng-repeat="checkin in habit.checkins"><span ng-if="habit.private">{{checkin.email}}</span>({{checkin.value}}) {{checkin.note}}</p>
+      <ul class='list-group'>
+        <li class="list-group-item checkin" ng-repeat="checkin in habit.checkins">
+          <span ng-if="!habit.private">{{checkin.email}}</span>
+          <span class='badge'>{{checkin.value}}</span>
+          {{checkin.note}}
+        </li>
+      </ul>
     </div>
   </div>
 </script>
 
+<script type='text/ng-template' id='signup'>
+  <div class='padded-container'>
+    <h1>Sign Up</h1>
+    <form ng-submit="signup()">
+      <ul class='errors' ng-show="errors.length > 0">
+        <li class='error' ng-repeat="error in errors">{{error}}</li>
+      </ul>
+      <div class="form-group">
+        <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
+      </div>
+      <div class="form-group">
+        <input class='form-control' id='password' type='password' placeholder='Enter Password' ng-model='user.password'> </input>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+      <a ui-sref="login"> Login </a>
+    </form>
+  </div>
+</script>
+
+
 <script type='text/ng-template' id='login'>
-  <h1>Login</h1>
-  <form ng-submit='login()'>
-    <p class='error' ng-if='error'>{{error}}</p>
-    <div class="form-group">
-      <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
-    </div>
-    <div class="form-group">
-      <input class='form-control' id='password' type='password' placeholder='Enter Password' ng-model='user.password'> </input>
-    </div>
-    <button type="submit" class="btn btn-default">Login</button>
-  </form>
-  <a ui-sref="signup"> Sign Up </a>
+  <div class='padded-container'>
+    <h1>Login</h1>
+    <form ng-submit='login()'>
+      <p class='error' ng-if='error'>{{error}}</p>
+      <div class="form-group">
+        <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
+      </div>
+      <div class="form-group">
+        <input class='form-control' id='password' type='password' placeholder='Enter Password' ng-model='user.password'> </input>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+      <a ui-sref="signup"> Sign Up </a>
+    </form>
+  </div>
 </script>

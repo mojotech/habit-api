@@ -21,5 +21,5 @@ Then(/^other users with that habit should see the note$/) do
   step "I login to a new account"
   step "that I joined a shared habit"
   step "I view the habit's details"
-  widget(:habit_details).widget?(:checkins, 'awesome').should be true
+  step "I should see the note in the checkins list"
 end

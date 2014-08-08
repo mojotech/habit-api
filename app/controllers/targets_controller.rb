@@ -15,7 +15,7 @@ class TargetsController < ApplicationController
   end
   def show
     habit = current_user.habits.find(params[:habit_id])
-    render json: habit.targets.first
+    render json: habit.targets.where(user_id: current_user.id).first
   end
   def update
     target = current_user
