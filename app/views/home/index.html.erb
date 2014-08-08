@@ -97,7 +97,10 @@
     </div>
     <div class='section text-center'>
       <h1 class='habit-percentage text-primary'>{{habit.percentage}}<small class='text-primary'>%</small></h1>
-      <p>You have completed <span class='value'>{{habit.value}} {{habit.unit}}</span> {{habit.target.formattedTimeFrame}} </p>
+      <p>You
+        <span ng-if='habit.past_tense'>{{habit.past_tense}}</span>
+        <span ng-if='!habit.past_tense'>have completed</span>
+        <span class='value'>{{habit.value}} {{habit.unit}}</span> {{habit.target.formattedTimeFrame}} </p>
       <p>Your target is <span class="target"> {{habit.target.value}} {{habit.unit}} per {{habit.target.timeframe}} </span></p>
     </div>
 

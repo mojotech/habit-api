@@ -12,6 +12,8 @@ gem 'active_model_serializers'
 gem 'devise'
 gem 'font-awesome-rails'
 gem 'oj'
+gem 'verbs'
+gem 'engtagger'
 
 group :development, :test do
   gem 'pry'
