@@ -1,8 +1,9 @@
 class Habit < ActiveRecord::Base
+  before_destroy :confirm_not_shared
 
   has_and_belongs_to_many :users
-  has_many :checkins, order: "created_at DESC"
-  has_many :targets
+  has_many :checkins, order: "created_at DESC", dependent: :destroy
+  has_many :targets, dependent: :destroy
 
   validates :title, :unit,  presence: true
   validates_inclusion_of :private, in: [true, false]
@@ -41,7 +42,7 @@ class Habit < ActiveRecord::Base
   end
 
   def shared?
-    public? && users.count >= 1
+    public? && users.count >= 2
   end
 
   private
@@ -89,5 +90,9 @@ class Habit < ActiveRecord::Base
       current_user.habits << matching_habit
     end
     yield(matching_habit)
+  end
+
+  def confirm_not_shared
+    !shared?
   end
 end
