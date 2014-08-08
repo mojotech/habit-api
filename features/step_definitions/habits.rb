@@ -101,3 +101,7 @@ Then(/^I should be able to set the title and unit$/) do
   widget(:habit_form).widget?(:locked_title).should be false
   widget(:habit_form).widget?(:locked_unit).should be false
 end
+
+Then(/^I should see a link to return home$/) do
+  widget(:navbar).widget(:home).should be_present
+end
