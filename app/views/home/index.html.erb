@@ -61,7 +61,8 @@
 
 <script type='text/ng-template', id="habits/new">
   <div class="nav-bar">
-    <a ui-sref='app.habits' ui-sref-opts="{reload: true}" class='habits-link fa fa-bars'></a>
+    <a ng-if="hasHabits" ui-sref='app.habits' ui-sref-opts="{reload: true}" class='habits-link fa fa-bars'></a>
+    <a ng-if="!hasHabits" ui-sref='logout' class="fa fa-sign-out logout"></a>
     <h4> New Habit </h4>
   </div>
   <div static-include='habits/_form'> </div>

@@ -99,3 +99,7 @@ end
 Then(/^I should be told to provide a password$/) do
   widget(:signup_form).widget?(:error, "password can't be blank").should be true
 end
+
+Then(/^I should see a link to logout$/) do
+  widget(:navbar).widget(:logout).should be_present
+end

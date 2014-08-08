@@ -73,3 +73,10 @@ Scenario: Unjoin public habit
   And I click the suggestion for "drink water"
   And I cancel out of the public habit
   Then I should be able to set the title and unit
+
+Scenario: Home link if habits
+  Given I created the following habits:
+    | title       | unit    | private | target | timeframe |
+    | walk dog    | times   | true    | 7      | week      |
+  When I visit the new habits page
+  Then I should see a link to return home

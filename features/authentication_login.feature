@@ -28,6 +28,7 @@ Scenario: Successful login with no habits
     | email    | dev@mojotech.com |
     | password | password         |
   Then I should see a form to add a new habit
+  And I should see a link to logout
 
 Scenario: Successful login with habits
   Given a logged in account with the following information:
