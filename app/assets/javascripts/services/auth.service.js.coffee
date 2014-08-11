@@ -1,4 +1,4 @@
-app.service 'auth', (Auth) ->
+app.service 'auth', (Auth, $http) ->
   signup: (credentials) ->
     Auth.register credentials
   login: Auth.login
@@ -9,5 +9,11 @@ app.service 'auth', (Auth) ->
       "Token token=\"#{user.user_token}\", user_email=\"#{user.user_email}\""
     else
       ""
-  currentUser: ->
-    Auth._currentUser
+  getCurrentUser: (callback) ->
+    $http
+      url: '/authenticated_user'
+      method: 'GET'
+    .success (data) ->
+      callback(data)
+    .error (error) ->
+      console.log error
