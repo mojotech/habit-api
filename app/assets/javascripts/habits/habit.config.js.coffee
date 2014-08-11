@@ -5,9 +5,6 @@ app.config ($stateProvider) ->
       "page@app":
         templateUrl: 'habits'
         controller: 'HabitsController'
-    resolve:
-      habits: (Habit) ->
-       Habit.getList()
 
   $stateProvider.state 'app.habits.new',
     url: '/new'

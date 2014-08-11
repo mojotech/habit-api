@@ -1,4 +1,4 @@
-app.controller 'HabitNewController', ($scope, $state, $http, Habit, Target, habits) ->
+app.controller 'HabitNewController', ($scope, $state, $http, Habit, Target) ->
 
   $scope.isEditable = true
 
@@ -8,7 +8,8 @@ app.controller 'HabitNewController', ($scope, $state, $http, Habit, Target, habi
     timeframe: 'week'
   $scope.timeFrameOptions = ['day','week','month']
 
-  $scope.hasHabits = habits.length > 0
+  Habit.getList().then (habits) ->
+    $scope.hasHabits = habits.length > 0
 
   $scope.suggestions = (query) ->
     $http.get "/habits?title=#{query}"
