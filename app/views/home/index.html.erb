@@ -163,7 +163,45 @@
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
         <a ui-sref="signup"> Sign Up </a>
+        <a ui-sref="forgot-password" class='forgot-password'>Forgot Password</a>
       </form>
     </div>
+  </div>
+</script>
+
+<script type='text/ng-template' id='forgot-password'>
+  <h1>Forgot Password</h1>
+  <form class='forgot-password'>
+    <div ng-show="!sentPasswordReset">
+      <p ng-show="error.length > 0" class="error">{{error}}</p>
+      <input type="text" placeholder="Enter email" name="email" ng-model="email"></input>
+      <br />
+      <button ng-click="resetPassword()" class="reset">Reset Password</button>
+    </div>
+    <p ng-if="sentPasswordReset" class='sent'>An email was sent to <b>{{email}}</b> with instructions to reset your password.</p>
+    <a ui-sref="login"> Login </a>
+    <br />
+    <a ui-sref="signup"> Sign Up </a>
+  </form>
+</script>
+
+<script type='text/ng-template' id='edit-password'>
+  <h1>Change Password</h1>
+  <div ng-show="!formSubmitted">
+    <ul ng-show="errors.length > 0" class='errors'>
+      <li ng-repeat="error in errors" class='error'>{{error}}</li>
+    </ul>
+    <form class='edit-password'>
+      <input type="password" placeholder="New password" name="password" ng-model="password"></input>
+      <br />
+      <input type="password" placeholder="Confirm new password" name="password-confirmation" ng-model="passwordConfirmation"></input>
+      <br />
+      <button ng-click="editPassword()" class="submit">Submit</button>
+    </form>
+  </div>
+  <div ng-show="formSubmitted">
+    <p class='reset'>Thanks, your password has been reset. You may now login to your account.</p>
+    <br />
+    <a ui-sref="login"> Login </a>
   </div>
 </script>
