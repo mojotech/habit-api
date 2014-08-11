@@ -7,6 +7,7 @@ Habitapp::Application.routes.draw do
   }
   post 'send_password_reset', to: 'home#send_password_reset'
   post 'change_password', to: 'home#change_password'
+  get 'users/authenticated_user'
   resources :habits
   resources :checkins
   resources :targets

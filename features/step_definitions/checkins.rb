@@ -22,6 +22,6 @@ Then(/^The habit with title "(.*?)" should have a checkin value of (-?\d+)$/) do
 end
 
 Then(/^the form should be cleared$/) do
-  widget(:habit_details).widget(:value).value.should eq ''
+  widget(:habit_details).widget(:new_checkin_value).value.should eq ''
   widget(:habit_details).widget(:note).value.should eq ''
 end
