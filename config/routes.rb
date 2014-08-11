@@ -1,5 +1,6 @@
 Habitapp::Application.routes.draw do
   get "home/index"
+  get "authenticated_user", to: 'home#authenticated_user'
   root to: "home#index"
   devise_for :users, controllers: {
     sessions: 'sessions',
