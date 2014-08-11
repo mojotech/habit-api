@@ -1,2 +1,2 @@
-app.controller 'AccountSettingsController', ($scope, auth) ->
-  console.log auth
+app.controller 'AccountSettingsController', ($scope, $http) ->
+
