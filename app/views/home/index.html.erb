@@ -96,6 +96,7 @@
       </div>
       <a ui-sref="app.habits.edit({habitId: habit.id})" class='edit fa fa-pencil'></a>
     </div>
+    <alert ng-show="error.length > 0" type="danger" close="closeFlash()">{{error}}</alert>
     <div class='section text-center'>
       <h1 class='habit-percentage text-primary'>{{habit.percentage}}<small class='text-primary'>%</small></h1>
       <p>You
@@ -106,11 +107,17 @@
     </div>
 
     <div class='section'>
-      <label>Value</label>
-      <input ng-model="newCheckin.value" id="new-checkin-value" class='form-control'></input>
-      <label>Note</label>
-      <input ng-model="newCheckin.note" id="note" class='form-control'></input>
-      <button ng-click="checkin('plus')" class='btn btn-success form-control section plus'> Log </button>
+      <form>
+        <div class='form-group' ng-class="error.length > 0 ? 'has-error' : ''">
+          <label>Value</label>
+          <input ng-model="newCheckin.value" id="new-checkin-value" class='form-control'></input>
+        </div>
+        <div class='form-group'>
+          <label>Note</label>
+          <input ng-model="newCheckin.note" id="note" class='form-control'></input>
+        </div>
+        <button ng-click="checkin('plus')" class='btn btn-success form-control section plus'> Log </button>
+      </form>
     </div>
     <div class='section' ng-if="habit.checkins.length">
       <h3>Activity</h3>

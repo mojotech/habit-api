@@ -27,3 +27,14 @@ Feature: Checkins
       | timeframe | day      |
     When I add a positive checkin to the habit with title "walk dog"
     Then The habit with title "walk dog" should have a checkin value of 1
+
+  Scenario: Checkin without value
+    And I create a habit with the following information:
+      | title     | walk dog |
+      | unit      | times    |
+      | private   | true     |
+      | target    | 3        |
+      | timeframe | day      |
+    And I view the habit details for "walk dog"
+    When I checkin without value that is not an integer
+    Then I should be told to provide a valid checkin value
