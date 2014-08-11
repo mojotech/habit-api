@@ -14,6 +14,8 @@ app.controller 'HabitController', ($scope, $state, habit, target, checkins, Chec
       value: if direction is 'minus' then -$scope.newCheckin.value else $scope.newCheckin.value
       note: $scope.newCheckin.note
     .then (checkin) ->
+      $scope.newCheckin.value = ''
+      $scope.newCheckin.note = ''
       $scope.habit.checkins.unshift checkin
       Habit.get(habit.id).then (habit) ->
         $scope.habit = constructHabit habit, $scope.habit.checkins
