@@ -16,6 +16,7 @@ Feature: Checkins
     And I view the habit details for "walk dog"
     When I checkin with a value of 2
     Then I should see a checkin value of "2 times"
+    And the form should be cleared
 
   Scenario: Positive checkin from list
     And I create a habit with the following information:
