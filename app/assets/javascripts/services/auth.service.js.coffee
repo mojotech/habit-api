@@ -14,6 +14,7 @@ app.service 'auth', (Auth, $http) ->
       url: '/authenticated_user'
       method: 'GET'
     .success (data) ->
+      console.log data
       callback(data)
     .error (error) ->
       console.log error
