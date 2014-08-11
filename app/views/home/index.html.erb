@@ -205,3 +205,39 @@
     <a ui-sref="login"> Login </a>
   </div>
 </script>
+
+<script type='text/ng-template' id='account-settings'>
+  <div class="nav-bar">
+    <a ui-sref='app.habits' ui-sref-opts="{reload: true}" class='habits-link fa fa-bars'></a>
+    <h4> Account Settings </h4>
+  </div>
+  <div class='padded-container'>
+    <div class='account-settings'>
+      <alert ng-show="errors.length > 0" type="danger" close="closeFlash()">
+        <ul>
+          <li class="error" ng-repeat="error in errors">{{error}}</li>
+        </ul>
+      </alert>
+      <form>
+        <div class='form-group'>
+          <label for='display-name'>Display Name</label>
+          <input name='display-name' type='text'></input>
+        </div>
+        <br />
+        <div class='form-group'>
+          <label for='current-password'>Current Password</label>
+          <input name='current-password' type='text'></input>
+        </div>
+        <div class='form-group'>
+          <label for='new-password'>New Password</label>
+          <input name='new-password' type='text'></input>
+        </div>
+        <div class='form-group'>
+          <label for='password-confirmation'>Confirm Password</label>
+          <input name='password-confirmation' type='text'></input>
+        </div>
+        <button ng-click="save()" class='save btn btn-primary'> Save </button>
+      </form>
+    </div>
+  </div>
+</script>

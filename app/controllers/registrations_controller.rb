@@ -3,6 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     user = User.new(user_params)
+    user.display_name = user.email
     if user.save
       render json: user.as_json(user_token: user.authentication_token, email: user.email), status: :created
     else
