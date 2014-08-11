@@ -123,7 +123,7 @@
       <h3>Activity</h3>
       <ul class='list-group'>
         <li class="list-group-item checkin" ng-repeat="checkin in habit.checkins">
-          <span ng-if="!habit.private">{{checkin.email}}</span>
+          <span ng-if="!habit.private">{{checkin.display_name}}</span>
           <span class='badge'>{{checkin.value}}</span>
           {{checkin.note}}
         </li>
