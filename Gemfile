@@ -14,6 +14,7 @@ gem 'font-awesome-rails'
 gem 'oj'
 gem 'verbs'
 gem 'engtagger'
+gem 'ngannotate-rails'
 
 group :development, :test do
   gem 'pry'

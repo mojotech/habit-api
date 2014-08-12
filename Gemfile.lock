@@ -122,6 +122,9 @@ GEM
     minitest (4.7.5)
     multi_json (1.10.1)
     multi_test (0.1.1)
+    ngannotate-rails (0.9.9)
+      execjs
+      rails (>= 3.1)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     oj (2.10.0)
@@ -237,6 +240,7 @@ DEPENDENCIES
   faker
   font-awesome-rails
   jquery-rails
+  ngannotate-rails
   oj
   pg
   pry
