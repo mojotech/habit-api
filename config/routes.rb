@@ -13,6 +13,7 @@ Habitapp::Application.routes.draw do
   resources :users do
     collection do
       get :me
+      patch :me
     end
   end
 end

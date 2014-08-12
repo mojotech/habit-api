@@ -145,3 +145,7 @@ end
 Then(/^I should be told the account is invalid$/) do
   widget(:forgot_password_form).widget(:error).text.should eq "The specified account doesn't exist."
 end
+
+Then(/^I should be told to provide a display name$/) do
+  widget(:signup_form).widget?(:error, "display name can't be blank").should be true
+end
