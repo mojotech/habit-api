@@ -143,7 +143,3 @@ end
 Then(/^I should be told the account is invalid$/) do
   widget(:forgot_password_form).widget(:error).text.should eq "The specified account doesn't exist."
 end
-
-Then(/^I should see a link to logout$/) do
-  widget(:navbar).widget(:logout).should be_present
-end
