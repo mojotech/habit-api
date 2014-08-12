@@ -6,8 +6,12 @@ class CheckinsController < ApplicationController
 
   def create
     habit = current_user.habits.find(params[:habit_id])
-
-    render json: habit.checkins.create(checkin_params.merge({ user_id: current_user.id }))
+    checkin = habit.checkins.new(checkin_params.merge({ user_id: current_user.id }))
+    if checkin.save
+      render json: checkin, status: 200
+    else
+      render json: { errors: checkin.errors }, status: 406
+    end
   end
 
   def index

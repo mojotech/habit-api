@@ -10,7 +10,7 @@ When(/^I checkin with a note$/) do
   step "I view the habit's details"
   widget(:habit_details).widget(:new_checkin_value).set 1
   widget(:habit_details).widget(:note).set('awesome')
-  widget(:habit_details).widget(:positive_checkin).click
+  widget(:habit_details).widget(:log).click
 end
 
 Then(/^I should see the note in the checkins list$/) do
