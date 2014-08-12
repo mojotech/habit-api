@@ -1,6 +1,7 @@
 class SignupForm < Dill::FieldGroup
   root '.signup-form'
 
+  text_field :display_name, 'display-name'
   text_field :email, 'identification'
   text_field :password, 'password'
   widget :submit, 'button'

@@ -142,6 +142,9 @@
       </alert>
       <h1>Sign Up</h1>
       <form ng-submit="signup()">
+        <div class="form-group" ng-class="displayNameError ? 'has-error' : ''">
+          <input class='form-control' id='displayName' placeholder='Enter Display Name' ng-model='user.displayName'> </input>
+        </div>
         <div class="form-group" ng-class="emailError ? 'has-error' : ''">
           <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
         </div>
