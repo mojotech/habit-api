@@ -1,0 +1,16 @@
+%script#signup(type="text/ng-template")
+  .padded-container
+    .signup-form
+      %alert(close="closeFlash()" ng-show="errors.length > 0" type="danger")
+        %ul
+          %li.error(ng-repeat="error in errors") {{error}}
+      %h1 Sign Up
+      %form(ng-submit="signup()")
+        .form-group(ng-class="displayNameError ? 'has-error' : ''")
+          %input#display-name.form-control(ng-model="user.displayName" placeholder="Enter Display Name")/
+        .form-group(ng-class="emailError ? 'has-error' : ''")
+          %input#identification.form-control(ng-model="user.email" placeholder="Enter Email")/
+        .form-group(ng-class="passwordError ? 'has-error' : ''")
+          %input#password.form-control(ng-model="user.password" placeholder="Enter Password" type="password")/
+        %button.btn.btn-primary(type="submit") Sign Up
+        %a(ui-sref="login") Login

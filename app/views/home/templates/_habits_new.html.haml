@@ -1,0 +1,6 @@
+%script(type='text/ng-template' id="habits/new")
+  .nav-bar
+    %a.habits-link.fa.fa-bars(ng-if="hasHabits" ui-sref="app.habits" ui-sref-opts="{reload: true}")
+    %a.fa.fa-cog.settings(ng-if="!hasHabits" ui-sref="settings")
+    %h4 New Habit
+  %div(static-include="habits/_form")

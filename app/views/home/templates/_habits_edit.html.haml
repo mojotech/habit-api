@@ -1,0 +1,9 @@
+%script(type='text/ng-template' id="habits/edit")
+  .nav-bar
+    %a.habits-link.fa.fa-bars(ui-sref="app.habits" ui-sref-opts="{reload: true}")
+    %h4 Edit Habit
+  .habits-edit
+    %div(static-include="habits/_form")
+    .padded-container
+      %button.abandon.btn.btn-danger(ng-click="deleteHabit(habit)" ng-if="habit.user_count > 1") Abandon {{habit.title}}
+      %button.delete.btn.btn-danger(ng-click="deleteHabit(habit)" ng-if="habit.user_count == 1") Delete {{habit.title}}

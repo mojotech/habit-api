@@ -1,0 +1,26 @@
+%script(type='text/ng-template' id="habits/_form")
+  .habit-form
+    %alert(close="closeFlash()" ng-show="errors.length > 0" type="danger")
+      %ul
+        %li.error(ng-repeat="error in errors") {{error}}
+    %form
+      .section
+        .form-group(ng-class="titleErrors ? 'has-error' : ''")
+          %input.form-control(name="title" ng-if="isEditable" ng-model="habit.title" placeholder="habit title" type="text" typeahead="suggestion as suggestion.title for suggestion in suggestions($viewValue)" typeahead-on-select="onSelect($item, $model, $label)" typeahead-template-url="typeahead")/
+          %span.locked-title(ng-if="!isEditable") {{habit.title}}
+    .section
+      .form-group(ng-class="valueErrors ? 'has-error' : ''")
+        %label Target
+        %input.form-control(name="target-value" ng-model="target.value" placeholder="value")/
+      .form-group(ng-class="unitErrors ? 'has-error' : ''")
+        %input#unit.form-control(name="unit" ng-if="isEditable" ng-model="habit.unit" placeholder="unit")/
+        %span.locked-unit(ng-if="!isEditable") {{habit.unit}}
+      .form-group
+        %select(name="target-timeframe" ng-model="target.timeframe" ng-options="timeframe for timeframe in timeFrameOptions")
+    .section
+      .form-group
+        %label Private
+        %input#private(ng-model="habit.private" type="checkbox")/
+    .section
+      %button.save.btn.btn-primary(ng-click="save()") Save
+      %button.cancel.btn.btn-link(ng-click="cancel()" ng-if="!isEditable") Cancel

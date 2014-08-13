@@ -1,0 +1,39 @@
+%script#habit(type="text/ng-template")
+  .habit-details
+    .nav-bar
+      %a.habits-link.fa.fa-bars(ui-sref="app.habits" ui-sref-opts="{reload: true}")
+      .title-lockup
+        %h4.title {{habit.title}}
+        %br/
+        %h4.sub-title {{habit.user_count - 1}} other users
+      %a.edit.fa.fa-pencil(ui-sref="app.habits.edit({habitId: habit.id})")
+    %alert(close="closeFlash()" ng-show="error.length > 0" type="danger") {{error}}
+    .section.text-center
+      %h1.habit-percentage.text-primary
+        {{habit.percentage}}
+        %small.text-primary %
+      %p
+        You
+        %span(ng-if="habit.past_tense") {{habit.past_tense}}
+        %span(ng-if="!habit.past_tense") have completed
+        %span.value {{habit.value}} {{habit.unit}}
+        {{habit.target.formattedTimeFrame}}
+      %p
+        Your target is
+        %span.target {{habit.target.value}} {{habit.unit}} per {{habit.target.timeframe}}
+    .section
+      %form
+        .form-group(ng-class="error.length > 0 ? 'has-error' : ''")
+          %label Value
+          %input#new-checkin-value.form-control(ng-model="newCheckin.value")/
+        .form-group
+          %label Note
+          %input#note.form-control(ng-model="newCheckin.note")/
+        %button.btn.btn-success.form-control.section.plus(ng-click="checkin('plus')") Log
+    .section(ng-if="habit.checkins.length")
+      %h3 Activity
+      %ul.list-group
+        %li.list-group-item.checkin(ng-repeat="checkin in habit.checkins")
+          %span(ng-if="!habit.private") {{checkin.display_name}}
+          %span.badge {{checkin.value}}
+          {{checkin.note}}
