@@ -107,6 +107,8 @@ GEM
       railties (>= 3.2, < 5.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
+    haml (4.0.3)
+      tilt
     heroku-deflater (0.5.3)
       rack (>= 1.4.5)
     hike (1.2.3)
@@ -241,6 +243,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
+  haml
   heroku-deflater
   jquery-rails
   ngannotate-rails
