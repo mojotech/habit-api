@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require lodash
+//= require fastclick
 //= require angular
 //= require angular-ui-router
 //= require devise
