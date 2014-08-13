@@ -1,6 +1,6 @@
 When(/^I logout$/) do
   visit '#/logout'
-  page.should have_css '#identification'
+  widget?(:login_form).should be true
 end
 
 Given(/^the account (.+) exists$/) do |email|
@@ -149,4 +149,17 @@ end
 
 Then(/^I should be told to provide a display name$/) do
   widget(:signup_form).widget?(:error, "display name can't be blank").should be true
+end
+
+Given(/^I created a new account$/) do
+  FactoryGirl.create(:user, email: 'dev@mojotech.com', password: 'password')
+end
+
+When(/^I signup with the same email$/) do
+  visit '/#/signup'
+  form = widget(:signup_form)
+  form.widget(:display_name).set 'Dylan'
+  form.widget(:email).set 'dev@mojotech.com'
+  form.widget(:password).set 'password'
+  form.submit_form()
 end
