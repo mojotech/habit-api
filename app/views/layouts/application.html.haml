@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %title Habitapp
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;")
+    %meta(content="yes" name="apple-mobile-web-app-capable")
+    = csrf_meta_tags
+  %body(ng-app="habit")
+    = yield
+    = stylesheet_link_tag    "application", media: "all"
+    = javascript_include_tag "application", async: Rails.env.production?

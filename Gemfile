@@ -15,6 +15,7 @@ gem 'oj'
 gem 'verbs'
 gem 'engtagger'
 gem 'ngannotate-rails'
+gem 'haml'
 
 group :production do
   gem 'heroku-deflater'

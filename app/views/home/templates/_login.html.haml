@@ -1,0 +1,13 @@
+%script#login(type="text/ng-template")
+  .padded-container
+    .login-form
+      %alert(close="closeFlash()" ng-show="error.length > 0" type="danger") {{error}}
+      %h1 Login
+      %form(ng-submit="login()")
+        .form-group(ng-class="error.length > 0 ? 'has-error' : ''")
+          %input#identification.form-control(ng-model="user.email" placeholder="Enter Email")/
+        .form-group(ng-class="error.length > 0 ? 'has-error' : ''")
+          %input#password.form-control(ng-model="user.password" placeholder="Enter Password" type="password")/
+        %button.btn.btn-primary(type="submit") Login
+        %a(ui-sref="signup") Sign Up
+        %a.forgot-password(ui-sref="forgot-password") Forgot Password

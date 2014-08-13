@@ -1,0 +1,14 @@
+%script#habits(type="text/ng-template")
+  .nav-bar
+    %a.fa.fa-cog.settings(ui-sref="settings")
+    %h4 Habits
+    %a.new-habit.fa.fa-plus(ui-sref="app.habits.new")
+    .clear
+  %ul#habits-list
+    %li.habit-listing(ng-class="habit.private ? 'private' : 'public'" ng-repeat="habit in habits")
+      .title
+        %a(ui-sref="app.habits.show({habitId: habit.id})")
+          %span.value {{habit.value}}
+          %span.habit-title {{habit.title}}
+      .button-container
+        %button.btn.btn-success.btn-link.plus.fa.fa-plus(ng-click="checkin(habit.id, 1)")

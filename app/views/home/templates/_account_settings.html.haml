@@ -1,0 +1,16 @@
+%script#account-settings(type="text/ng-template")
+  .nav-bar
+    %a.habits-link.fa.fa-bars(ui-sref="app.habits" ui-sref-opts="{reload: true}")
+    %h4 Account Settings
+    %a.fa.fa-sign-out.logout(ui-sref="logout")
+    .clear
+  .padded-container
+    .account-settings
+      %alert(close="closeFlash()" ng-show="errors.length > 0" type="danger")
+        %ul
+          %li.error(ng-repeat="error in errors") {{error}}
+      %form
+        .form-group(ng-class="displayNameErrors ? 'has-error' : ''")
+          %label(for="display-name") Display Name
+          %input.form-control(name="display-name" ng-model="displayName" type="text")/
+        %button.save.btn.btn-primary(ng-click="save()") Save
