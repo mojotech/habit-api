@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :display_name, presence: true
+
+  def remember_me
+    true
+  end
 end
