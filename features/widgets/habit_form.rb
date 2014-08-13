@@ -16,6 +16,10 @@ class HabitForm < Dill::Form
   widget :delete, '.delete'
   widget :abandon, '.abandon'
 
+  widget :error, -> (message) {
+    ['.alert .error', text: message]
+  }
+
   def submit_form
     widget(:save).click
   end

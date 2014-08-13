@@ -80,3 +80,11 @@ Scenario: Home link if habits
     | walk dog    | times   | true    | 7      | week      |
   When I visit the new habits page
   Then I should see a link to return home
+
+Scenario: Habit without title
+  When I create a habit without a title
+  Then I should be told to provide a title
+
+Scenario: Habit without target unit
+  When I create a habit without a target unit
+  Then I should be told to provide a target unit

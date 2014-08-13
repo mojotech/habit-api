@@ -29,14 +29,31 @@ app.controller 'HabitNewController', ($scope, $state, $http, Habit, Target, habi
     $scope.isEditable = true
 
   $scope.save = ->
+    resetErrors()
     Habit.post
       title: $scope.habit.title
       unit: $scope.habit.unit
       private: $scope.habit.private or false
-    .then (habit) ->
+    .then ((habit) ->
       Target.post
         habit_id: habit.id
         value: $scope.target.value
         timeframe: $scope.target.timeframe
-      .then ->
+      .then (->
         $state.go 'app.habits', null, reload: true
+      ), (response) ->
+        valueErrors = _.map response.data.value, (e) -> "value #{e}"
+        $scope.errors = valueErrors
+        $scope.valueErrors = (valueErrors.length > 0)
+    ), (response) ->
+      titleErrors = _.map response.data.title, (e) -> "title #{e}"
+      unitErrors = _.map response.data.unit, (e) -> "unit #{e}"
+      $scope.errors = titleErrors.concat unitErrors
+      $scope.titleErrors = (titleErrors.length > 0)
+      $scope.unitErrors = (unitErrors.length > 0)
+
+  resetErrors = ->
+    $scope.errors = []
+    $scope.titleErrors = false
+    $scope.unitErrors = false
+    $scope.valueErrors = false

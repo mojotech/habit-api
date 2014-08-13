@@ -18,7 +18,12 @@ class HabitsController < ApplicationController
   end
 
   def create
-    render json: Habit.associate_matching_or_create(habit_params, current_user)
+    habit = Habit.associate_matching_or_create(habit_params, current_user)
+    if habit.save
+      render json: habit, status: 200
+    else
+      render json: habit.errors, status: 406
+    end
   end
 
   def update

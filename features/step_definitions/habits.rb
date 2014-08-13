@@ -22,10 +22,10 @@ end
 
 When(/^I create a habit with the following information:$/) do |table|
   form = widget(:habit_form)
-  form.widget(:title).set(table.rows_hash['title'])
-  form.widget(:unit).set(table.rows_hash['unit'])
+  form.widget(:title).set(table.rows_hash['title'] || '')
+  form.widget(:unit).set(table.rows_hash['unit'] || '')
   form.widget(:private).set(table.rows_hash['private'] == 'true')
-  form.widget(:target_value).set table.rows_hash['target']
+  form.widget(:target_value).set table.rows_hash['target'] || ''
   form.widget(:timeframe).set table.rows_hash['timeframe']
   form.submit_form()
 end
@@ -104,4 +104,53 @@ end
 
 Then(/^I should see a link to return home$/) do
   widget(:navbar).widget(:home).should be_present
+end
+
+When(/^I create a habit without a title$/) do
+  visit '/#/habits/new'
+  form = widget(:habit_form)
+  form.widget(:unit).set 'walks'
+  form.widget(:private).set true
+  form.widget(:target_value).set 5
+  form.widget(:timeframe).set 'week'
+  form.submit_form()
+end
+
+When(/^I create a habit without a target value$/) do
+  visit '/#/habits/new'
+  form = widget(:habit_form)
+  form.widget(:title).set 'walk dog'
+  form.widget(:unit).set 'walks'
+  form.widget(:private).set true
+  form.widget(:timeframe).set 'week'
+  form.submit_form()
+end
+
+When(/^I create a habit without a target unit$/) do
+  visit '/#/habits/new'
+  form = widget(:habit_form)
+  form.widget(:title).set 'walk dog'
+  form.widget(:private).set true
+  form.widget(:target_value).set 5
+  form.widget(:timeframe).set 'week'
+  form.submit_form()
+end
+
+When(/^I create a habit with an invalid target value$/) do
+  visit '/#/habits/new'
+  form = widget(:habit_form)
+  form.widget(:title).set 'walk dog'
+  form.widget(:unit).set 'times'
+  form.widget(:private).set true
+  form.widget(:target_value).set 'd'
+  form.widget(:timeframe).set 'week'
+  form.submit_form()
+end
+
+Then(/^I should be told to provide a title$/) do
+  widget(:habit_form).widget(:error, "title can't be blank").should be_present
+end
+
+Then(/^I should be told to provide a target unit$/) do
+  widget(:habit_form).widget(:error, "unit can't be blank").should be_present
 end
