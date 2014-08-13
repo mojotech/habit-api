@@ -40,7 +40,7 @@ Then(/^I should see a form to add a new habit$/) do
 end
 
 Then(/^I should be brought to the login form$/) do
-  widget(:login_form).should be_present
+  widget?(:login_form).should be true
 end
 
 When(/^I signup with the following information:$/) do |table|

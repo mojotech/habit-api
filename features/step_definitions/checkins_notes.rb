@@ -18,13 +18,13 @@ Then(/^I should see the note in the checkins list$/) do
 end
 
 Then(/^other users with that habit should see the note$/) do
-  visit '/#/logout'
   user = FactoryGirl.create(:user)
-  visit '/#/login'
+  step "I logout"
   form = widget(:login_form)
   form.widget(:email).set user.email
   form.widget(:password).set user.password
   form.submit_form()
+  widget?(:habit_form).should be true
   step "that I joined a shared habit"
   step "I view the habit's details"
   step "I should see the note in the checkins list"
