@@ -4,7 +4,7 @@ class HabitItem < Dill::Widget
   widget :log, '.plus'
   widget :value, '.value'
   widget :title, '.habit-title'
-  widget :link, '.title a'
+  widget :link, 'a.title'
 
   def click
     widget(:link).click

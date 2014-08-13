@@ -20,6 +20,7 @@ a, a:hover {
   right: 5%;
   .plus {
     margin-right: -15px;
+    margin-top: -6px;
   }
 }
 
@@ -79,6 +80,7 @@ a, a:hover {
     padding: 0 5%;
     a {
       line-height: 100%;
+      display: inline-block;
     }
     .value {
       margin-right: 10px;
@@ -91,10 +93,13 @@ a, a:hover {
     }
 
     .title {
-      width: calc(100% - 111px);
+      width: calc(100% - 50px);
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+      span {
+        line-height: 40px;
+      }
     }
   }
 }
