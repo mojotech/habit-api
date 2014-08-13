@@ -62,6 +62,7 @@ Given(/^I am logged in$/) do
     | email    | #{user.email}    |
     | password | #{user.password} |
   })
+  widget?(:habit_form).should be true
 end
 
 Given(/^a logged in account with the following information:$/) do |table|
