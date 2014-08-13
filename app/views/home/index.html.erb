@@ -2,7 +2,7 @@
 
 <script type='text/ng-template' id='habits'>
   <div class="nav-bar">
-    <a ui-sref='logout' class="fa fa-sign-out logout"></a>
+    <a ui-sref='settings' class="fa fa-cog settings"></a>
     <h4> Habits </h4>
     <a ui-sref='app.habits.new' class='new-habit fa fa-plus'></a>
     <div class="clear"> </div>
@@ -79,7 +79,7 @@
 <script type='text/ng-template', id="habits/new">
   <div class="nav-bar">
     <a ng-if="hasHabits" ui-sref='app.habits' ui-sref-opts="{reload: true}" class='habits-link fa fa-bars'></a>
-    <a ng-if="!hasHabits" ui-sref='logout' class="fa fa-sign-out logout"></a>
+    <a ng-if="!hasHabits" ui-sref='settings' class="fa fa-cog settings"></a>
     <h4> New Habit </h4>
   </div>
   <div static-include='habits/_form'> </div>
@@ -140,7 +140,7 @@
       <h3>Activity</h3>
       <ul class='list-group'>
         <li class="list-group-item checkin" ng-repeat="checkin in habit.checkins">
-          <span ng-if="!habit.private">{{checkin.email}}</span>
+          <span ng-if="!habit.private">{{checkin.display_name}}</span>
           <span class='badge'>{{checkin.value}}</span>
           {{checkin.note}}
         </li>
@@ -159,6 +159,9 @@
       </alert>
       <h1>Sign Up</h1>
       <form ng-submit="signup()">
+        <div class="form-group" ng-class="displayNameError ? 'has-error' : ''">
+          <input class='form-control' id='display-name' placeholder='Enter Display Name' ng-model='user.displayName'> </input>
+        </div>
         <div class="form-group" ng-class="emailError ? 'has-error' : ''">
           <input class='form-control' id='identification' placeholder='Enter Email' ng-model='user.email'> </input>
         </div>
@@ -227,5 +230,30 @@
     <p class='reset'>Thanks, your password has been reset. You may now login to your account.</p>
     <br />
     <a ui-sref="login"> Login </a>
+  </div>
+</script>
+
+<script type='text/ng-template' id='account-settings'>
+  <div class="nav-bar">
+    <a ui-sref='app.habits' ui-sref-opts="{reload: true}" class='habits-link fa fa-bars'></a>
+    <h4> Account Settings </h4>
+    <a ui-sref='logout' class="fa fa-sign-out logout"></a>
+    <div class="clear"> </div>
+  </div>
+  <div class='padded-container'>
+    <div class='account-settings'>
+      <alert ng-show="errors.length > 0" type="danger" close="closeFlash()">
+        <ul>
+          <li class="error" ng-repeat="error in errors">{{error}}</li>
+        </ul>
+      </alert>
+      <form>
+        <div class='form-group' ng-class="displayNameErrors ? 'has-error' : ''">
+          <label for='display-name'>Display Name</label>
+          <input name='display-name' type='text' ng-model="displayName" class='form-control'></input>
+        </div>
+        <button ng-click="save()" class='save btn btn-primary'> Save </button>
+      </form>
+    </div>
   </div>
 </script>

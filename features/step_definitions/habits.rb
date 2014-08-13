@@ -1,6 +1,7 @@
 Given(/^I created the following habits:$/) do |table|
   table.hashes.each do |row|
     visit '/#/habits/new'
+    sleep 1
     step "I create a habit with the following information:", table(%{
       | title     | #{row['title']}     |
       | unit      | #{row['unit']}      |

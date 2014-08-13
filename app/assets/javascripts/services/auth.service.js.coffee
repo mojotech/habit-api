@@ -1,4 +1,4 @@
-app.service 'auth', (Auth) ->
+app.service 'auth', (Auth, $http, $q) ->
   signup: (credentials) ->
     Auth.register credentials
   login: Auth.login
@@ -9,5 +9,11 @@ app.service 'auth', (Auth) ->
       "Token token=\"#{user.user_token}\", user_email=\"#{user.user_email}\""
     else
       ""
-  currentUser: ->
-    Auth._currentUser
+  currentUser: (callback) ->
+    d = $q.defer()
+    $http
+      url: '/users/me'
+      method: 'GET'
+    .success (data) ->
+      d.resolve data
+    d.promise

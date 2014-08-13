@@ -4,7 +4,7 @@ When(/^I logout$/) do
 end
 
 Given(/^the account (.+) exists$/) do |email|
-  FactoryGirl.create(:user, email: email, password: 'password') if User.where(email: email).count == 0
+  FactoryGirl.create(:user, email: email, password: 'password', display_name: 'Dylan') if User.where(email: email).count == 0
 end
 
 When(/^I create the following habits:$/) do |table|
@@ -45,6 +45,7 @@ end
 When(/^I signup with the following information:$/) do |table|
   visit '/#/signup'
   form = widget(:signup_form)
+  form.widget(:display_name).set(table.rows_hash['display_name'])
   form.widget(:email).set(table.rows_hash['email'])
   form.widget(:password).set(table.rows_hash['password'])
   form.submit_form()
@@ -65,7 +66,8 @@ end
 Given(/^a logged in account with the following information:$/) do |table|
   User.create(
     email: table.rows_hash['email'],
-    password: table.rows_hash['password']
+    password: table.rows_hash['password'],
+    display_name: 'Dylan'
   )
   step "I login with the following information:", table
 end
@@ -144,6 +146,6 @@ Then(/^I should be told the account is invalid$/) do
   widget(:forgot_password_form).widget(:error).text.should eq "The specified account doesn't exist."
 end
 
-Then(/^I should see a link to logout$/) do
-  widget(:navbar).widget(:logout).should be_present
+Then(/^I should be told to provide a display name$/) do
+  widget(:signup_form).widget?(:error, "display name can't be blank").should be true
 end

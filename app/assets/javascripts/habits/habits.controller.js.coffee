@@ -5,6 +5,5 @@ app.controller 'HabitsController', ($scope, $state, auth, habits, Checkin) ->
     Checkin.post
       value: value
       habit_id: habitId
-      user_id: auth.currentUser.id
     .then ->
       $state.go 'app.habits', null, reload: true

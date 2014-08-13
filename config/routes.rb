@@ -10,4 +10,10 @@ Habitapp::Application.routes.draw do
   resources :habits
   resources :checkins
   resources :targets
+  resources :users do
+    collection do
+      get :me
+      patch :me
+    end
+  end
 end
