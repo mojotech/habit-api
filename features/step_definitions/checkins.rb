@@ -10,7 +10,6 @@ end
 
 When(/^I add a positive checkin to the habit with title "(.*?)"$/) do |title|
   widget(:habit_item, title).widget(:log).click
-  sleep 1
 end
 
 Then(/^The habit with title "(.*?)" should have a checkin value of (-?\d+)$/) do |title, value|

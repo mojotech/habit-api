@@ -1,7 +1,6 @@
 Given(/^I created the following habits:$/) do |table|
   table.hashes.each do |row|
-    visit '/#/habits/new'
-    sleep 1
+    step "I visit the new habits page"
     step "I create a habit with the following information:", table(%{
       | title     | #{row['title']}     |
       | unit      | #{row['unit']}      |
@@ -9,7 +8,6 @@ Given(/^I created the following habits:$/) do |table|
       | target    | #{row['target']}    |
       | timeframe | #{row['timeframe']} |
     })
-    sleep 2
   end
 end
 
@@ -19,6 +17,7 @@ end
 
 Given(/^I visit the new habits page$/) do
   visit '/#/habits/new'
+  widget?(:habit_form).should be true
 end
 
 When(/^I create a habit with the following information:$/) do |table|
@@ -29,6 +28,7 @@ When(/^I create a habit with the following information:$/) do |table|
   form.widget(:target_value).set table.rows_hash['target'] || ''
   form.widget(:timeframe).set table.rows_hash['timeframe']
   form.submit_form()
+  widget?(:habits_list).should be true
 end
 
 Then(/^I should see a form to enter a new habit$/) do

@@ -46,7 +46,7 @@ Given(/^I am logged in to a new account$/) do
   form.widget(:email).set 'dev@mojotech.com'
   form.widget(:password).set 'password'
   form.submit_form()
-  sleep 2
+  widget?(:habit_form).should be true
 end
 
 Then(/^my display name should not be blank$/) do

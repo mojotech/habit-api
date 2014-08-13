@@ -1,6 +1,6 @@
 When(/^I logout$/) do
   visit '#/logout'
-  sleep 2
+  page.should have_css '#identification'
 end
 
 Given(/^the account (.+) exists$/) do |email|
@@ -22,6 +22,7 @@ end
 
 When(/^I login with the following information:$/) do |table|
   visit '/#/login'
+  widget?(:login_form).should be true
   form = widget(:login_form)
   form.widget(:email).set(table.rows_hash['email'])
   form.widget(:password).set(table.rows_hash['password'])
