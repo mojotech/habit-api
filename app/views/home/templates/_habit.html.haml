@@ -4,7 +4,6 @@
       %a.habits-link.fa.fa-bars(ui-sref="app.habits" ui-sref-opts="{reload: true}")
       .title-lockup
         %h4.title {{habit.title}}
-        %br/
         %h4.sub-title {{habit.user_count - 1}} other users
       %a.edit.fa.fa-pencil(ui-sref="app.habits.edit({habitId: habit.id})")
     %alert(close="closeFlash()" ng-show="error.length > 0" type="danger") {{error}}
