@@ -7,15 +7,8 @@ Feature: Authentication
   to enter a new habit.
 
 Scenario: Signup with existing account
-  When I signup with the following information:
-    | email        | dev@mojotech.com |
-    | password     | password         |
-    | display_name | Dylan            |
-  And I logout
-  When I signup with the following information:
-    | email        | dev@mojotech.com |
-    | password     | password         |
-    | display_name | Dylan            |
+  Given I created a new account
+  When I signup with the same email
   Then I should be brought to the signup form
   And I should be told the account already exists
 
