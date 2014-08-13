@@ -16,6 +16,10 @@ gem 'verbs'
 gem 'engtagger'
 gem 'ngannotate-rails'
 
+group :production do
+  gem 'heroku-deflater'
+end
+
 group :development, :test do
   gem 'pry'
   gem 'pry-debugger'
