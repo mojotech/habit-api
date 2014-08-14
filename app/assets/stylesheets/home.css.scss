@@ -38,11 +38,16 @@ a, a:hover {
   * {
     line-height: 50px;
   }
+  a {
+    padding: 0 15px;
+  }
   .settings, .habits-link {
     float: left;
+    margin-left: -15px;
   }
   .new-habit, .edit, .logout {
     float: right;
+    margin-right: -15px;
   }
   h4 {
     display: inline-block;
