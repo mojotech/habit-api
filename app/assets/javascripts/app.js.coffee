@@ -6,15 +6,31 @@
     'restangular'
   ]
 
-app.run ($rootScope, $state, Restangular, auth, Auth) ->
+
+
+
+
+app.run ($rootScope, $state, Restangular, auth, Auth, $urlRouter) ->
   FastClick.attach document.body
+
   Restangular.setDefaultHeaders
     Authorization: auth.token()
 
+  publicStates = ["login", "signup", "forgot-password", "edit-password"]
+
+  transition =
+    to: null
+
+  $rootScope.$on 'devise:unauthorized', (event, xhr, deferred) ->
+    event.preventDefault()
+    if _.contains publicStates, transition.to.name
+      $urlRouter.sync()
+    else
+      $state.go 'login'
+
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
-    unauthorizedStates = ["login", "signup", "forgot-password", "edit-password"]
-    if Auth.isAuthenticated()
-      if !Auth._currentUser and !_.contains(unauthorizedStates, toState.name)
-        $state.go 'login', { redirect: toState.name }
-      else if Auth._currentUser and _.contains(unauthorizedStates, toState.name)
+    transition.to = toState
+    Auth.currentUser().then (user) ->
+      if _.contains(publicStates, toState.name)
+        event.preventDefault()
         $state.go 'app.habits'
