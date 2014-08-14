@@ -34,9 +34,9 @@ Scenario: Successful login with habits
     | email    | dev@mojotech.com |
     | password | password         |
   And the account "dev@mojotech.com" has the following habits:
-    | title       | unit    | private |
-    | walk dog    | times   | true    |
-    | drink water | glasses | true    |
+    | title       | private |
+    | walk dog    | true    |
+    | drink water | true    |
   And I logout
   And I login with the following information:
     | email    | dev@mojotech.com |

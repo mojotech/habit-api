@@ -1,14 +1,14 @@
-Given(/^I am a user creating a habit "(.*?)" in "(.*?)"$/) do |name, unit|
+Given(/^I am a user creating a habit "(.*?)"$/) do |name|
   visit "#/habits/new"
-  form = widget(:habit_form)
-  form.widget(:title).set name
-  form.widget(:unit).set unit
+  widget(:habit_form).widget(:title).set name
 end
 
 Given(/^I set the target with$/) do |table|
-  widget(:habit_form).widget(:target_value).set table.transpose.rows_hash['value']
-  widget(:habit_form).widget(:timeframe).set table.transpose.rows_hash['timeframe']
-  widget(:habit_form).submit_form()
+  form = widget(:habit_form)
+  form.widget(:target_value).set table.transpose.rows_hash['value']
+  form.widget(:timeframe).set table.transpose.rows_hash['timeframe']
+  form.widget(:unit).set table.transpose.rows_hash['unit']
+  form.submit_form()
 end
 
 Then(/^I should see the target "(.*?)"$/) do |target_description|

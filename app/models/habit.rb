@@ -6,7 +6,7 @@ class Habit < ActiveRecord::Base
   has_many :checkins, order: "created_at DESC", dependent: :destroy
   has_many :targets, dependent: :destroy
 
-  validates :title, :unit,  presence: true
+  validates :title, presence: true
   validates_inclusion_of :private, in: [true, false]
   validates_uniqueness_of :title, conditions: -> { where({ private: false})  }, if: :public?
 
@@ -24,7 +24,6 @@ class Habit < ActiveRecord::Base
   def convert_or_update(habit_params, current_user)
     attrs = {
       title: attributes['title'],
-      unit: attributes['unit'],
       private: attributes['private']
     }.merge(habit_params.symbolize_keys)
     attrs[:private] = (attrs[:private] == 'true' or attrs[:private] == true)

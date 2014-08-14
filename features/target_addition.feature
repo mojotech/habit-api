@@ -8,9 +8,9 @@ Feature: Target Creation
 
 Scenario: A user should be able to create a target
   Given I am logged in
-  And I am a user creating a habit "Walk Dog" in "walks"
+  And I am a user creating a habit "Walk Dog"
   When I set the target with
-    | value | timeframe |
-    | 45    | day       |
+    | value | timeframe | unit  |
+    | 45    | day       | walks |
   And I click the habit with the title "Walk Dog"
   Then I should see the target "45 walks per day"

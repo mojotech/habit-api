@@ -13,27 +13,26 @@ app.controller 'HabitEditController', ($scope, $state, habit, $http, target, Hab
   $scope.onSelect = ($item, $model, $label) ->
     $scope.isEditable = false
     $scope.habit.title = $model.title
-    $scope.habit.unit = $model.unit
     $scope.habit.user_count = $model.user_count
 
 
   $scope.cancel = ->
     $scope.habit.user_count = 0
     $scope.habit.title = ''
-    $scope.habit.unit = ''
+    $scope.target.unit = ''
     $scope.habit.private = false
     $scope.isEditable = true
 
   $scope.save = ->
     habit.put
       title: $scope.habit.title
-      unit: $scope.habit.unit
       private: $scope.habit.private
     .then (habit) ->
       target.put
         habit_id: habit.id
         value: $scope.target.value
         timeframe: $scope.target.timeframe
+        unit: $scope.target.unit
       .then ->
         $state.go 'app.habits', null, reload: true
 
