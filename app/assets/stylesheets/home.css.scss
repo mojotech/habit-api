@@ -84,18 +84,21 @@ a, a:hover {
     border-bottom: 1px solid lightgrey;
     line-height: 50px;
     padding: 0 5%;
+    small {
+      font-size: 15px;
+    }
     a {
       line-height: 100%;
       display: inline-block;
     }
-    .value {
+    .percentage {
       margin-right: 10px;
-      font-size: 25px;
-      width: 40px;
+      font-size: 22px;
+      width: 75px;
       text-align: center;
       display: inline-block;
       position: relative;
-      top: 4px;
+      top: 3px;
     }
 
     .title {

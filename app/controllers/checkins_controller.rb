@@ -7,6 +7,7 @@ class CheckinsController < ApplicationController
   def create
     habit = current_user.habits.find(params[:habit_id])
     checkin = habit.checkins.new(checkin_params.merge({ user_id: current_user.id }))
+    checkin.target = current_user.targets.find_by(habit_id: habit.id)
     if checkin.save
       render json: checkin, status: 200
     else
