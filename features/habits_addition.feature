@@ -63,7 +63,6 @@ Scenario: Join public habit
   When I visit the new habits page
   And I type "drink wate" into the title field
   And I click the suggestion for "drink water"
-  Then I shouldn't be able to edit the title or unit
   And I should be able to unjoin the public habit
 
 Scenario: Unjoin public habit
@@ -72,7 +71,6 @@ Scenario: Unjoin public habit
   And I type "drink wate" into the title field
   And I click the suggestion for "drink water"
   And I cancel out of the public habit
-  Then I should be able to set the title and unit
 
 Scenario: Home link if habits
   Given I created the following habits:

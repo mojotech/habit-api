@@ -81,26 +81,12 @@ When(/^I click the suggestion for "(.*?)"$/) do |title|
   widget(:type_ahead).click_suggestion(title)
 end
 
-Then(/^I shouldn't be able to edit the title or unit$/) do
-  widget(:habit_form).widget?(:title).should be false
-  widget(:habit_form).widget?(:unit).should be false
-  widget(:habit_form).widget?(:locked_title).should be true
-  widget(:habit_form).widget?(:locked_unit).should be true
-end
-
 Then(/^I should be able to unjoin the public habit$/) do
   widget(:habit_form).widget?(:cancel).should be true
 end
 
 When(/^I cancel out of the public habit$/) do
   widget(:habit_form).widget(:cancel).click
-end
-
-Then(/^I should be able to set the title and unit$/) do
-  widget(:habit_form).widget?(:title).should be true
-  widget(:habit_form).widget?(:unit).should be true
-  widget(:habit_form).widget?(:locked_title).should be false
-  widget(:habit_form).widget?(:locked_unit).should be false
 end
 
 Then(/^I should see a link to return home$/) do

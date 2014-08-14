@@ -3,8 +3,6 @@ class HabitForm < Dill::Form
 
   text_field :title, 'title'
   text_field :unit, 'unit'
-  widget :locked_title, '.locked-title'
-  widget :locked_unit, '.locked-unit'
   check_box :private, 'private'
 
   widget :save, '.save'
