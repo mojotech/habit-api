@@ -26,4 +26,3 @@ app.controller 'HabitController', ($scope, $state, habit, target, checkins, Chec
 
   $scope.closeFlash = ->
     $scope.error = ''
-

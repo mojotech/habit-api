@@ -7,7 +7,8 @@ app.config ($stateProvider) ->
         controller: 'HabitsController'
     resolve:
       habits: (Habit) ->
-       Habit.getList()
+        Habit.getList()
+        # TODO extend each habit to include completion?
 
   $stateProvider.state 'app.habits.new',
     url: '/new'
