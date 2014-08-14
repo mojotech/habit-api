@@ -1,9 +1,6 @@
 app.controller 'HabitController', ($scope, $state, habit, target, checkins, Checkin, Habit) ->
   constructHabit = (habit, checkins) ->
     _.extend habit,
-      target: _.extend target,
-        formattedTimeFrame: (week: 'this week', month: 'this month', day: 'today')[target.timeframe]
-      percentage: (habit.value / target.value * 100 ).toFixed(0)
       {checkins}
 
   $scope.habit = constructHabit habit, checkins
@@ -26,4 +23,3 @@ app.controller 'HabitController', ($scope, $state, habit, target, checkins, Chec
 
   $scope.closeFlash = ->
     $scope.error = ''
-

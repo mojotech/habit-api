@@ -8,9 +8,9 @@
       %a.edit.fa.fa-pencil(ui-sref="app.habits.edit({habitId: habit.id})")
     %alert(close="closeFlash()" ng-show="error.length > 0" type="danger") {{error}}
     .section.text-center
-      %h1.habit-percentage.text-primary
-        {{habit.percentage}}
-        %small.text-primary %
+      %h1.habit-percentage.text-primary<
+        {{habit.target.completion | percentage:0}}
+        %small.text-primary> %
       %p
         You
         %span(ng-if="habit.past_tense") {{habit.past_tense}}
