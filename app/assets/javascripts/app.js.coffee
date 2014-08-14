@@ -6,10 +6,6 @@
     'restangular'
   ]
 
-
-
-
-
 app.run ($rootScope, $state, Restangular, auth, Auth, $urlRouter) ->
   FastClick.attach document.body
 
