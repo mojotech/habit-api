@@ -1,5 +1,6 @@
 When(/^I logout$/) do
-  visit '#/logout'
+  visit '/#/logout'
+  visit '/#/logout'
   widget?(:login_form).should be true
 end
 
@@ -72,6 +73,7 @@ Given(/^a logged in account with the following information:$/) do |table|
     display_name: 'Dylan'
   )
   step "I login with the following information:", table
+  widget?(:habit_form).should be true
 end
 
 Given(/^the account "(.*?)" has the following habits:$/) do |email, table|
