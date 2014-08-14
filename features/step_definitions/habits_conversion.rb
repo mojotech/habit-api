@@ -62,3 +62,11 @@ Then(/^another user should not see the habit$/) do
   step "I type \"walk dog\" into the title field"
   widget?(:type_ahead).should be false
 end
+
+When(/^I checkin to the habit$/) do
+  widget(:habit_item, 'walk dog').widget(:log).click
+end
+
+Then(/^I should see my checkin$/) do
+  widget(:habit_item, 'walk dog').widget(:percentage).value().should_not eq '0%'
+end

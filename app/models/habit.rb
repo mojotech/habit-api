@@ -16,7 +16,7 @@ class Habit < ActiveRecord::Base
       if match
         match
       else
-        current_user.habits.create(habit_params)
+        current_user.habits.create(title: habit_params[:title], private: habit_params[:private])
       end
     end
   end
@@ -30,9 +30,9 @@ class Habit < ActiveRecord::Base
     if will_be_private(attrs)
       return convert_to_private attrs, current_user
     elsif will_be_public(attrs)
-      convert_to_public attrs, current_user
+      return convert_to_public attrs, current_user
     else
-      update_attributes attrs
+      update_attribute :private, attrs[:private]
     end
 
     self
@@ -87,6 +87,7 @@ class Habit < ActiveRecord::Base
     end
     targets.where(user_id: current_user.id).each do |target|
       target.habit = private_habit
+      target.update_completion
       target.save!
     end
     users.destroy current_user
@@ -106,8 +107,9 @@ class Habit < ActiveRecord::Base
     Habit.associate_matching(habit_params, current_user) do |match|
       if match
         users.destroy current_user
+        match
       else
-        update_attributes(habit_params)
+        update_attribute :private, habit_params[:private]
       end
     end
   end
@@ -115,6 +117,15 @@ class Habit < ActiveRecord::Base
   def self.associate_matching(habit_params, current_user, &block)
     matching_habit = Habit.where(private: habit_params[:private], title: habit_params[:title]).first
     if matching_habit and !matching_habit.users.include?(current_user)
+      Target.where(user_id: current_user.id, habit_id: habit_params[:id]).each do |target|
+        target.habit = matching_habit
+        target.update_completion
+        target.save!
+      end
+      Checkin.where(user_id: current_user.id, habit_id: habit_params[:id]).each do |checkin|
+        checkin.habit = matching_habit
+        checkin.save!
+      end
       current_user.habits << matching_habit
     end
     yield(matching_habit)
