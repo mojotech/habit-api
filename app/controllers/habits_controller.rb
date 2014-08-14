@@ -27,7 +27,7 @@ class HabitsController < ApplicationController
   end
 
   def update
-    render json: current_user.habits.find(params[:id]).convert_or_update(params, current_user)
+    render json: current_user.habits.find(params[:id]).convert_or_update(habit_params, current_user)
   end
 
   def destroy
@@ -45,6 +45,6 @@ class HabitsController < ApplicationController
   private
 
   def habit_params
-    params.permit(:title, :private)
+    params.permit(:title, :private, :id)
   end
 end

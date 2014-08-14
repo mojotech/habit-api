@@ -32,7 +32,7 @@ class Habit < ActiveRecord::Base
     elsif will_be_public(attrs)
       return convert_to_public attrs, current_user
     else
-      update_attribute :private, attrs[:private]
+      update_attributes attrs
     end
 
     self
