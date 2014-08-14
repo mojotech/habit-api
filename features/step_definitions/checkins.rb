@@ -12,8 +12,8 @@ When(/^I add a positive checkin to the habit with title "(.*?)"$/) do |title|
   widget(:habit_item, title).widget(:log).click
 end
 
-Then(/^The habit with title "(.*?)" should have a checkin value of (-?\d+)$/) do |title, value|
-  widget(:habit_item, title).widget(:value).value().should eq value
+Then(/^The habit with title "(.*?)" should have a checkin value of (-?.+)$/) do |title, value|
+  widget(:habit_item, title).widget(:percentage).value().should eq value
 end
 
 Then(/^the form should be cleared$/) do

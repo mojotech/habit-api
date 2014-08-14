@@ -1,5 +1,5 @@
 class HabitSerializer < ActiveModel::Serializer
-  attributes :id, :title, :private, :user_count, :value, :past_tense
+  attributes :id, :title, :private, :user_count, :value, :past_tense, :target
 
   def user_count
     object.users.count
@@ -25,5 +25,9 @@ class HabitSerializer < ActiveModel::Serializer
 
   def total_progress
     my_checkins.inject(0) { |sum, n| sum + n.value }
+  end
+
+  def target
+    my_target
   end
 end

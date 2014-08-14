@@ -23,10 +23,10 @@ Feature: Checkins
       | title     | walk dog |
       | unit      | times    |
       | private   | true     |
-      | target    | 3        |
+      | target    | 4        |
       | timeframe | day      |
     When I add a positive checkin to the habit with title "walk dog"
-    Then The habit with title "walk dog" should have a checkin value of 1
+    Then The habit with title "walk dog" should have a checkin value of 25%
 
   Scenario: Checkin without value
     And I create a habit with the following information:
