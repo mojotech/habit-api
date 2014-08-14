@@ -15,11 +15,11 @@
         You
         %span(ng-if="habit.past_tense") {{habit.past_tense}}
         %span(ng-if="!habit.past_tense") have completed
-        %span.value {{habit.value}} {{habit.unit}}
+        %span.value {{habit.value}} {{habit.target.unit}}
         {{habit.target.formattedTimeFrame}}
       %p
         Your target is
-        %span.target {{habit.target.value}} {{habit.unit}} per {{habit.target.timeframe}}
+        %span.target {{habit.target.value}} {{habit.target.unit}} per {{habit.target.timeframe}}
     .section
       %form
         .form-group(ng-class="error.length > 0 ? 'has-error' : ''")

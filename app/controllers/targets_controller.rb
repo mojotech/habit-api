@@ -36,6 +36,6 @@ class TargetsController < ApplicationController
 
   def target_params
     params
-      .permit(:value, :timeframe)
+      .permit(:value, :timeframe, :unit)
   end
 end

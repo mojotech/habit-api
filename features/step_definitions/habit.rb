@@ -40,7 +40,6 @@ Given(/^A shared habit can be converted to private$/) do
   user_two = FactoryGirl.create(:user)
   shared_habit = Habit.associate_matching_or_create({
     title: user_one.habits.last.attributes["title"],
-    unit: user_one.habits.last.attributes["unit"],
     private: false
   }, user_two)
 
@@ -120,7 +119,6 @@ Given(/^A user can't remove a shared habit$/) do
   user_two = FactoryGirl.create(:user)
   shared_habit = Habit.associate_matching_or_create({
     title: user_one.habits.last.attributes["title"],
-    unit: user_one.habits.last.attributes["unit"],
     private: false
   }, user_two)
 

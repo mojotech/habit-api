@@ -8,9 +8,9 @@ Feature: Target editing
 Scenario: A user should be able to edit a target
   Given I am logged in
   And a habit with the target
-    | value | timeframe |
-    | 45    | day       |
+    | value | timeframe | unit  |
+    | 45    | day       | times |
   When I edit the habit to be
-    | value | timeframe |
-    | 15    | week      |
+    | value | timeframe | unit  |
+    | 15    | week      | walks |
   Then I should see the target "15 walks per week"

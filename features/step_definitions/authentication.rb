@@ -77,9 +77,9 @@ end
 Given(/^the account "(.*?)" has the following habits:$/) do |email, table|
   user = User.where(email: email).first
   table.hashes.each do |row|
-    matching_habits = user.habits.where(title: row['title'], unit: row['unit'], private: row['private'])
+    matching_habits = user.habits.where(title: row['title'], private: row['private'])
     if matching_habits.count == 0
-      user.habits.create(title: row['title'], unit: row['unit'], private: row['private'])
+      user.habits.create(title: row['title'], private: row['private'])
     end
   end
 end
