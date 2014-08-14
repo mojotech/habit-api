@@ -34,10 +34,3 @@ app.config ($stateProvider) ->
       "page@app":
         templateUrl: 'habit'
         controller: 'HabitController'
-    resolve:
-      habit: ($stateParams, Habit) ->
-        Habit.get $stateParams.habitId
-      target: ($stateParams, Target) ->
-        Target.get 0, habit_id: $stateParams.habitId
-      checkins: ($stateParams, Checkin) ->
-        Checkin.getList habit_id: $stateParams.habitId
