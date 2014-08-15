@@ -10,17 +10,13 @@ class HabitSerializer < ActiveModel::Serializer
   end
 
   def value
-    if my_target
+    if target
       my_checkins
-        .where(created_at: my_target.timeframe_int.days.ago..Time.now)
+        .where(created_at: target.timeframe_int.days.ago..Time.now)
         .inject(0) { |sum, n| sum + n.value }
     else
       0
     end
-  end
-
-  def my_target
-    object.targets.where(user_id: current_user.id).first
   end
 
   def total_progress
@@ -28,6 +24,6 @@ class HabitSerializer < ActiveModel::Serializer
   end
 
   def target
-    my_target
+    object.targets.where(user_id: current_user.id).first
   end
 end
