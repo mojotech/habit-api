@@ -6,7 +6,7 @@
     %form
       .section
         .form-group(ng-class="titleErrors ? 'has-error' : ''")
-          %input.form-control(name="title" ng-model="habit.title" placeholder="habit title" type="text" typeahead="suggestion as suggestion.title for suggestion in suggestions($viewValue)" typeahead-on-select="onSelect($item, $model, $label)" typeahead-template-url="typeahead")/
+          %input.form-control(name="title" ng-focus="onFocus($event)" ng-model="habit.title" placeholder="habit title" type="text" empty-typeahead typeahead="suggestion as suggestion.title for suggestion in suggestions($viewValue) | filter:$viewValue:comparator" typeahead-on-select="onSelect($item, $model, $label)" typeahead-template-url="typeahead")/
     .section
       .form-group(ng-class="valueErrors ? 'has-error' : ''")
         %label Target

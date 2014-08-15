@@ -1,4 +1,4 @@
-app.controller 'HabitNewController', ($scope, $state, $http, Habit, Target, habits) ->
+app.controller 'HabitNewController', ($timeout, $scope, $state, $http, Habit, Target, habits) ->
 
   $scope.isEditable = true
 
@@ -9,11 +9,6 @@ app.controller 'HabitNewController', ($scope, $state, $http, Habit, Target, habi
   $scope.timeFrameOptions = ['day','week','month']
 
   $scope.hasHabits = habits.length > 0
-
-  $scope.suggestions = (query) ->
-    $http.get "/habits?title=#{query}"
-    .then (results) ->
-      results.data
 
   $scope.onSelect = ($item, $model, $label) ->
     $scope.isEditable = false
