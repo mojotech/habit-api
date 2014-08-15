@@ -25,3 +25,10 @@ app.controller 'HabitController', ($scope, $state, habits, Checkin, Habit, $stat
 
   $scope.closeFlash = ->
     $scope.error = ''
+
+  $scope.deleteCheckin = (checkin) ->
+    $scope.habit.checkins.splice $scope.habit.checkins.indexOf(checkin), 1
+    checkin.remove()
+
+    Habit.get($scope.habit.id).then (habit) ->
+      $scope.habit = _.extend habit, checkins: $scope.habit.checkins

@@ -21,6 +21,10 @@ class CheckinsController < ApplicationController
     render json: habit.checkins.includes(:user)
   end
 
+  def destroy
+    render json: Checkin.find(params[:id]).destroy
+  end
+
   private
 
   def checkin_params

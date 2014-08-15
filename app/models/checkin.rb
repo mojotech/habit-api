@@ -6,6 +6,7 @@ class Checkin < ActiveRecord::Base
   validates :value, numericality: { only_integer: true }
 
   after_save :update_target_completion
+  after_destroy :update_target_completion
 
   private
     def update_target_completion
