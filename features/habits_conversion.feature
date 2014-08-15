@@ -22,5 +22,13 @@ Feature: Habit Conversion
   Scenario: Shared to private
     Given that I create a shared habit
     When I edit the habit to be private
-    Then I should see the habit is private    
+    Then I should see the habit is private
     And another user should be able to see the habit
+
+  Scenario: Shared to private to shared
+    Given that I create a shared habit
+    When I checkin to the habit
+    And I edit the habit to be private
+    And I edit the habit to be public
+    Then I should see the habit is public
+    And I should see my checkin
