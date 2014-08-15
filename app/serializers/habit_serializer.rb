@@ -19,10 +19,6 @@ class HabitSerializer < ActiveModel::Serializer
     end
   end
 
-  def total_progress
-    my_checkins.inject(0) { |sum, n| sum + n.value }
-  end
-
   def target
     object.targets.where(user_id: current_user.id).first
   end
