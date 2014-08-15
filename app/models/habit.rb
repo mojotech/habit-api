@@ -1,7 +1,7 @@
 class Habit < ActiveRecord::Base
   before_destroy :confirm_not_shared
   before_save :add_past_tense
-
+  before_save :update_user_count
   has_and_belongs_to_many :users
   has_many :checkins, order: "created_at DESC", dependent: :destroy
   has_many :targets, dependent: :destroy
@@ -9,7 +9,6 @@ class Habit < ActiveRecord::Base
   validates :title, presence: true
   validates_inclusion_of :private, in: [true, false]
   validates_uniqueness_of :title, conditions: -> { where({ private: false})  }, if: :public?
-
 
   def self.associate_matching_or_create(habit_params, current_user)
     associate_matching(habit_params, current_user) do |match|
@@ -47,6 +46,10 @@ class Habit < ActiveRecord::Base
   end
 
   private
+
+  def update_user_count
+    self.user_count = users.count
+  end
 
   def add_past_tense
     if title_changed?

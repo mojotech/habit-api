@@ -1,10 +1,6 @@
 class HabitSerializer < ActiveModel::Serializer
   attributes :id, :title, :private, :user_count, :value, :past_tense, :target
 
-  def user_count
-    object.users.count
-  end
-
   def my_checkins
     object.checkins.where(user_id: current_user.id)
   end
