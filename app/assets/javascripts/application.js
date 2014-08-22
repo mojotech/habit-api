@@ -16,6 +16,7 @@
 //= require angular-ui-router
 //= require devise
 //= require restangular
+//= require moment
 //= require app
 //= require ui-bootstrap-tpls-0.11.0
 //= require_tree .
