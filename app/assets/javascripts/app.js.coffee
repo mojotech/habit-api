@@ -4,6 +4,7 @@
     'Devise'
     'ui.bootstrap'
     'restangular'
+    'angularMoment'
   ]
 
 app.run ($rootScope, $state, Restangular, auth, Auth, $urlRouter) ->

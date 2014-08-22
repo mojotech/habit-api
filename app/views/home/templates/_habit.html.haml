@@ -36,4 +36,5 @@
           %span(ng-if="!habit.private") {{checkin.display_name}}
           %span.badge {{checkin.value}}
           {{checkin.note}}
+          %span.timestamp(am-time-ago="checkin.created_at")
           %a.delete-checkin.text-muted(ng-if='checkin.belongs_to_user' ng-click='deleteCheckin(checkin)') delete
