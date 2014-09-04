@@ -141,3 +141,15 @@ end
 Then(/^I should be told to provide a target unit$/) do
   widget(:habit_form).widget(:error, "unit can't be blank").should be_present
 end
+
+Given(/^I created a new habit$/) do
+  Habit.associate_matching_or_create({ title: 'walk my dog' }, User.first)
+end
+
+When(/^I type part of the habit's title into the title field$/) do
+  widget(:habit_form).widget(:title).set 'walk my do'
+end
+
+Then(/^I shouldn't see a suggestion for the habit$/) do
+  widget?(:type_ahead).should be false
+end
