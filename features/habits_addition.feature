@@ -86,3 +86,9 @@ Scenario: Habit without title
 Scenario: Habit without target unit
   When I create a habit without a target unit
   Then I should be told to provide a target unit
+
+Scenario: Don't suggest my habits
+  Given I created a new habit
+  When I visit the new habits page
+  And I type part of the habit's title into the title field
+  Then I shouldn't see a suggestion for the habit
