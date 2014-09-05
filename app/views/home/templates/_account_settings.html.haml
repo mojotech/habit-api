@@ -9,6 +9,7 @@
       %alert(close="closeFlash()" ng-show="errors.length > 0" type="danger")
         %ul
           %li.error(ng-repeat="error in errors") {{error}}
+      %img.profile-image(ng-src='{{user.image.large }}' ng-if='user.image.large')
       %form
         .form-group(ng-class="displayNameErrors ? 'has-error' : ''")
           %label(for="display-name") Display Name
