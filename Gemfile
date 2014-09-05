@@ -15,6 +15,7 @@ gem 'verbs'
 gem 'engtagger'
 gem 'ngannotate-rails'
 gem 'haml'
+gem 'omniauth-facebook'
 
 group :production do
   gem 'heroku-deflater'
