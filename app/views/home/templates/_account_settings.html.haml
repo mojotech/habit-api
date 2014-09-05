@@ -12,5 +12,5 @@
       %form
         .form-group(ng-class="displayNameErrors ? 'has-error' : ''")
           %label(for="display-name") Display Name
-          %input.form-control(name="display-name" ng-model="displayName" type="text")/
+          %input.form-control(name="display-name" ng-model="user.display_name" type="text")/
         %button.save.btn.btn-primary(ng-click="save()") Save

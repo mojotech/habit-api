@@ -1,6 +1,6 @@
 app.controller 'AccountSettingsController', ($scope, $state, $http, auth, Auth) ->
   auth.currentUser().then (user) ->
-    $scope.displayName = user.display_name
+    $scope.user = user
 
   $scope.save = ->
     $scope.errors = []
