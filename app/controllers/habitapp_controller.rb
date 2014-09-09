@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HabitAppController < ApplicationController
   skip_before_filter :authenticate_user_from_token!
 
   def index
