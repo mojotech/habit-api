@@ -1,0 +1,11 @@
+.profile-image {
+  border-radius: 50%;
+}
+
+.account-settings {
+  .profile-image {
+    margin: 15px auto;
+    display: block;
+    border: 4px solid lightgrey;
+  }
+}
