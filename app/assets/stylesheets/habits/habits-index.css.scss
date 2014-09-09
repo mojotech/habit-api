@@ -1,0 +1,51 @@
+
+#habits-list {
+  margin: 0;
+  padding: 0;
+  .habit-listing {
+    position: relative;
+    font-size: 15px;
+    list-style-type: none;
+    margin: 0px;
+    height: 50px;
+    border-bottom: 1px solid lightgrey;
+    line-height: 50px;
+    padding: 0 5%;
+    small {
+      font-size: 15px;
+    }
+    a {
+      line-height: 100%;
+      display: inline-block;
+    }
+    .percentage {
+      margin-right: 10px;
+      font-size: 22px;
+      width: 75px;
+      text-align: center;
+      display: inline-block;
+      position: relative;
+      top: 3px;
+    }
+
+    .title {
+      width: calc(100% - 50px);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      span {
+        line-height: 40px;
+      }
+    }
+  }
+}
+
+.button-container {
+  position: absolute;
+  top: 0;
+  right: 5%;
+  .plus {
+    margin-right: -15px;
+    margin-top: -6px;
+  }
+}
