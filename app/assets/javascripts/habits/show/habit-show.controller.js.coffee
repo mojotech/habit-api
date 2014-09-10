@@ -5,6 +5,12 @@ app.controller 'HabitController', ($scope, $state, habits, Checkin, Habit, $stat
   Checkin.getList(habit_id: $stateParams.habitId).then (checkins) ->
     $scope.habit.checkins = checkins
 
+    if $scope.habit.checkins.length == 0
+      $scope.newCheckin = value: 1
+    else
+      $scope.habit.lastCheckin().then (lastCheckin) ->
+        $scope.newCheckin = value: lastCheckin.value
+
   $scope.checkin = (direction) ->
     $scope.error = ''
 
@@ -15,8 +21,7 @@ app.controller 'HabitController', ($scope, $state, habits, Checkin, Habit, $stat
       value: if direction is 'minus' then -$scope.newCheckin.value else $scope.newCheckin.value
       note: $scope.newCheckin.note
     .then ((checkin) ->
-      $scope.newCheckin.value = ''
-      $scope.newCheckin.note = ''
+      _.extend $scope.newCheckin, note: ""
       $scope.habit.checkins.unshift checkin
       Habit.get($scope.habit.id).then (habit) ->
         $scope.habit = _.extend habit, checkins: $scope.habit.checkins
