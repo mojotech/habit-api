@@ -8,8 +8,8 @@ Habitapp::Application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  post 'send_password_reset', to: 'habitapp#send_password_reset'
-  post 'change_password', to: 'habitapp#change_password'
+  post 'send_password_reset', to: 'users#send_password_reset'
+  post 'change_password', to: 'users#change_password'
 
   resources :habits
   resources :checkins
