@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook]
+         :omniauthable, omniauth_providers: [:facebook, :twitter]
 
   validates :display_name, presence: true
 
@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
   def image=(url, provider)
     if provider == "facebook"
       write_attribute :image, { small: url, large: "#{url}?type=large"}
+    else  provier == "twitter"
+      write_attribute :image, { small: url, large: url.sub('_normal', '') }
     end
   end
 
