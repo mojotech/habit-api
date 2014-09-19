@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def email_required?
+    super && provider.blank?
+  end
+
   def image=(url, provider)
     if provider == "facebook"
       write_attribute :image, { small: url, large: "#{url}?type=large"}
