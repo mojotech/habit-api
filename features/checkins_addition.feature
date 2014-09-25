@@ -6,7 +6,7 @@ Feature: Checkins
     Given I am logged in
     And I visit the new habits page
 
-  Scenario: Positive checkin from habit details
+  Scenario: Custom positive checkin from habit details
     And I create a habit with the following information:
       | title     | walk dog |
       | unit      | times    |
@@ -16,9 +16,9 @@ Feature: Checkins
     And I view the habit details for "walk dog"
     When I checkin with a value of 2
     Then I should see a checkin value of "2 times"
-    And the form should be cleared
+    Then the form should show a checkin value of 2
 
-  Scenario: Positive checkin from list
+  Scenario: Initial positive checkin from list
     And I create a habit with the following information:
       | title     | walk dog |
       | unit      | times    |
@@ -26,7 +26,7 @@ Feature: Checkins
       | target    | 4        |
       | timeframe | day      |
     When I add a positive checkin to the habit with title "walk dog"
-    Then The habit with title "walk dog" should have a checkin value of 25%
+    Then The habit with title "walk dog" should have a checkin percentage of 25%
 
   Scenario: Checkin without value
     And I create a habit with the following information:
@@ -36,8 +36,20 @@ Feature: Checkins
       | target    | 3        |
       | timeframe | day      |
     And I view the habit details for "walk dog"
-    When I checkin without value that is not an integer
+    When I checkin with a value that is not an integer
     Then I should be told to provide a valid checkin value
+
+  Scenario: Initial positive checkin from habit details
+    And I create a habit with the following information:
+      | title     | walk dog |
+      | unit      | times    |
+      | private   | true     |
+      | target    | 4        |
+      | timeframe | day      |
+    And I view the habit details for "walk dog"
+    Then I should see a default form checkin value of 1
+    When I checkin without changing the default value
+    Then the form should show a checkin value of 1
 
   Scenario: Custom positive checkin from list
     And I create a habit with the following information:
@@ -48,7 +60,5 @@ Feature: Checkins
       | timeframe | day      |
     And I view the habit details for "walk dog"
     When I checkin with a value of 5
-    And I view the habit list
+    When I view the habit list
     Then The habit list item with the title "walk dog" should have a checkin value of 5
-
-

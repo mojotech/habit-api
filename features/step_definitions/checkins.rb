@@ -48,7 +48,6 @@ end
 
 When(/^I view the habit list$/) do
   widget(:navbar).widget(:home).click
-
 end
 
 Then(/^The habit list item with the title "(.*?)" should have a checkin value of (\d+)$/) do |title, value|
