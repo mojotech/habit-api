@@ -38,3 +38,17 @@ Feature: Checkins
     And I view the habit details for "walk dog"
     When I checkin without value that is not an integer
     Then I should be told to provide a valid checkin value
+
+  Scenario: Custom positive checkin from list
+    And I create a habit with the following information:
+      | title     | walk dog |
+      | unit      | times    |
+      | private   | true     |
+      | target    | 4        |
+      | timeframe | day      |
+    And I view the habit details for "walk dog"
+    When I checkin with a value of 5
+    And I view the habit list
+    Then The habit list item with the title "walk dog" should have a checkin value of 5
+
+

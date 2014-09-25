@@ -5,6 +5,7 @@ class HabitItem < Dill::Widget
   widget :percentage, '.percentage'
   widget :title, '.habit-title'
   widget :link, 'a.title'
+  widget :new_checkin_value, '.button-container'
 
   def click
     widget(:link).click
