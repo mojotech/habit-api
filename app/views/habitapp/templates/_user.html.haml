@@ -1,0 +1,13 @@
+%script#user(type='text/ng-template')
+  .nav-bar
+    %a.habits-link.fa.fa-bars(ui-sref="app.habits" ui-sref-opts="{reload: true}")
+    %h4 {{user.display_name}}
+    %a.fa.fa-sign-out.logout(ui-sref="logout")
+    .clear
+  .section.text-center
+    %h1 {{user.image}}
+  %ul#habits-list
+    %li.habit-listing(ng-class="habit.private ? 'private' : 'public'" ng-repeat="habit in habits")
+      %div.title
+        %span.habit-title {{habit.title}}
+

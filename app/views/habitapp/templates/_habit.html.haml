@@ -33,7 +33,7 @@
       %h3 Activity
       %ul.list-group
         %li.list-group-item.checkin(ng-repeat="checkin in habit.checkins")
-          %span(ng-if="!habit.private") {{checkin.display_name}}
+          %a.span(ng-if="!habit.private" ui-sref="app.users({ userId: checkin.user_id })") {{checkin.display_name}}
           %span.badge {{checkin.value}}
           {{checkin.note}}
           %span.timestamp(am-time-ago="checkin.created_at")
