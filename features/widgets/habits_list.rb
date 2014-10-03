@@ -1,5 +1,6 @@
 class HabitsList < Dill::List
   root '#habits-list'
+
   item '.habit-listing' do
     widget :title, '.habit-title'
   end

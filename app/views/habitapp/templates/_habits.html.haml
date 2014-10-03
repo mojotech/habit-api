@@ -11,5 +11,6 @@
           {{habit.target.completion | percentage:0}}
           %small> %
         %span.habit-title {{habit.title}}
+
       .button-container
-        %button.btn.btn-success.btn-link.plus.fa.fa-plus(ng-click="checkin(habit.id, 1)")
+        %button.btn.btn-success.btn-link.plus.fa.fa-plus(ng-click="checkin(habit.id, habit.last_checkin_value)") {{habit.last_checkin_value}}

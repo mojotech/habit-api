@@ -1,5 +1,5 @@
 class HabitSerializer < ActiveModel::Serializer
-  attributes :id, :title, :private, :user_count, :value, :past_tense, :target
+  attributes :id, :title, :private, :user_count, :value, :past_tense, :target, :last_checkin_value
 
   def my_checkins
     object.checkins.where(user_id: current_user.id)
@@ -18,4 +18,13 @@ class HabitSerializer < ActiveModel::Serializer
   def target
     object.targets.where(user_id: current_user.id).first
   end
+
+  def last_checkin_value
+    if my_checkins.length >= 1
+      my_checkins.first.value
+    else
+      1
+    end
+  end
+
 end
