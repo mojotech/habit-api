@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+
+  def show
+    render json: User.find(params[:id]), serializer: UserSerializer
+  end
+
   def me
     if request.patch?
       current_user.display_name = params[:display_name]
