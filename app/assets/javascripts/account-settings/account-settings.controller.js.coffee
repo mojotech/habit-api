@@ -8,7 +8,7 @@ app.controller 'AccountSettingsController', ($scope, $state, $http, auth, Auth) 
       url: '/users/me'
       method: 'PATCH'
       params:
-        display_name: $scope.displayName
+        display_name: $scope.user.display_name
     .success (data) ->
       $state.go 'app.habits'
     .error (error) ->
