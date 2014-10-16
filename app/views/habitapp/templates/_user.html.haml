@@ -5,9 +5,8 @@
     %a.fa.fa-sign-out.logout(ui-sref="logout")
     .clear
   .section.text-center
-    %h1 {{user.image}}
+    %img.profile-image(ng-src='{{user.image.large }}' ng-if='user.image.large')
   %ul#habits-list
     %li.habit-listing(ng-class="habit.private ? 'private' : 'public'" ng-repeat="habit in habits")
       %div.title
         %span.habit-title {{habit.title}}
-
