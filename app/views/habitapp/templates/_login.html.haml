@@ -1,18 +1,26 @@
 %script#login(type="text/ng-template")
-  .padded-container
-    .login-form
-      %alert(close="closeFlash()" ng-show="error.length > 0" type="danger") {{error}}
-      %h1 Login
-      %form(ng-submit="login()")
-        .form-group(ng-class="error.length > 0 ? 'has-error' : ''")
-          %input#identification.form-control(ng-model="user.email" placeholder="Enter Email")/
-        .form-group(ng-class="error.length > 0 ? 'has-error' : ''")
-          %input#password.form-control(ng-model="user.password" placeholder="Enter Password" type="password")/
-        %button.btn.btn-primary(type="submit") Login
-        %a(ui-sref="signup") Sign Up
-        %a.forgot-password(ui-sref="forgot-password") Forgot Password
-    .form-group
-      %a(href='/users/auth/facebook') Sign in with Facebook
+  .row.login-page
+    .col-xs-10.login-container
+      .login-form
+        %alert(close="closeFlash()" ng-show="error.length > 0" type="danger") {{error}}
+        .login-title Habit
+        .login-tagline Login to your account
+        .form-group
+          %a.btn.btn-block.login-social.btn-facebook.text-center(href='/users/auth/facebook')
+            %i.fa.fa-facebook
+            Facebook
+        .form-group
+          %a.btn.btn-block.login-social.btn-twitter(href='/users/auth/twitter')
+            %i.fa.fa-twitter
+            Twitter
+        %h5.text-center OR
+        %form(ng-submit="login()")
+          .form-group(ng-class="error.length > 0 ? 'has-error' : ''")
+            %input#identification.form-control(ng-model="user.email" placeholder="Email")/
+          .form-group(ng-class="error.length > 0 ? 'has-error' : ''")
+            %input#password.form-control(ng-model="user.password" placeholder="Password" type="password")/
+          %button.btn.btn-primary.pull-right(type="submit") Login
+          %a.sign-up(ui-sref="signup") Create Account
+          %a.forgot-password(ui-sref="forgot-password") Forgot Password
 
-    .form-group
-      %a(href='/users/auth/twitter') Sign in with Twitter
+

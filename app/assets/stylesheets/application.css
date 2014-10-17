@@ -10,5 +10,6 @@
  *
  *= require_self
  *= require bootstrap
+ *= require bootstrap-social
  *= require_tree .
  */

@@ -1,0 +1,101 @@
+html, body, .page-ui-view {
+  min-height: 100%;
+  position: relative;
+}
+body.login-page {
+  background-image: url('road-blurred.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.login-page {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  @media screen and (max-width: 480px) {
+    min-height: 100%;
+  }
+}
+
+.login-container {
+  margin: 0 auto;
+  float: none;
+  @media screen and (max-width: 480px) {
+    padding:0;
+    width: 93%;
+  }
+}
+
+.login-form {
+  background-color: rgb(245, 245, 245);
+  max-width: 400px;
+  padding: 0.0625em 3.6em 2em 3.6em;
+  margin: 2em auto 0;
+  border-radius: 0.225em;
+  -moz-box-shadow: 0 0 5px 5px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 0 5px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 0 5px 5px rgba(0,0,0,0.1);
+  @media screen and (max-width: 480px) {
+    padding: 1em;
+    float: none;
+    margin: 1em auto;
+  }
+}
+
+.login-title {
+  padding-top: 0.225em;
+  font-family: 'Raleway', sans-serif;
+  color: rgb(60, 60, 60);
+  text-align: center;
+  font-size: 3em;
+}
+
+.login-tagline {
+  padding-bottom: 1.625em;
+  text-align: center;
+  font-size: 1em;
+  margin-top: -0.625em;
+}
+
+.sign-up {
+  text-decoration: underline;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 10px 0;
+  font-size: 15px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  a:hover {
+    color: blue;
+  }
+}
+
+.forgot-password {
+  display: block;
+  padding-top: 1.625em;
+  text-align: center;
+  color: rgb(170, 170, 170);
+}
+
+.login-social {
+  position:relative;
+  text-align:center;
+  vertical-align: middle;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+.login-social>:first-child {
+  vertical-align: middle;
+  width:32px;
+  line-height:34px;
+  font-size:1.6em;
+  text-align:center;
+}
