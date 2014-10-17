@@ -33,6 +33,14 @@ class Target < ActiveRecord::Base
     self.update_attribute :completion, completion
   end
 
+  def convert_existing_checkins(type, factor)
+    if type == "*"
+      checkins.map { |c| c.update(value: c.value * factor) }
+    elsif type == "/"
+      checkins.map { |c| c.update(value: c.value / factor)  }
+    end
+  end
+
   private
 
   def habit_exists(attr)
