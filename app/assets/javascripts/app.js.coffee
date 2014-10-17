@@ -8,6 +8,8 @@
   ]
 
 app.run ($rootScope, $state, Restangular, auth, Auth, $urlRouter) ->
+  $rootScope.$state = $state
+
   FastClick.attach document.body
 
   Restangular.setDefaultHeaders
@@ -31,3 +33,4 @@ app.run ($rootScope, $state, Restangular, auth, Auth, $urlRouter) ->
       if _.contains(publicStates, toState.name)
         event.preventDefault()
         $state.go 'app.habits'
+
