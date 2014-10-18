@@ -1,6 +1,6 @@
 %script#login(type="text/ng-template")
   .row.login-page
-    .col-xs-10.login-container
+    .login-container
       .login-form
         %alert(close="closeFlash()" ng-show="error.length > 0" type="danger") {{error}}
         .login-title Habit
@@ -22,5 +22,3 @@
           %button.btn.btn-primary.pull-right(type="submit") Login
           %a.sign-up(ui-sref="signup") Create Account
           %a.forgot-password(ui-sref="forgot-password") Forgot Password
-
-

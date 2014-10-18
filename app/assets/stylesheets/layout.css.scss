@@ -5,6 +5,15 @@ $greyblue: #34444f;
 $red: #CE6861;
 $green: #60AB89;
 
+.page-ui-view {
+  margin: 0 auto;
+  float: none;
+  @media screen and (max-width: 480px) {
+    padding:0;
+    width: 93%;
+  }
+}
+
 a, a:hover {
   color: inherit;
   text-decoration: none;
