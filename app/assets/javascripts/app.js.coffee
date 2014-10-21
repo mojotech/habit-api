@@ -15,7 +15,7 @@ app.run ($rootScope, $state, Restangular, auth, Auth, $urlRouter) ->
   Restangular.setDefaultHeaders
     Authorization: auth.token()
 
-  publicStates = ["login", "signup", "forgot-password", "edit-password"]
+  $rootScope.publicStates =  publicStates = ["login", "signup", "forgot-password", "edit-password"]
 
   transition =
     to: null
