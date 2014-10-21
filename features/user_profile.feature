@@ -1,7 +1,9 @@
 @javascript
 Feature: User Profile
-  As a user I should be able to view other users profiles
-  including the habits they are publicly tracking. When I view my own profile I should only see my public habits.
+  As a user I should be able to view other users profiles including the
+  habits they are publicly tracking. When I view my own profile I should
+  only see my public habits.
+
   When I look at another user's profile I should be able to see their
   public habits and join any that I do not currently track.
 
