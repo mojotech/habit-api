@@ -10,3 +10,5 @@
     %li.habit-listing(ng-class="habit.private ? 'private' : 'public'" ng-repeat="habit in habits")
       %div.title
         %span.habit-title {{habit.title}}
+        .button-container
+          %button.btn.btn-success.btn-link.join.fa.fa-book(ng-hide="habit.belongs_to_current_user" ng-click="join(habit)") Join

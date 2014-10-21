@@ -49,3 +49,25 @@ end
 Then(/^I should see their user profile and public habits$/) do
   widget(:habit_item).should be_present
 end
+
+When(/^I view a user profile page$/) do
+  step "I create a habit with the following information:", table(%{
+    | title     | water plants |
+    | unit      | times    |
+    | private   | false    |
+    | target    | 1        |
+    | timeframe | week     |
+  })
+  widget(:new_habit_link).click
+  step "that I join a shared habit with checkins"
+  step "I click a user name from the checkins list"
+end
+
+Then(/^I should be able to join habits I don't currently track$/) do
+  widget(:join_habit).should be_present
+  widget(:join_habit).click
+end
+
+Then(/^the new habit form should include the title of that habit$/) do
+  expect(widget(:habit_form).widget(:title)).to have_content "water plants"
+end

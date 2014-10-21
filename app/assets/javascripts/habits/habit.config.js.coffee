@@ -10,7 +10,7 @@ app.config ($stateProvider) ->
        Habit.getList()
 
   $stateProvider.state 'app.habits.new',
-    url: '/new'
+    url: '/new?title'
     views:
       "page@app":
         templateUrl: 'habits/new'

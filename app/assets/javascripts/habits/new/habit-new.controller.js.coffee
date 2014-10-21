@@ -1,8 +1,9 @@
-app.controller 'HabitNewController', ($timeout, $scope, $state, $http, Habit, Target, habits) ->
+app.controller 'HabitNewController', ($timeout, $scope, $state, $http, Habit, Target, habits, $stateParams) ->
 
   $scope.isEditable = true
 
-  $scope.habit = {}
+  $scope.habit =
+    title: $stateParams.title
 
   $scope.target =
     timeframe: 'week'
