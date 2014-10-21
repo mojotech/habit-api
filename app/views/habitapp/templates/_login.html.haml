@@ -1,10 +1,10 @@
 %script#login(type="text/ng-template")
-  .row.login-page
+  .row
     .login-container
-      .login-form
         %alert(close="closeFlash()" ng-show="error.length > 0" type="danger") {{error}}
-        .login-title Habit
-        .login-tagline Login to your account
+      .login-form.floating-form
+        .public-title Habit
+        .public-tagline Login to your account
         .form-group
           %a.btn.btn-block.login-social.btn-facebook.text-center(href='/users/auth/facebook')
             %i.fa.fa-facebook
@@ -20,5 +20,5 @@
           .form-group(ng-class="error.length > 0 ? 'has-error' : ''")
             %input#password.form-control(ng-model="user.password" placeholder="Password" type="password")/
           %button.btn.btn-primary.pull-right(type="submit") Login
-          %a.sign-up(ui-sref="signup") Create Account
-          %a.forgot-password(ui-sref="forgot-password") Forgot Password
+          %a.secondary-action(ui-sref="signup") Create Account
+          %a.forgot-password.forgot-password-link(ui-sref="forgot-password") Forgot Password
