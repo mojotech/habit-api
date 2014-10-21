@@ -2,13 +2,13 @@ html, body, .page-ui-view {
   min-height: 100%;
   position: relative;
 }
-body.login-page {
+body.public-page {
   background-image: image-url('road-blurred.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 }
-.login-page {
+.public-page {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -17,8 +17,7 @@ body.login-page {
   }
 }
 
-
-.login-form {
+.floating-form {
   background-color: rgb(245, 245, 245);
   max-width: 400px;
   padding: 0.0625em 3.6em 2em 3.6em;
@@ -34,7 +33,7 @@ body.login-page {
   }
 }
 
-.login-title {
+.public-title {
   padding-top: 0.225em;
   font-family: 'Raleway', sans-serif;
   color: rgb(60, 60, 60);
@@ -42,14 +41,14 @@ body.login-page {
   font-size: 3em;
 }
 
-.login-tagline {
+.public-tagline {
   padding-bottom: 1.625em;
   text-align: center;
   font-size: 1em;
   margin-top: -0.625em;
 }
 
-.sign-up {
+.secondary-action {
   text-decoration: underline;
   display: inline-block;
   margin-bottom: 0;
@@ -63,12 +62,9 @@ body.login-page {
   font-size: 15px;
   line-height: 1.42857143;
   border-radius: 4px;
-  a:hover {
-    color: blue;
-  }
 }
 
-.forgot-password {
+.forgot-password-link {
   display: block;
   padding-top: 1.625em;
   text-align: center;
