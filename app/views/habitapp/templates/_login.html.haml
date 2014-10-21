@@ -1,7 +1,6 @@
 %script#login(type="text/ng-template")
   .row
     .login-container
-        %alert(close="closeFlash()" ng-show="error.length > 0" type="danger") {{error}}
       .login-form.floating-form
         .public-title Habit
         .public-tagline Login to your account
@@ -19,6 +18,7 @@
             %input#identification.form-control(ng-model="user.email" placeholder="Email")/
           .form-group(ng-class="error.length > 0 ? 'has-error' : ''")
             %input#password.form-control(ng-model="user.password" placeholder="Password" type="password")/
+          %alert(close="closeFlash()" ng-show="error.length > 0" type="danger") {{error}}
           %button.btn.btn-primary.pull-right(type="submit") Login
           %a.secondary-action(ui-sref="signup") Create Account
           %a.forgot-password.forgot-password-link(ui-sref="forgot-password") Forgot Password
