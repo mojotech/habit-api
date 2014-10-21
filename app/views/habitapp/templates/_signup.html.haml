@@ -1,16 +1,26 @@
 %script#signup(type="text/ng-template")
-  .padded-container
-    .signup-form
-      %alert(close="closeFlash()" ng-show="errors.length > 0" type="danger")
-        %ul
-          %li.error(ng-repeat="error in errors") {{error}}
-      %h1 Sign Up
+  .row
+    .signup-form.floating-form
+      .public-title Habit
+      .public-tagline Create an account &#9679; Start your journey
+      .form-group
+        %a.btn.btn-block.login-social.btn-facebook.text-center(href='/users/auth/facebook')
+          %i.fa.fa-facebook
+          Facebook
+      .form-group
+        %a.btn.btn-block.login-social.btn-twitter(href='/users/auth/twitter')
+          %i.fa.fa-twitter
+          Twitter
+      %h5.text-center OR
       %form(ng-submit="signup()")
         .form-group(ng-class="displayNameError ? 'has-error' : ''")
-          %input#display-name.form-control(ng-model="user.displayName" placeholder="Enter Display Name")/
+          %input#display-name.form-control(ng-model="user.displayName" placeholder="Name")/
         .form-group(ng-class="emailError ? 'has-error' : ''")
-          %input#identification.form-control(ng-model="user.email" placeholder="Enter Email")/
+          %input#identification.form-control(ng-model="user.email" placeholder="Email")/
         .form-group(ng-class="passwordError ? 'has-error' : ''")
-          %input#password.form-control(ng-model="user.password" placeholder="Enter Password" type="password")/
-        %button.btn.btn-primary(type="submit") Sign Up
-        %a(ui-sref="login") Login
+          %input#password.form-control(ng-model="user.password" placeholder="Password" type="password")/
+        %alert(close="closeFlash()" ng-show="errors.length > 0" type="danger")
+          %ul
+            %li.error(ng-repeat="error in errors") {{error}}
+        %button.btn.btn-primary.pull-right(type="submit") Sign Up
+        %a.account-existance(ui-sref="login") Login
