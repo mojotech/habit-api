@@ -50,7 +50,7 @@ Then(/^I should see their user profile and public habits$/) do
   widget(:habit_item).should be_present
 end
 
-When(/^I view a user profile page$/) do
+When(/^I view another user's profile page$/) do
   step "I create a habit with the following information:", table(%{
     | title     | water plants |
     | unit      | times    |
@@ -63,7 +63,7 @@ When(/^I view a user profile page$/) do
   step "I click a user name from the checkins list"
 end
 
-Then(/^I should be able to join habits I don't currently track$/) do
+When(/^I join a habit that I don't currently track$/) do
   widget(:join_habit).should be_present
   widget(:join_habit).click
 end
