@@ -76,16 +76,6 @@ Given(/^a logged in account with the following information:$/) do |table|
   widget?(:habit_form).should be true
 end
 
-Given(/^the account "(.*?)" has the following habits:$/) do |email, table|
-  user = User.where(email: email).first
-  table.hashes.each do |row|
-    matching_habits = user.habits.where(title: row['title'], private: row['private'])
-    if matching_habits.count == 0
-      user.habits.create(title: row['title'], private: row['private'])
-    end
-  end
-end
-
 Then(/^I should see an error message$/) do
   widget?(:error).should be true
 end
