@@ -143,7 +143,13 @@ Then(/^I should be told to provide a target unit$/) do
 end
 
 Given(/^I created a new habit$/) do
-  Habit.associate_matching_or_create({ title: 'walk my dog' }, User.first)
+  step "I create a habit with the following information:", table(%{
+      | title     | walk my dog       |
+      | unit      | walks             |
+      | private   | false             |
+      | target    | 3                 |
+      | timeframe | week              |
+    })
 end
 
 When(/^I type part of the habit's title into the title field$/) do
