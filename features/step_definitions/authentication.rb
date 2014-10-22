@@ -87,7 +87,7 @@ Given(/^the account "(.*?)" has the following habits:$/) do |email, table|
 end
 
 Then(/^I should see an error message$/) do
-  widget(:login_form).widget?(:error).should be true
+  widget?(:error).should be true
 end
 
 Then(/^I should be told the account already exists$/) do
