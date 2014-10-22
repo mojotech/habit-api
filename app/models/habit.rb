@@ -4,7 +4,6 @@ class Habit < ActiveRecord::Base
 
   before_destroy :confirm_not_shared
   before_save :add_past_tense
-  before_save :update_user_count
 
   has_many :checkins, order: "created_at DESC", dependent: :destroy
   has_many :targets, inverse_of: :habit, dependent: :destroy
@@ -50,10 +49,6 @@ class Habit < ActiveRecord::Base
   end
 
   private
-
-  def update_user_count
-    self.user_count = users.count
-  end
 
   def add_past_tense
     if title_changed?
