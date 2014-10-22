@@ -11,27 +11,6 @@ Scenario: Create habit I already have
   And I try to create a habit with the same title
   Then I should see an error message
 
-Scenario: Create new public habit
-  When I visit the new habits page
-  And I create a habit with the following information:
-    | title     | walk dog  |
-    | unit      | times     |
-    | private   | false     |
-    | target    | 3         |
-    | timeframe | day       |
- Then I should should see the following habit in my list:
-    | walk dog |
-
-Scenario: Create new private habit
-  When I visit the new habits page
-  And I create a habit with the following information:
-    | title     | drink water |
-    | unit      | glasses     |
-    | private   | true        |
-    | target    | 3           |
-    | timeframe | day         |
-  Then I should should see the following habit in my list:
-    | drink water |
 
 Scenario: Suggestions for public habits
   Given there is a public habit "drink water"

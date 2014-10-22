@@ -1,5 +1,5 @@
 class HabitSerializer < ActiveModel::Serializer
-  attributes :id, :title, :private, :user_count, :value,
+  attributes :id, :title, :user_count, :value,
     :past_tense, :target, :last_checkin_value,
     :belongs_to_current_user
 

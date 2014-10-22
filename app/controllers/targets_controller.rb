@@ -5,8 +5,8 @@ class TargetsController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    habit = current_user.habits.find(params[:habit_id])
-    target = habit.targets.new(target_params.merge({ user_id: current_user.id }))
+    target = current_user.targets.new(target_params)
+
     if target.save
       render json: target, status: :ok
     else
@@ -15,18 +15,11 @@ class TargetsController < ApplicationController
   end
 
   def show
-    habit = current_user.habits.find(params[:habit_id])
-    render json: habit.targets.where(user_id: current_user.id).first
+    render json: current_user.targets.where({ habit_id: params[:habit_id]}).first
   end
 
   def update
-    target = current_user
-      .habits
-      .find(params[:habit_id])
-      .targets
-      .first
-
-    render json: target.update_attributes(target_params)
+    render json: current_user.targets.find(params[:id]).update_attributes(target_params)
   end
 
   def destroy
@@ -37,6 +30,6 @@ class TargetsController < ApplicationController
 
   def target_params
     params
-      .permit(:value, :timeframe, :unit, habit_attributes: [:title])
+      .permit(:value, :timeframe, :unit, :private, habit_attributes: [:title])
   end
 end

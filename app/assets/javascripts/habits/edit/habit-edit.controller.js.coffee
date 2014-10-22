@@ -9,10 +9,10 @@ app.controller 'HabitEditController', ($scope, $state, habit, $http, target, Hab
       target.patch
         habit_attributes:
           title: $scope.habit.title
-          private:  $scope.habit.private
         value: $scope.target.value
         timeframe: $scope.target.timeframe
         unit: $scope.target.unit
+        private:  $scope.target.private
       .then ->
         $state.go 'app.habits', null, reload: true
     deleteHabit: (habit) ->

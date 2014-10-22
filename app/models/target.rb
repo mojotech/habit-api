@@ -4,6 +4,7 @@ class Target < ActiveRecord::Base
   has_many :checkins
 
   validates_inclusion_of :timeframe, in: ['week', 'month', 'day']
+  validates_inclusion_of :private, in: [true, false]
   validates :value, numericality: { only_integer: true }
   validates :unit, :completion, presence: true
 

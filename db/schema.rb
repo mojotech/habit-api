@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 20141022160621) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "private"
     t.string   "past_tense"
   end
 
@@ -43,6 +42,7 @@ ActiveRecord::Schema.define(version: 20141022160621) do
     t.datetime "updated_at"
     t.string   "unit"
     t.decimal  "completion", default: 0.0
+    t.boolean  "private"
   end
 
   create_table "users", force: true do |t|

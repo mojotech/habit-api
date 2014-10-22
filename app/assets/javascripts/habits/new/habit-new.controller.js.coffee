@@ -11,10 +11,10 @@ app.controller 'HabitNewController', (Restangular, $scope, $state, Habit, Target
     Restangular.all('targets').post
       habit_attributes:
         title: $scope.habit.title
-        private: $scope.habit.private
       value: target.value
       unit: target.unit
       timeframe: target.timeframe
+      private: target.private
 
   andTransition = ->
     $state.go 'app.habits', null, reload: true
