@@ -1,7 +1,5 @@
 class Habit < ActiveRecord::Base
 
-  default_scope order('user_count DESC')
-
   before_save :add_past_tense
 
   has_many :checkins, order: "created_at DESC", dependent: :destroy
