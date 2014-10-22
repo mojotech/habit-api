@@ -15,6 +15,8 @@ class Target < ActiveRecord::Base
       30
     when "day"
       1
+    else
+      1
     end
   end
 
