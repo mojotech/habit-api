@@ -7,18 +7,9 @@ Background:
   Given I am logged in
 
 Scenario: Create habit I already have
-  Given I created the following habits:
-    | title       | unit    | private | target | timeframe |
-    | walk dog    | times   | true    | 7      | week      |
-    | drink water | glasses | false   | 8      | day       |
-  When I visit the new habits page
-  And I create a habit with the following information:
-    | title     | drink water |
-    | unit      | glasses     |
-    | private   | false       |
-    | target    | 3           |
-    | timeframe | day         |
-  Then I should see the habit "drink water" once in my list
+  Given that I created a public habit
+  And I try to create a habit with the same title
+  Then I should see an error message
 
 Scenario: Create new public habit
   When I visit the new habits page
