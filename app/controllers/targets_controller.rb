@@ -14,11 +14,6 @@ class TargetsController < ApplicationController
     end
   end
 
-  def index
-    habit = current_user.habits.find(params[:habit_id])
-    render json: habit.targets
-  end
-
   def show
     habit = current_user.habits.find(params[:habit_id])
     render json: habit.targets.where(user_id: current_user.id).first
