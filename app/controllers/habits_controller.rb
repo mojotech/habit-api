@@ -6,11 +6,11 @@ class HabitsController < ApplicationController
 
   def index
     if params[:title]
-      habits = Habit.where(private: false).where('title ilike ?', "%#{params[:title]}%") - current_user.habits
+      habits = Habit.is_public.where('title ilike ?', "%#{params[:title]}%") - current_user.habits
     elsif params[:suggestions]
-      habits = Habit.where(private: false) - current_user.habits
+      habits = Habit.is_public - current_user.habits
     elsif params[:user_id]
-      habits = User.find(params[:user_id]).habits.where(private: false)
+      habits = User.find(params[:user_id]).habits.is_public
     else
       habits = current_user.habits
     end

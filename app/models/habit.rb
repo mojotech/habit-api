@@ -10,6 +10,8 @@ class Habit < ActiveRecord::Base
   has_many :checkins, order: "created_at DESC", dependent: :destroy
   has_many :targets, dependent: :destroy
 
+  scope :is_public, -> { where(private: false) }
+
   validates :title, presence: true
   validates_inclusion_of :private, in: [true, false]
   validates_uniqueness_of :title, conditions: -> { where({ private: false})  }, if: :public?
