@@ -5,7 +5,7 @@
     %a.new-habit.fa.fa-plus(ui-sref="app.habits.new")
     .clear
   %ul#habits-list
-    %li.habit-listing(ng-class="habit.private ? 'private' : 'public'" ng-repeat="habit in habits")
+    %li.habit-listing(ng-class="habit.target.private ? 'private' : 'public'" ng-repeat="habit in habits")
       %a.title(ui-sref="app.habits.show({habitId: habit.id})")
         %span.percentage<
           {{habit.target.completion | percentage:0}}

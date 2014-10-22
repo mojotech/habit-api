@@ -28,6 +28,8 @@ Given(/^that I created a public habit$/) do
   })
 end
 
+
+
 Given(/^that I joined a shared habit$/) do
   step "I visit the new habits page"
   step "I create a habit with the following information:", table(%{

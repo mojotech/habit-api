@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   include TokenAuthenticable
 
-  has_many :checkins
   has_many :targets
   has_many :habits, through: :targets
+  has_many :checkins
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

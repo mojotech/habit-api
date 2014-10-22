@@ -1,11 +1,16 @@
 class Target < ActiveRecord::Base
-  belongs_to :habit
+  belongs_to :habit, inverse_of: :targets
   belongs_to :user
   has_many :checkins
 
   validates_inclusion_of :timeframe, in: ['week', 'month', 'day']
+  validates_inclusion_of :private, in: [true, false]
   validates :value, numericality: { only_integer: true }
   validates :unit, :completion, presence: true
+
+  validates_uniqueness_of :habit_id, scope: :user_id, message: "you already belong to this habit"
+  validates_presence_of :habit
+  accepts_nested_attributes_for :habit, reject_if: :habit_exists
 
   def timeframe_int
     case timeframe
@@ -14,6 +19,8 @@ class Target < ActiveRecord::Base
     when "month"
       30
     when "day"
+      1
+    else
       1
     end
   end
@@ -26,4 +33,14 @@ class Target < ActiveRecord::Base
     self.update_attribute :completion, completion
   end
 
+  private
+
+  def habit_exists(attr)
+    if _habit = Habit.find_by(title: attr['title'])
+      self.habit = _habit
+      true
+    else
+      false
+    end
+  end
 end

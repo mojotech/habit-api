@@ -1,53 +1,58 @@
-app.controller 'HabitNewController', ($timeout, $scope, $state, $http, Habit, Target, habits) ->
+app.factory 'HabitEditable', ->
+  ($scope, originalHabit, originalTarget) ->
+    _.extend $scope,
+      isEditable: true
+      habit: originalHabit
+      target: originalTarget
+      timeFrameOptions: ['day','week','month']
+      onSelect: ($item, $model) ->
+        _.extend $scope,
+          isEditable: false
+          habit: $model
+      cancel: ->
+        _.extend $scope,
+          isEditable: true
+          habit: originalHabit
+          target: originalTarget
 
-  $scope.isEditable = true
 
-  $scope.habit = {}
+app.controller 'HabitNewController', (Restangular, $scope, $state, Habit, Target, habits, HabitEditable) ->
+  _.extend $scope,
+    new HabitEditable($scope, {}, timeframe: 'week', private: true)
+    hasHabits: habits.length > 0
+    save: ->
+      resetErrors()
+      saveTarget $scope.target
+        .then andTransition, handleTargetErrors
 
-  $scope.target =
-    timeframe: 'week'
-  $scope.timeFrameOptions = ['day','week','month']
+  saveTarget = (target) ->
+    Restangular.all('targets').post
+      habit_attributes:
+        title: $scope.habit.title
+      value: target.value
+      unit: target.unit
+      timeframe: target.timeframe
+      private: target.private
 
-  $scope.hasHabits = habits.length > 0
+  andTransition = ->
+    $state.go 'app.habits', null, reload: true
 
-  $scope.onSelect = ($item, $model, $label) ->
-    $scope.isEditable = false
-    $scope.habit.title = $model.title
-    $scope.habit.user_count = $model.user_count
+  handleTargetErrors = (response) ->
+    valueErrors = _.map response.data.value, (e) -> "value #{e}"
+    unitErrors = _.map response.data.unit, (e) -> "unit #{e}"
+    sameTitleErrors = _.map response.data.habit_id, (e) -> "title #{e}"
+    otherTitleErrors = _.map response.data['habit.title'], (e) -> "title #{e}"
+    titleErrors = sameTitleErrors.concat otherTitleErrors
 
-  $scope.cancel = ->
-    $scope.habit.user_count = 0
-    $scope.habit.title = ''
-    $scope.target.unit = ''
-    $scope.habit.private = false
-    $scope.isEditable = true
-
-  $scope.save = ->
-    resetErrors()
-    Habit.post
-      title: $scope.habit.title
-      private: $scope.habit.private or false
-    .then ((habit) ->
-      Target.post
-        habit_id: habit.id
-        value: $scope.target.value
-        unit: $scope.target.unit
-        timeframe: $scope.target.timeframe
-      .then (->
-        $state.go 'app.habits', null, reload: true
-      ), (response) ->
-        valueErrors = _.map response.data.value, (e) -> "value #{e}"
-        unitErrors = _.map response.data.unit, (e) -> "unit #{e}"
-        $scope.errors = valueErrors.concat unitErrors
-        $scope.valueErrors = (valueErrors.length > 0)
-        $scope.unitErrors = (unitErrors.length > 0)
-    ), (response) ->
-      titleErrors = _.map response.data.title, (e) -> "title #{e}"
-      $scope.errors = titleErrors
-      $scope.titleErrors = (titleErrors.length > 0)
+    _.extend $scope,
+      errors: titleErrors.concat(valueErrors).concat unitErrors
+      valueErrors: (valueErrors.length > 0)
+      unitErrors: (unitErrors.length > 0)
+      titleErrors: titleErrors.length > 0
 
   resetErrors = ->
-    $scope.errors = []
-    $scope.titleErrors = false
-    $scope.unitErrors = false
-    $scope.valueErrors = false
+    _.extend $scope,
+      errors: []
+      titleErrors: false
+      unitErrors: false
+      valueErrors: false
