@@ -7,6 +7,8 @@ class Target < ActiveRecord::Base
   validates :value, numericality: { only_integer: true }
   validates :unit, :completion, presence: true
 
+  accepts_nested_attributes_for :habit, reject_if: :habit_exists
+
   def timeframe_int
     case timeframe
     when "week"
@@ -28,4 +30,14 @@ class Target < ActiveRecord::Base
     self.update_attribute :completion, completion
   end
 
+  private
+
+  def habit_exists(attr)
+    if _habit = Habit.find_by(title: attr['title'])
+      self.habit = _habit
+      true
+    else
+      false
+    end
+  end
 end

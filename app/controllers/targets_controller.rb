@@ -38,6 +38,6 @@ class TargetsController < ApplicationController
 
   def target_params
     params
-      .permit(:value, :timeframe, :unit)
+      .permit(:value, :timeframe, :unit, habit_attributes: [:title])
   end
 end
