@@ -7,7 +7,7 @@ class Habit < ActiveRecord::Base
   before_save :update_user_count
 
   has_many :checkins, order: "created_at DESC", dependent: :destroy
-  has_many :targets, dependent: :destroy
+  has_many :targets, inverse_of: :habit, dependent: :destroy
   has_many :users, through: :targets
 
   validates :title, presence: true

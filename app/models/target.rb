@@ -1,5 +1,5 @@
 class Target < ActiveRecord::Base
-  belongs_to :habit
+  belongs_to :habit, inverse_of: :targets
   belongs_to :user
   has_many :checkins
 
