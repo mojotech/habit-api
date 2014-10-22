@@ -8,6 +8,7 @@ Given(/^I set the target with$/) do |table|
   form.widget(:target_value).set table.transpose.rows_hash['value']
   form.widget(:timeframe).set table.transpose.rows_hash['timeframe']
   form.widget(:unit).set table.transpose.rows_hash['unit']
+  form.widget(:private).set table.transpose.rows_hash['private'] == 'true'
   form.submit_form()
 end
 

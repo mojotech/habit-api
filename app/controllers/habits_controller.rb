@@ -6,11 +6,15 @@ class HabitsController < ApplicationController
 
   def index
     if params[:title]
-      habits = Habit.where(private: false).where('title ilike ?', "%#{params[:title]}%") - current_user.habits
+      habits = Habit.public
+        .where('title ilike ?', "%#{params[:title]}%")
+      habits = habits - current_user.habits
     elsif params[:suggestions]
-      habits = Habit.where(private: false) - current_user.habits
+      habits = Habit.public - current_user.habits
     elsif params[:user_id]
-      habits = User.find(params[:user_id]).habits.where(private: false)
+      habits = User.find(params[:user_id])
+        .habits
+        .public
     else
       habits = current_user.habits
     end
@@ -22,7 +26,7 @@ class HabitsController < ApplicationController
   end
 
   def create
-    habit = Habit.associate_matching_or_create(habit_params, current_user)
+    habit = current_user.habits.create(habit_params)
     if habit.save
       render json: habit, status: 200
     else
@@ -31,24 +35,12 @@ class HabitsController < ApplicationController
   end
 
   def update
-    render json: current_user.habits.find(params[:id]).convert_or_update(habit_params, current_user)
-  end
-
-  def destroy
-    habit = Habit.find(params[:id])
-    if habit.users.count > 1
-      habit.users.delete(current_user)
-      habit.checkins.where(user: current_user).destroy_all
-      habit.save
-    else
-      habit.destroy
-    end
-    render json: :no_content, status: :no_content
+    render json: Habit.find(params[:id]).update_attributes(habit_params)
   end
 
   private
 
   def habit_params
-    params.permit(:title, :private, :id)
+    params.permit(:title, :id)
   end
 end

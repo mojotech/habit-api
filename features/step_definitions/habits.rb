@@ -20,6 +20,27 @@ Given(/^I visit the new habits page$/) do
   widget?(:habit_form).should be true
 end
 
+When(/^I try to create a habit with the same title$/) do
+  step "I visit the new habits page"
+  step "try to create a habit with the following information:", table(%{
+    | title     | walk dog |
+    | unit      | times    |
+    | private   | false    |
+    | target    | 3        |
+    | timeframe | week     |
+  })
+end
+
+When(/^try to create a habit with the following information:$/) do |table|
+  form = widget(:habit_form)
+  form.widget(:title).set(table.rows_hash['title'] || '')
+  form.widget(:unit).set(table.rows_hash['unit'] || '')
+  form.widget(:private).set(table.rows_hash['private'] == 'true')
+  form.widget(:target_value).set table.rows_hash['target'] || ''
+  form.widget(:timeframe).set table.rows_hash['timeframe']
+  form.submit_form()
+end
+
 When(/^I create a habit with the following information:$/) do |table|
   form = widget(:habit_form)
   form.widget(:title).set(table.rows_hash['title'] || '')
@@ -143,7 +164,13 @@ Then(/^I should be told to provide a target unit$/) do
 end
 
 Given(/^I created a new habit$/) do
-  Habit.associate_matching_or_create({ title: 'walk my dog' }, User.first)
+  step "I create a habit with the following information:", table(%{
+      | title     | walk my dog       |
+      | unit      | walks             |
+      | private   | false             |
+      | target    | 3                 |
+      | timeframe | week              |
+    })
 end
 
 When(/^I type part of the habit's title into the title field$/) do
