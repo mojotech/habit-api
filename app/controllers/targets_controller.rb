@@ -29,6 +29,10 @@ class TargetsController < ApplicationController
     render json: target.update_attributes(target_params)
   end
 
+  def destroy
+    render json: current_user.targets.find(params[:id]).destroy
+  end
+
  private
 
   def target_params

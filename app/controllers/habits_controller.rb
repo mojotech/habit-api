@@ -34,18 +34,6 @@ class HabitsController < ApplicationController
     render json: current_user.habits.find(params[:id]).convert_or_update(habit_params, current_user)
   end
 
-  def destroy
-    habit = Habit.find(params[:id])
-    if habit.users.count > 1
-      habit.users.delete(current_user)
-      habit.checkins.where(user: current_user).destroy_all
-      habit.save
-    else
-      habit.destroy
-    end
-    render json: :no_content, status: :no_content
-  end
-
   private
 
   def habit_params

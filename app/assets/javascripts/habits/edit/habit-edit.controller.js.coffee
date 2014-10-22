@@ -16,5 +16,5 @@ app.controller 'HabitEditController', ($scope, $state, habit, $http, target, Hab
       .then ->
         $state.go 'app.habits', null, reload: true
     deleteHabit: (habit) ->
-      habit.remove().then ->
+      target.remove().then ->
         $state.go 'app.habits', null, reload: true
