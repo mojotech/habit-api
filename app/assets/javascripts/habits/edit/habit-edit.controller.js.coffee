@@ -1,41 +1,20 @@
-app.controller 'HabitEditController', ($scope, $state, habit, $http, target, Habit, Target) ->
+app.controller 'HabitEditController', ($scope, $state, habit, $http, target, Habit, Target, HabitEditable) ->
 
-  $scope.isEditable = true
-  $scope.habit = habit
-  $scope.target = target
-  $scope.timeFrameOptions = ['day','week','month']
-
-  $scope.suggestions = (query) ->
-    $http.get "/habits?title=#{query}"
-    .then (results) ->
-      results.data
-
-  $scope.onSelect = ($item, $model, $label) ->
-    $scope.isEditable = false
-    $scope.habit.title = $model.title
-    $scope.habit.user_count = $model.user_count
-
-
-  $scope.cancel = ->
-    $scope.habit.user_count = 0
-    $scope.habit.title = ''
-    $scope.target.unit = ''
-    $scope.habit.private = false
-    $scope.isEditable = true
-
-  $scope.save = ->
-    habit.put
-      title: $scope.habit.title
-      private: $scope.habit.private
-    .then (habit) ->
-      target.put
-        habit_id: habit.id
+  _.extend $scope, new HabitEditable($scope, habit, target),
+    suggestions: (query) ->
+      $http.get "/habits?title=#{query}"
+      .then (results) ->
+        results.data
+    save: ->
+      target.patch
+        habit_attributes:
+          title: $scope.habit.title
+          private:  $scope.habit.private
         value: $scope.target.value
         timeframe: $scope.target.timeframe
         unit: $scope.target.unit
       .then ->
         $state.go 'app.habits', null, reload: true
-
-  $scope.deleteHabit = (habit) ->
-    habit.remove().then ->
+    deleteHabit: (habit) ->
+      habit.remove().then ->
         $state.go 'app.habits', null, reload: true
