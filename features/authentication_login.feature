@@ -29,23 +29,6 @@ Scenario: Successful login with no habits
     | password | password         |
   Then I should see a form to add a new habit
 
-Scenario: Successful login with habits
-  Given a logged in account with the following information:
-    | email    | dev@mojotech.com |
-    | password | password         |
-  And the account "dev@mojotech.com" has the following habits:
-    | title       | private |
-    | walk dog    | true    |
-    | drink water | true    |
-  And I logout
-  And I login with the following information:
-    | email    | dev@mojotech.com |
-    | password | password         |
-  Then I should see the following habits:
-    | title       |
-    | walk dog    |
-    | drink water |
-
 Scenario: Forgot password link
   When I view the login page
   Then I should see a link to reset my password

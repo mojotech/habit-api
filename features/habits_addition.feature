@@ -6,16 +6,6 @@ Feature: Habits
 Background:
   Given I am logged in
 
-Scenario: New habit link
-  Given I created the following habits:
-    | title    | unit     | private | target | timeframe |
-    | walk dog | times    | true    | 7      | week      |
-  Then I should see a link to add a new habit
-
-Scenario: New habit form
-  When I visit the new habits page
-  Then I should see a form to enter a new habit
-
 Scenario: Create habit I already have
   Given I created the following habits:
     | title       | unit    | private | target | timeframe |
