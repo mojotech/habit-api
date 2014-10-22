@@ -7,6 +7,7 @@ class Target < ActiveRecord::Base
   validates :value, numericality: { only_integer: true }
   validates :unit, :completion, presence: true
 
+  validates_presence_of :habit
   accepts_nested_attributes_for :habit, reject_if: :habit_exists
 
   def timeframe_int
