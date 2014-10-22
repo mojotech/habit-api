@@ -8,7 +8,7 @@ class TargetsController < ApplicationController
     habit = current_user.habits.find(params[:habit_id])
     target = habit.targets.new(target_params.merge({ user_id: current_user.id }))
     if target.save
-      render json: target.to_json, status: 200
+      render json: target, status: :ok
     else
       render json: target.errors, status: 406
     end
