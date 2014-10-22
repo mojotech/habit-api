@@ -35,14 +35,6 @@ ActiveRecord::Schema.define(version: 20140919191521) do
     t.integer  "user_count"
   end
 
-  create_table "habits_users", id: false, force: true do |t|
-    t.integer "habit_id"
-    t.integer "user_id"
-  end
-
-  add_index "habits_users", ["habit_id"], name: "index_habits_users_on_habit_id", using: :btree
-  add_index "habits_users", ["user_id"], name: "index_habits_users_on_user_id", using: :btree
-
   create_table "targets", force: true do |t|
     t.integer  "value"
     t.string   "timeframe"

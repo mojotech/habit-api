@@ -6,9 +6,9 @@ class Habit < ActiveRecord::Base
   before_save :add_past_tense
   before_save :update_user_count
 
-  has_and_belongs_to_many :users
   has_many :checkins, order: "created_at DESC", dependent: :destroy
   has_many :targets, dependent: :destroy
+  has_many :users, through: :targets
 
   validates :title, presence: true
   validates_inclusion_of :private, in: [true, false]
