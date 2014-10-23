@@ -29,6 +29,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'bullet'
+  gem 'foreman'
 end
 
 group :test do
