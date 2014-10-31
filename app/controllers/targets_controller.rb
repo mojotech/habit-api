@@ -19,7 +19,13 @@ class TargetsController < ApplicationController
   end
 
   def update
-    render json: current_user.targets.find(params[:id]).update_attributes(target_params)
+    current_target = current_user.targets.find(params[:id])
+
+    if conversion_params[:conversion][:type].present? && conversion_params[:conversion][:factor].present?
+      current_target.convert_existing_checkins(conversion_params[:conversion][:type], conversion_params[:conversion][:factor])
+    end
+
+    render json: current_target.update_attributes(target_params)
   end
 
   def destroy
@@ -31,5 +37,9 @@ class TargetsController < ApplicationController
   def target_params
     params
       .permit(:value, :timeframe, :unit, :private, habit_attributes: [:title])
+  end
+
+  def conversion_params
+    params.permit(conversion: [:factor, :type])
   end
 end
